@@ -41,10 +41,9 @@ export default function SideNav() {
             </SidebarMenu>
 
             {/* Text with Image Background */}
-            <div className="text-with-image">
-              Chronicle Cloud
-            </div>
+            <div className="text-with-image">Chronicle Cloud</div>
 
+            {/* input field */}
             <div>
               <h3 className="text-[18px] font-serif text-center">
                 Subscribe for newsletter
@@ -72,7 +71,6 @@ export default function SideNav() {
                       strokeLinejoin="round"
                     ></g>
                     <g id="SVGRepo_iconCarrier">
-                      
                       <path
                         opacity="1"
                         d="M14 5H20"
