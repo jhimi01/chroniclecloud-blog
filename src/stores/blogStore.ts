@@ -1,6 +1,44 @@
 import { create } from "zustand";
 
-const useBlogStore = create((set) => {
+// Define types for the blog data
+// Assuming you have something like this for CardBlogProps
+// export interface CardBlogProps {
+//   id: string;
+//   title: string;
+//   content: string;
+//   date: string;
+//   category: string;
+//   desc: string; // Add missing prop 'desc'
+//   likes: number;
+//   author: string;
+//   image: string; // Add missing prop 'image'
+// }
+// blogStore.ts
+
+export interface CardBlogProps {
+  id: string;
+  title: string;
+  content: string;
+  date: string;
+  category: string;
+  desc: string;
+  likes: number;
+  author: string;
+  image: string;
+}
+
+// Define types for the store state
+interface BlogStore {
+  blogs: CardBlogProps[];
+  isLoading: boolean;
+  error: string | null;
+  fetchBlogs: () => Promise<void>;
+  addBlog: (newBlog: CardBlogProps) => Promise<void>;
+  updateBlog: (id: string, updatedBlog: CardBlogProps) => Promise<void>;
+  deleteBlog: (id: string) => Promise<void>;
+}
+
+const useBlogStore = create<BlogStore>((set) => {
   const fetchBlogs = async () => {
     set({ isLoading: true, error: null });
     try {
@@ -8,14 +46,14 @@ const useBlogStore = create((set) => {
       if (!response.ok) {
         throw new Error("Failed to fetch blogs");
       }
-      const data = await response.json();
+      const data: CardBlogProps[] = await response.json();
       set({ blogs: data, isLoading: false });
     } catch (error) {
-      set({ error: error.message, isLoading: false });
+      set({ error: (error as Error).message, isLoading: false });
     }
   };
 
-  const addBlog = async (newBlog) => {
+  const addBlog = async (newBlog: CardBlogProps) => {
     try {
       const response = await fetch("/api/blogpost", {
         method: "POST",
@@ -29,14 +67,14 @@ const useBlogStore = create((set) => {
         throw new Error("Failed to add blog");
       }
 
-      const savedBlog = await response.json();
+      const savedBlog: CardBlogProps = await response.json();
       set((state) => ({ blogs: [...state.blogs, savedBlog] }));
     } catch (error) {
-      set({ error: error.message });
+      set({ error: (error as Error).message });
     }
   };
 
-  const updateBlog = async (id, updatedBlog) => {
+  const updateBlog = async (id: string, updatedBlog: CardBlogProps) => {
     try {
       const response = await fetch(`/api/blogpost/${id}`, {
         method: "PUT",
@@ -50,16 +88,16 @@ const useBlogStore = create((set) => {
         throw new Error("Failed to update blog");
       }
 
-      const updatedData = await response.json();
+      const updatedData: CardBlogProps = await response.json();
       set((state) => ({
         blogs: state.blogs.map((blog) => (blog.id === id ? updatedData : blog)),
       }));
     } catch (error) {
-      set({ error: error.message });
+      set({ error: (error as Error).message });
     }
   };
 
-  const deleteBlog = async (id) => {
+  const deleteBlog = async (id: string) => {
     try {
       const response = await fetch(`/api/blogpost/${id}`, {
         method: "DELETE",
@@ -73,7 +111,7 @@ const useBlogStore = create((set) => {
         blogs: state.blogs.filter((blog) => blog.id !== id),
       }));
     } catch (error) {
-      set({ error: error.message });
+      set({ error: (error as Error).message });
     }
   };
 

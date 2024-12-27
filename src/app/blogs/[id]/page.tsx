@@ -1,26 +1,31 @@
+"use client";
 import SideNavLayout from "@/app/sidenav/layout";
 import LeftSideber from "@/components/LeftSideber";
-import {
-  CalendarDays,
-  ChevronRight,
-  CircleUserRound,
-  File,
-  ThumbsUp,
-} from "lucide-react";
+import { use, useEffect, useState } from "react";
+import { CalendarDays, CircleUserRound, File, ThumbsUp } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
+import { CardBlogProps } from "@/stores/blogStore";
 
-export default function Blog() {
-  const blog = {
-    author: "janesmith@example.com",
-    title: "10 Tips for Healthy Eating",
-    image: "/img/bg5.jpg",
-    date: "2024-12-20",
-    category: "Health",
-    desc: "Discover simple yet effective tips to maintain a healthy diet in your busy life.  Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati omnis, fuga sed excepturi sapiente unde ab sequi nisi. Ex totam quo id labore voluptate numquam at itaque, tenetur consequatur ipsum illum odio, officiis ad est? Iusto amet, voluptate tempora itaque et laboriosam delectus, esse officia nam at sed eligendi obcaecati ea quis minima excepturi inventore rerum! Mollitia magni facere molestiae!",
-    likes: 85,
-  };
+export default function Blog({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
+
+  const [blog, setBlog] = useState<CardBlogProps | null>(null);
+
+  useEffect(() => {
+    async function fetchBlogData() {
+      const response = await fetch(`/api/blogs/${id}`);
+      if (!response.ok) {
+        console.error("Blog not found");
+        return;
+      }
+      const data = await response.json();
+      setBlog(data);
+    }
+    fetchBlogData();
+  }, [id]);
+
+  if (!blog) return <div>Loading...</div>;
 
   return (
     <SideNavLayout>
