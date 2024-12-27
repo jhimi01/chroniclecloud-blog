@@ -1,11 +1,16 @@
 "use client";
+import useBlogs from "@/hooks/getBlogs";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type } from "node:os";
 import React from "react";
 
-export default function LeftSideber() {
+export default function  LeftSideber() {
+
+// const {users} = useBlogs()
+// console.log("users", users)
+
   const categories = [
     { type: "Fashion", amount: 6 },
     { type: "Technology", amount: 6 },

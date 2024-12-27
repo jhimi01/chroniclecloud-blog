@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { Profiler } from "react";
 
 interface CardBlogProps {
+  id: string;
   title: string;
   date: string;
   category: string;
@@ -14,6 +15,7 @@ interface CardBlogProps {
 }
 
 export default function CardBlog({
+  id,
   title,
   date,
   category,
@@ -59,7 +61,7 @@ export default function CardBlog({
             <h3 className="text-sm flex items-center gap-1"><CircleUserRound size={16} strokeWidth={1.75} /> {author}</h3>
             <Link
               className="text-[#1eafed] text-sm font-semibold flex items-center"
-              href="/blogs/2"
+              href={`/blogs/${id}`}
             >
               Read More
               <ChevronRight size={16} strokeWidth={2} />
