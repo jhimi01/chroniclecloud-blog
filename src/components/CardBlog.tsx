@@ -25,7 +25,7 @@ export default function CardBlog({
   return (
     <div
       // style={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
-      className="hover:bg-accent bg-accent md:bg-transparent hover:shadow-md w-11/12 mx-auto md:w-full rounded-2xl p-5 "
+      className="hover:bg-accent bg-accent md:bg-transparent hover:shadow-md w-11/12 mr-auto md:w-full rounded-2xl p-5 "
     >
       <div className="md:flex gap-5">
         <Image

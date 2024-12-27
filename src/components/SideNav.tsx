@@ -13,7 +13,7 @@ import { usePathname } from "next/navigation";
 export default function SideNav() {
   const projects = [
     { name: "Home", href: "/" },
-    { name: "Category", href: "/category" },
+    { name: "Blogs", href: "/blogs" },
     { name: "Travel", href: "/login" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
