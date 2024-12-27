@@ -1,4 +1,11 @@
-import { CalendarDays, ChevronRight, CircleUserRound, File, PersonStanding, ThumbsUp } from "lucide-react";
+import {
+  CalendarDays,
+  ChevronRight,
+  CircleUserRound,
+  File,
+  PersonStanding,
+  ThumbsUp,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { Profiler } from "react";
@@ -25,11 +32,8 @@ export default function CardBlog({
   image,
 }: CardBlogProps) {
   return (
-    <div
-      // style={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
-      className="hover:bg-accent bg-accent md:bg-transparent hover:shadow-md w-11/12 mr-auto md:w-full rounded-2xl p-5 "
-    >
-      <div className="md:flex gap-5">
+    <div className="hover:bg-accent bg-accent md:bg-transparent hover:shadow-md w-11/12 mr-auto md:w-fulll rounded-2xl p-5 ">
+      <div className="md:flex gap-5 ">
         <Image
           width={800}
           height={800}
@@ -37,7 +41,7 @@ export default function CardBlog({
           alt="blog post"
           className="md:h-32 md:w-32 h-20 w-20 rounded-full"
         />
-        <div className="space-y-2 md:space-y-3 my-2 md:my-0">
+        <div className="space-y-2 md:space-y-3 w-full my-2 md:my-0">
           <h2 className="font-serif md:text-2xl text-xl text-black">{title}</h2>
           <div className="md:flex gap-4">
             <div className="flex text-gray-400 items-center gap-1 text-sm">
@@ -57,8 +61,10 @@ export default function CardBlog({
             <p className="text-base text-gray-600">{desc}</p>
           </div>
           <hr />
-          <div className="md:flex justify-between text-gray-400">
-            <h3 className="text-sm flex items-center gap-1"><CircleUserRound size={16} strokeWidth={1.75} /> {author}</h3>
+          <div className="md:flex justify-between  text-gray-400">
+            <h3 className="text-sm flex items-center gap-1">
+              <CircleUserRound size={16} strokeWidth={1.75} /> {author}
+            </h3>
             <Link
               className="text-[#1eafed] text-sm font-semibold flex items-center"
               href={`/blogs/${id}`}

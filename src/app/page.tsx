@@ -1,74 +1,32 @@
-'use client'
-import LeftSideber from "@/components/LeftSideber";
+"use client";
+
 import SideNavLayout from "./sidenav/layout";
 import CardBlog from "@/components/CardBlog";
-import useBlogStore from "@/stores/blogStore";
-import { useEffect } from "react";
+import LeftSideber from "@/components/LeftSideber";
+import useBlogStore, { CardBlogProps } from "@/stores/blogStore";
 
 export default function Home() {
-  // const blogs = [
-  //   {
-  //     author: "johndoe@example.com",
-  //     title: "The Future of Web Development",
-  //     image: "/img/bg.jpg",
-  //     date: "2024-12-26",
-  //     category: "Technology",
-  //     desc: "Exploring the latest trends and predictions shaping the future of web development.",
-  //     likes: 120,
-  //   },
-  //   {
-  //     author: "janesmith@example.com",
-  //     title: "10 Tips for Healthy Eating",
-  //     image: "/img/bg5.jpg",
-  //     date: "2024-12-20",
-  //     category: "Health",
-  //     desc: "Discover simple yet effective tips to maintain a healthy diet in your busy life.",
-  //     likes: 85,
-  //   },
-  //   {
-  //     author: "alexanderlee@example.com",
-  //     title: "Traveling on a Budget",
-  //     image: "/img/bg3.jpg",
-  //     date: "2024-11-15",
-  //     category: "Travel",
-  //     desc: "Learn how to explore the world without breaking the bank with these budget travel hacks.",
-  //     likes: 200,
-  //   },
-  //   {
-  //     author: "emilywhite@example.com",
-  //     title: "The Power of Minimalism",
-  //     image: "/img/bg2.jpg",
-  //     date: "2024-10-10",
-  //     category: "Lifestyle",
-  //     desc: "Understand how embracing minimalism can lead to a happier and more focused life.",
-  //     likes: 150,
-  //   },
-  //   {
-  //     author: "michaelbrown@example.com",
-  //     title: "Mastering JavaScript in 2024",
-  //     image: "/img/bg5.jpg",
-  //     date: "2024-09-30",
-  //     category: "Programming",
-  //     desc: "An in-depth guide to improving your JavaScript skills and staying ahead in 2024.",
-  //     likes: 320,
-  //   },
-  // ];
+  const { blogs, filteredBlogs, isLoading, error, searchTerm } = useBlogStore();
 
-  const { blogs, isLoading, error } = useBlogStore();
-  console.log(blogs);
+  console.log(filteredBlogs()); // Note that we're calling the function here
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
-
-  // console.log(blogs)
+  const displayBlogs = searchTerm ? filteredBlogs() : blogs;
 
   return (
     <SideNavLayout>
       <div className="flex">
         <div className="w-full md:w-[80%] space-y-5 md:space-y-7 md:mr-5">
-          {blogs?.map((blogs, index) => (
-            <CardBlog key={index} {...blogs} />
-          ))}
+        {displayBlogs.length === 0 ? (
+            <h2 className="text-center text-2xl font-semibold">No value available</h2> // Show this when no blogs match search or when no blogs exist
+          ) : (
+            <div className="space-y-3">
+              {displayBlogs.map((blog: CardBlogProps, index: number) => (
+                <CardBlog key={index} {...blog} />
+              ))}
+            </div>
+          )}
         </div>
         <div>
           <LeftSideber />

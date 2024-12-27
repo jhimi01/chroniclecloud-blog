@@ -1,16 +1,13 @@
 "use client";
 import useBlogs from "@/hooks/getBlogs";
+import useBlogStore from "@/stores/blogStore";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type } from "node:os";
-import React from "react";
+import React, { useState } from "react";
 
-export default function  LeftSideber() {
-
-// const {users} = useBlogs()
-// console.log("users", users)
-
+export default function LeftSideber() {
   const categories = [
     { type: "Fashion", amount: 6 },
     { type: "Technology", amount: 6 },
@@ -69,19 +66,30 @@ export default function  LeftSideber() {
     },
   ];
 
+  const [search, setSearch] = useState('');
+  const { setSearchTerm } = useBlogStore();
   const pathname = usePathname();
+  
+  console.log(search)
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+    setSearchTerm(e.target.value); // Update the search term in Zustand store
+  };
 
   return (
     <>
       {/* for desktop */}
       <div className="border-l p-3 md:block hidden">
         <div className="input-container mt-3 mx-auto">
-          <input
-            type="text"
-            name="text"
-            className="input placeholder:text-gray-500"
-            placeholder="Search blog"
-          />
+        <input
+          type="text"
+          value={search}
+          onChange={handleSearchChange}
+          name="text"
+          className="input placeholder:text-gray-500"
+          placeholder="Search blog"
+        />
           <span className="icon">
             <svg
               width="19px"
@@ -162,7 +170,7 @@ export default function  LeftSideber() {
           <div className="mt-8 text-slate-500">
             <h2 className="mb-1 px-2 text-xl font-serif">My Contents</h2>
 
-            <div >
+            <div>
               {mycontetnts?.length === 0 ? (
                 <h3 className="px-2">No content</h3>
               ) : (
@@ -189,33 +197,33 @@ export default function  LeftSideber() {
           </div>
         ) : (
           <div className="mt-8 text-slate-500">
-          <h2 className="mb-1 px-2 text-xl font-serif">Related Contents</h2>
+            <h2 className="mb-1 px-2 text-xl font-serif">Related Contents</h2>
 
-          <div className="space-y-3">
-            {mycontetnts?.length === 0 ? (
-              <h3 className="px-2">No content</h3>
-            ) : (
-              <div className="space-y-3">
-                {relatedcontetnts?.map((content, index) => (
-                  <Link
-                    key={index}
-                    href="/blogs/id"
-                    className="flex px-2 flex-row gap-1 hover:shadow-lg bg-accent cursor-pointer"
-                  >
-                    <Image
-                      height={500}
-                      width={500}
-                      alt="related contents"
-                      className="h-14 w-14"
-                      src={content?.image}
-                    />
-                    <h3>{content?.title}</h3>
-                  </Link>
-                ))}
-              </div>
-            )}
+            <div className="space-y-3">
+              {mycontetnts?.length === 0 ? (
+                <h3 className="px-2">No content</h3>
+              ) : (
+                <div className="space-y-3">
+                  {relatedcontetnts?.map((content, index) => (
+                    <Link
+                      key={index}
+                      href="/blogs/id"
+                      className="flex px-2 flex-row gap-1 hover:shadow-lg bg-accent cursor-pointer"
+                    >
+                      <Image
+                        height={500}
+                        width={500}
+                        alt="related contents"
+                        className="h-14 w-14"
+                        src={content?.image}
+                      />
+                      <h3>{content?.title}</h3>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
-        </div>
         )}
       </div>
 

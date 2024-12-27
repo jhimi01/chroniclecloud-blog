@@ -1,20 +1,5 @@
 import { create } from "zustand";
 
-// Define types for the blog data
-// Assuming you have something like this for CardBlogProps
-// export interface CardBlogProps {
-//   id: string;
-//   title: string;
-//   content: string;
-//   date: string;
-//   category: string;
-//   desc: string; // Add missing prop 'desc'
-//   likes: number;
-//   author: string;
-//   image: string; // Add missing prop 'image'
-// }
-// blogStore.ts
-
 export interface CardBlogProps {
   id: string;
   title: string;
@@ -32,13 +17,16 @@ interface BlogStore {
   blogs: CardBlogProps[];
   isLoading: boolean;
   error: string | null;
-  fetchBlogs: () => Promise<void>;
+  searchTerm: string;
+  filteredBlogs: CardBlogProps[];
+  // fetchBlogs: () => Promise<void>;
   addBlog: (newBlog: CardBlogProps) => Promise<void>;
   updateBlog: (id: string, updatedBlog: CardBlogProps) => Promise<void>;
   deleteBlog: (id: string) => Promise<void>;
+  setSearchTerm: (searchTerm: string) => void;
 }
 
-const useBlogStore = create<BlogStore>((set) => {
+const useBlogStore = create<BlogStore>((set, get) => {
   const fetchBlogs = async () => {
     set({ isLoading: true, error: null });
     try {
@@ -115,6 +103,18 @@ const useBlogStore = create<BlogStore>((set) => {
     }
   };
 
+  const setSearchTerm = (searchTerm: string) => {
+    set({ searchTerm });
+  };
+
+  // Updated filteredBlogs function to be inside the store
+  const filteredBlogs = () => {
+    const { blogs, searchTerm } = get();
+    return blogs.filter((blog) =>
+      blog.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  };
+
   // Immediately fetch blogs upon store initialization
   fetchBlogs();
 
@@ -122,10 +122,13 @@ const useBlogStore = create<BlogStore>((set) => {
     blogs: [],
     isLoading: false,
     error: null,
+    searchTerm: "",
+    filteredBlogs,
     fetchBlogs,
     addBlog,
     updateBlog,
     deleteBlog,
+    setSearchTerm,
   };
 });
 

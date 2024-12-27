@@ -1,5 +1,5 @@
-'use client'
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import SideNavLayout from "../sidenav/layout";
 import { Plus } from "lucide-react";
 // import  { CardBlogProps } from "@/components/CardBlog";
@@ -8,14 +8,21 @@ import { CardBlogProps } from "@/stores/blogStore"; // Correct import path
 import Link from "next/link";
 import useBlogStore from "@/stores/blogStore";
 import CardBlog from "@/components/CardBlog";
- // Import CardBlog and CardBlogProps
-
+// Import CardBlog and CardBlogProps
 
 // Assuming you have something like this for CardBlogProps
 
 export default function Blogs() {
-  const { blogs, isLoading, error } = useBlogStore();
-  
+  const { blogs, filteredBlogs, isLoading, error } = useBlogStore();
+  const [search, setSearch] = useState("");
+  const { setSearchTerm } = useBlogStore();
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+    setSearchTerm(e.target.value); // Update the search term in Zustand store
+  };
+
+  console.log("search", filteredBlogs);
 
   return (
     <SideNavLayout>
@@ -26,6 +33,7 @@ export default function Blogs() {
             className="w-full h-full pl-5 outline-none placeholder-gray-500 text-sm"
             placeholder="Search for products"
             type="text"
+            onChange={handleSearchChange}
           />
           <svg
             fill="#6B7280"
@@ -80,23 +88,34 @@ export default function Blogs() {
         </div>
 
         {/* upload blog */}
-       <Link href='/blogs/upload-blog'>
-       <button
-          className="bg-white text-center w-full md:w-48 rounded-2xl h-12 relative border text-black text-base font-normal group"
-          type="button"
-        >
-          <div className="bg-[#1eafed] text-white rounded-xl h-10 w-[20%] flex items-center justify-center absolute left-1 top-[4px] group-hover:w-[96%] z-10 duration-500">
-            <Plus />
-          </div>
-          <p className="translate-x-2">create blog</p>
-        </button></Link>
+        <Link href="/blogs/upload-blog">
+          <button
+            className="bg-white text-center w-full md:w-48 rounded-2xl h-12 relative border text-black text-base font-normal group"
+            type="button"
+          >
+            <div className="bg-[#1eafed] text-white rounded-xl h-10 w-[20%] flex items-center justify-center absolute left-1 top-[4px] group-hover:w-[96%] z-10 duration-500">
+              <Plus />
+            </div>
+            <p className="translate-x-2">create blog</p>
+          </button>
+        </Link>
       </div>
 
       {/* blogs sections */}
       <div className="w-full md:w-[90%] mt-5 space-y-5 md:space-y-7 md:mr-5">
-        {blogs?.map((blog: CardBlogProps, index) => (
-          <CardBlog key={index} {...blog} />
-        ))}
+        {filteredBlogs.length === 0 ? (
+          <div>
+            {blogs?.map((blog, index) => (
+              <CardBlog key={index} {...blog} />
+            ))}
+          </div>
+        ) : (
+          <div>
+            {filteredBlogs.map((blog, index) => (
+              <CardBlog key={index} {...blog} />
+            ))}
+          </div>
+        )}
       </div>
     </SideNavLayout>
   );
