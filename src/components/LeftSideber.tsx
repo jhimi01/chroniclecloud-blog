@@ -1,3 +1,7 @@
+"use client";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { type } from "node:os";
 import React from "react";
 
@@ -12,29 +16,55 @@ export default function LeftSideber() {
 
   const mycontetnts = [
     {
-      type: "Fashion",
-      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      author: "alexanderlee@example.com",
+      title: "Traveling on a Budget",
+      image: "/img/bg3.jpg",
+      date: "2024-11-15",
+      category: "Travel",
+      desc: "Learn how to explore the world without breaking the bank with these budget travel hacks.",
+      likes: 200,
     },
     {
-      type: "Technology",
-      content:
-        "Vestibulum tempus dui vitae mi malesuada, sed malesuada tellus sagittis.",
+      author: "emilywhite@example.com",
+      title: "The Power of Minimalism",
+      image: "/img/bg2.jpg",
+      date: "2024-10-10",
+      category: "Lifestyle",
+      desc: "Understand how embracing minimalism can lead to a happier and more focused life.",
+      likes: 150,
     },
     {
-      type: "Travel",
-      content: "Nullam et nunc at arcu ullamcorper semper at id urna.",
-    },
-    {
-      type: "Photography",
-      content:
-        "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
-    },
-    {
-      type: "Food",
-      content:
-        "Sed vel eros vel ex semper ultricies. Donec laoreet lectus non justo accumsan, vel semper nunc varius.",
+      author: "michaelbrown@example.com",
+      title: "Mastering JavaScript in 2024",
+      image: "/img/bg5.jpg",
+      date: "2024-09-30",
+      category: "Programming",
+      desc: "An in-depth guide to improving your JavaScript skills and staying ahead in 2024.",
+      likes: 320,
     },
   ];
+  const relatedcontetnts = [
+    {
+      author: "johndoe@example.com",
+      title: "The Future of Web Development",
+      image: "/img/bg.jpg",
+      date: "2024-12-26",
+      category: "Technology",
+      desc: "Exploring the latest trends and predictions shaping the future of web development.",
+      likes: 120,
+    },
+    {
+      author: "janesmith@example.com",
+      title: "10 Tips for Healthy Eating",
+      image: "/img/bg5.jpg",
+      date: "2024-12-20",
+      category: "Health",
+      desc: "Discover simple yet effective tips to maintain a healthy diet in your busy life.",
+      likes: 85,
+    },
+  ];
+
+  const pathname = usePathname();
 
   return (
     <>
@@ -123,17 +153,65 @@ export default function LeftSideber() {
           </div>
         </div>
 
-        <div className="mt-8 text-slate-500">
-          <h2 className="mb-1 px-2 text-xl font-serif">My Contents</h2>
+        {pathname == "/" ? (
+          <div className="mt-8 text-slate-500">
+            <h2 className="mb-1 px-2 text-xl font-serif">My Contents</h2>
 
-          <div>
-            {mycontetnts?.map((contents, index) => (
-              <div className="flex flex-row">
-                <h3>{contents.type}</h3>
+            <div >
+              {mycontetnts?.length === 0 ? (
+                <h3 className="px-2">No content</h3>
+              ) : (
+                <div className="space-y-3">
+                  {mycontetnts?.map((content, index) => (
+                    <Link
+                      key={index}
+                      href="/blogs/id"
+                      className="flex px-2 flex-row gap-1 hover:shadow-lg bg-accent cursor-pointer"
+                    >
+                      <Image
+                        height={500}
+                        width={500}
+                        alt="related contents"
+                        className="h-14 w-14"
+                        src={content?.image}
+                      />
+                      <h3>{content?.title}</h3>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        ) : (
+          <div className="mt-8 text-slate-500">
+          <h2 className="mb-1 px-2 text-xl font-serif">Related Contents</h2>
+
+          <div className="space-y-3">
+            {mycontetnts?.length === 0 ? (
+              <h3 className="px-2">No content</h3>
+            ) : (
+              <div className="space-y-3">
+                {relatedcontetnts?.map((content, index) => (
+                  <Link
+                    key={index}
+                    href="/blogs/id"
+                    className="flex px-2 flex-row gap-1 hover:shadow-lg bg-accent cursor-pointer"
+                  >
+                    <Image
+                      height={500}
+                      width={500}
+                      alt="related contents"
+                      className="h-14 w-14"
+                      src={content?.image}
+                    />
+                    <h3>{content?.title}</h3>
+                  </Link>
+                ))}
               </div>
-            ))}
+            )}
           </div>
         </div>
+        )}
       </div>
 
       {/* for mobile */}
