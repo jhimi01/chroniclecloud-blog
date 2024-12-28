@@ -21,8 +21,8 @@ export default {
   				foreground: 'hsl(var(--popover-foreground))'
   			},
   			primary: {
-  				DEFAULT: 'hsl(var(--primary))',
-  				foreground: 'hsl(var(--primary-foreground))'
+				DEFAULT: '#1D4ED8', // Replace with your desired primary color
+				foreground: '#FFFFFF', 
   			},
   			secondary: {
   				DEFAULT: 'hsl(var(--secondary))',
@@ -65,7 +65,10 @@ export default {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+		  fontFamily: {
+			sans: ['Poppins', 'sans-serif'], // Replace default sans font
+		  }
   	}
   },
   plugins: [require("tailwindcss-animate")],

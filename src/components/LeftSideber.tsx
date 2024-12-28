@@ -142,7 +142,7 @@ export default function LeftSideber() {
 
         {/* category */}
         <div className="mt-8 text-slate-500">
-          <h2 className="mb-1 px-2 text-xl font-serif">Categories</h2>
+          <h2 className="mb-1 px-2 text-xl">Categories</h2>
 
           <div>
             {categories?.map((category, index) => (
@@ -167,7 +167,7 @@ export default function LeftSideber() {
 
         {pathname == "/" ? (
           <div className="mt-8 text-slate-500">
-            <h2 className="mb-1 px-2 text-xl font-serif">My Contents</h2>
+            <h2 className="mb-1 px-2 text-xl ">My Contents</h2>
 
             <div>
               {mycontetnts?.length === 0 ? (
@@ -196,7 +196,7 @@ export default function LeftSideber() {
           </div>
         ) : (
           <div className="mt-8 text-slate-500">
-            <h2 className="mb-1 px-2 text-xl font-serif">Related Contents</h2>
+            <h2 className="mb-1 px-2 text-xl ">Related Contents</h2>
 
             <div className="space-y-3">
               {mycontetnts?.length === 0 ? (

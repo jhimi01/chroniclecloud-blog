@@ -31,7 +31,7 @@ export default function Blog({ params }: { params: Promise<{ id: string }> }) {
     <SideNavLayout>
       <div className="flex md:pr-0 pr-5 ">
         <div className="my-4 space-y-3 md:space-y-5 md:w-[80%]">
-          <h2 className="text-2xl md:text-5xl font-serif">{blog?.title}</h2>
+          <h2 className="text-2xl md:text-5xl ">{blog?.title}</h2>
           <p className="text-gray-500 text-xs md:text-base ">{blog?.desc}</p>
           <div className="md:flex gap-4 text-gray-400">
             <h3 className="text-sm flex items-center gap-1">

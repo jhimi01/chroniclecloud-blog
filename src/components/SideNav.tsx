@@ -45,7 +45,7 @@ export default function SideNav() {
 
             {/* input field */}
             <div>
-              <h3 className="text-[18px] font-serif text-center">
+              <h3 className="text-[18px] text-center">
                 Subscribe for newsletter
               </h3>
 

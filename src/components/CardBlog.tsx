@@ -39,10 +39,10 @@ export default function CardBlog({
           height={800}
           src={image}
           alt="blog post"
-          className="md:h-32 md:w-32 h-20 w-20 rounded-full"
+          className="md:h-32 md:w-32 h-20 w-20"
         />
         <div className="space-y-2 md:space-y-3 w-full my-2 md:my-0">
-          <h2 className="font-serif md:text-2xl text-xl text-black">{title}</h2>
+          <h2 className=" md:text-2xl text-xl text-black">{title}</h2>
           <div className="md:flex gap-4">
             <div className="flex text-gray-400 items-center gap-1 text-sm">
               <CalendarDays size={16} strokeWidth={1.75} className="" />

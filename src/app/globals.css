@@ -137,6 +137,12 @@
   }
 }
 
+/* globals.css */
+html {
+  font-family: sans-serif;
+}
+
+
 @layer base {
   * {
     @apply border-border;
