@@ -8,13 +8,16 @@ import { type } from "node:os";
 import React, { useState } from "react";
 
 export default function LeftSideber() {
+
   const categories = [
-    { type: "Fashion", amount: 6 },
-    { type: "Technology", amount: 6 },
-    { type: "travel", amount: 8 },
-    { type: "Photography", amount: 2 },
-    { type: "Food", amount: 5 },
+    { type: "fashion" },
+    { type: "technology" },
+    { type: "travel" },
+    { type: "photography" },
+    { type: "health" },
   ];
+
+
 
   const mycontetnts = [
     {
@@ -68,6 +71,7 @@ export default function LeftSideber() {
 
   const [search, setSearch] = useState("");
   const pathname = usePathname();
+  const categoryFromPathname = pathname.split('/')[2];
 
   console.log(search);
 
@@ -148,15 +152,15 @@ export default function LeftSideber() {
               <Link key={index} href={`/categories/${category.type}`}>
                 <div
                   key={index}
-                  className={` px-2 hover:bg-slate-200 cursor-pointer ${
+                  className={` hover:bg-slate-200 cursor-pointer ${
                     index !== categories.length - 1
                       ? "border-b border-gray-300"
                       : ""
                   }`}
                 >
-                  <div className="flex flex-row items-center justify-between py-2">
-                    <h5>{category?.type}</h5>
-                    <h5>({category?.amount})</h5>
+                  <div className={`flex flex-row items-center px-2 justify-between py-2 ${category?.type === categoryFromPathname && "bg-gray-300 text-gray-700"}`}>
+                    <h5 className="capitalize">{category?.type}</h5>
+                    {/* <h5>({categories?.length})</h5> */}
                   </div>
 
                   {categories.length == index - 1 ? <hr /> : ""}

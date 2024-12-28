@@ -99,11 +99,11 @@ export default function Blogs() {
       </div>
       <hr className="my-5" />
       {/* blogs sections */}
-      <div className="w-full mt-5 space-y-5 md:space-y-7">
+      <div className="w-full my-10 space-y-5 md:space-y-7">
         {blogs.length === 0 ? (
           <div>no blogs available</div>
         ) : (
-          <div>
+          <div className="space-y-5">
             {blogs.map((blog, index) => (
               <CardBlog key={index} {...blog} />
             ))}

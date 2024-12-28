@@ -4,38 +4,35 @@ import Image from "next/image";
 import React from "react";
 
 export default function Hero() {
-
   const blogs = [
-     {
-        author: "janesmith@example.com",
-        title: "The Future of Web Development",
-        image: "/img/bg.jpg",
-        date: "2024-12-20",
-        category: "Health",
-        desc: "Discover simple yet effective tips to maintain a healthy diet in your busy life.  Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati omnis, fuga sed excepturi sapiente unde ab sequi nisi. Ex totam quo id labore voluptate numquam at itaque, tenetur consequatur ipsum illum odio, officiis ad est? Iusto amet, voluptate tempora itaque et laboriosam delectus, esse officia nam at sed eligendi obcaecati ea quis minima excepturi inventore rerum! Mollitia magni facere molestiae!",
-        likes: 85,
-      },
-     {
-        author: "janesmith@example.com",
-        title: "A red-rock wonderland",
-        image: "/img/bg3.jpg",
-        date: "2024-12-20",
-        category: "Health",
-        desc: "Discover simple yet effective tips to maintain a healthy diet in your busy life.  Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati omnis, fuga sed excepturi sapiente unde ab sequi nisi. Ex totam quo id labore voluptate numquam at itaque, tenetur consequatur ipsum illum odio, officiis ad est? Iusto amet, voluptate tempora itaque et laboriosam delectus, esse officia nam at sed eligendi obcaecati ea quis minima excepturi inventore rerum! Mollitia magni facere molestiae!",
-        likes: 85,
-      },
-     {
-        author: "janesmith@example.com",
-        title: "10 Tips for Healthy Eating",
-        image: "/img/bg5.jpg",
-        date: "2024-12-20",
-        category: "Travel",
-        desc: "Discover simple yet effective tips to maintain a healthy diet in your busy life.  Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati omnis, fuga sed excepturi sapiente unde ab sequi nisi. Ex totam quo id labore voluptate numquam at itaque, tenetur consequatur ipsum illum odio, officiis ad est? Iusto amet, voluptate tempora itaque et laboriosam delectus, esse officia nam at sed eligendi obcaecati ea quis minima excepturi inventore rerum! Mollitia magni facere molestiae!",
-        likes: 85,
-      },
-
-
-  ]
+    {
+      author: "janesmith@example.com",
+      title: "The Future of Web Development",
+      image: "/img/bg.jpg",
+      date: "2024-12-20",
+      category: "Health",
+      desc: "Discover simple yet effective tips to maintain a healthy diet in your busy life.  Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati omnis, fuga sed excepturi sapiente unde ab sequi nisi. Ex totam quo id labore voluptate numquam at itaque, tenetur consequatur ipsum illum odio, officiis ad est? Iusto amet, voluptate tempora itaque et laboriosam delectus, esse officia nam at sed eligendi obcaecati ea quis minima excepturi inventore rerum! Mollitia magni facere molestiae!",
+      likes: 85,
+    },
+    {
+      author: "janesmith@example.com",
+      title: "A red-rock wonderland",
+      image: "/img/bg3.jpg",
+      date: "2024-12-20",
+      category: "Health",
+      desc: "Discover simple yet effective tips to maintain a healthy diet in your busy life.  Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati omnis, fuga sed excepturi sapiente unde ab sequi nisi. Ex totam quo id labore voluptate numquam at itaque, tenetur consequatur ipsum illum odio, officiis ad est? Iusto amet, voluptate tempora itaque et laboriosam delectus, esse officia nam at sed eligendi obcaecati ea quis minima excepturi inventore rerum! Mollitia magni facere molestiae!",
+      likes: 85,
+    },
+    {
+      author: "janesmith@example.com",
+      title: "10 Tips for Healthy Eating",
+      image: "/img/bg5.jpg",
+      date: "2024-12-20",
+      category: "Travel",
+      desc: "Discover simple yet effective tips to maintain a healthy diet in your busy life.  Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati omnis, fuga sed excepturi sapiente unde ab sequi nisi. Ex totam quo id labore voluptate numquam at itaque, tenetur consequatur ipsum illum odio, officiis ad est? Iusto amet, voluptate tempora itaque et laboriosam delectus, esse officia nam at sed eligendi obcaecati ea quis minima excepturi inventore rerum! Mollitia magni facere molestiae!",
+      likes: 85,
+    },
+  ];
 
   // Assume the first blog is the main article, and the rest are side articles
   const mainArticle = blogs[0];
@@ -54,13 +51,8 @@ export default function Hero() {
 
   return (
     <main className="container mx-auto my-5">
-      {/* Breaking News Section */}
-      {/* <div className="bg-red-500 text-white py-2 px-4 mb-4 text-sm font-semibold">
-        Breaking News: {mainArticle?.title || 'Astronomy Binoculars A Great Alternative'}
-      </div> */}
-
       {/* Hero Section */}
-      <div className="grid grid-cols-1 md:grid-cols-3 md:gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-3 md:gap-2 h-full">
         {/* Main Article */}
         <div className="col-span-2 flex flex-col h-full group overflow-hidden  relative">
           <div className="relative h-full group">
@@ -106,7 +98,7 @@ export default function Hero() {
         {/* Side Articles */}
         <div className="md:space-y-2 flex md:flex-col gap-2 mt-2 md:mt-0 md:gap-0 h-full">
           {sideArticles.map((article, index) => (
-            <div className="relative flex-1 group overflow-hidden " key={index}>
+            <div className="relative group overflow-hidden " key={index}>
               <Image
                 height={500}
                 width={500}
