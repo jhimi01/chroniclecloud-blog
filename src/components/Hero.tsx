@@ -4,7 +4,38 @@ import Image from "next/image";
 import React from "react";
 
 export default function Hero() {
-  const { blogs } = useBlogStore();
+
+  const blogs = [
+     {
+        author: "janesmith@example.com",
+        title: "The Future of Web Development",
+        image: "/img/bg.jpg",
+        date: "2024-12-20",
+        category: "Health",
+        desc: "Discover simple yet effective tips to maintain a healthy diet in your busy life.  Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati omnis, fuga sed excepturi sapiente unde ab sequi nisi. Ex totam quo id labore voluptate numquam at itaque, tenetur consequatur ipsum illum odio, officiis ad est? Iusto amet, voluptate tempora itaque et laboriosam delectus, esse officia nam at sed eligendi obcaecati ea quis minima excepturi inventore rerum! Mollitia magni facere molestiae!",
+        likes: 85,
+      },
+     {
+        author: "janesmith@example.com",
+        title: "A red-rock wonderland",
+        image: "/img/bg3.jpg",
+        date: "2024-12-20",
+        category: "Health",
+        desc: "Discover simple yet effective tips to maintain a healthy diet in your busy life.  Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati omnis, fuga sed excepturi sapiente unde ab sequi nisi. Ex totam quo id labore voluptate numquam at itaque, tenetur consequatur ipsum illum odio, officiis ad est? Iusto amet, voluptate tempora itaque et laboriosam delectus, esse officia nam at sed eligendi obcaecati ea quis minima excepturi inventore rerum! Mollitia magni facere molestiae!",
+        likes: 85,
+      },
+     {
+        author: "janesmith@example.com",
+        title: "10 Tips for Healthy Eating",
+        image: "/img/bg5.jpg",
+        date: "2024-12-20",
+        category: "Travel",
+        desc: "Discover simple yet effective tips to maintain a healthy diet in your busy life.  Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati omnis, fuga sed excepturi sapiente unde ab sequi nisi. Ex totam quo id labore voluptate numquam at itaque, tenetur consequatur ipsum illum odio, officiis ad est? Iusto amet, voluptate tempora itaque et laboriosam delectus, esse officia nam at sed eligendi obcaecati ea quis minima excepturi inventore rerum! Mollitia magni facere molestiae!",
+        likes: 85,
+      },
+
+
+  ]
 
   // Assume the first blog is the main article, and the rest are side articles
   const mainArticle = blogs[0];
@@ -44,8 +75,8 @@ export default function Hero() {
                   className="w-full h-full object-cover group-hover:scale-110 transition duration-1000  cursor-pointer"
                 />
                 {/* Overlay */}
-                <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-                <div className="absolute bottom-4 left-10 bg-primary text-white text-xs font-bold px-2 py-1">
+                <div className="absolute inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-40"></div>
+                <div className="absolute bottom-4 left-10 bg-secondary text-white text-xs font-bold px-2 py-1">
                   {mainArticle.category || "Food Habit"}
                 </div>
                 <div className="absolute bottom-14 left-10 text-white">
@@ -84,8 +115,8 @@ export default function Hero() {
                 className="w-full h-full object-cover group-hover:scale-110 transition duration-1000  cursor-pointer"
               />
               {/* Overlay */}
-              <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-              <div className="absolute bottom-2 left-5 bg-primary text-white text-xs font-bold px-2 py-1">
+              <div className="absolute inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-40"></div>
+              <div className="absolute bottom-2 left-5 bg-secondary text-white text-xs font-bold px-2 py-1">
                 {article.category || "Food Habit"}
               </div>
               <div className="absolute bottom-9 left-5 text-white">

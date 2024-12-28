@@ -32,7 +32,7 @@ export default function CardBlog({
   image,
 }: CardBlogProps) {
   return (
-    <div className="hover:bg-accent bg-accent md:bg-transparent hover:shadow-md w-11/12 mr-auto md:w-fulll rounded-2xl p-5 ">
+    <div className="hover:bg-accent bg-accent md:bg-transparent hover:shadow-md w-11/12 mr-auto md:w-full">
       <div className="md:flex gap-5 ">
         <Image
           width={800}
@@ -41,7 +41,7 @@ export default function CardBlog({
           alt="blog post"
           className="md:h-32 md:w-32 h-20 w-20"
         />
-        <div className="space-y-2 md:space-y-3 w-full my-2 md:my-0">
+        <div className="space-y-2 md:space-y-3 p-5 w-full my-2 md:my-0">
           <h2 className=" md:text-2xl text-xl text-black">{title}</h2>
           <div className="md:flex gap-4">
             <div className="flex text-gray-400 items-center gap-1 text-sm">

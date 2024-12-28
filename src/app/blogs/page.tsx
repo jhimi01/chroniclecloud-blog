@@ -21,8 +21,9 @@ export default function Blogs() {
   };
 
   return (
-    <SideNavLayout>
-      <div className="md:flex items-center gap-5 pr-4">
+    // <SideNavLayout>
+     <div className="mx-auto container">
+      <div className="md:flex  items-center gap-5 pt-10 pr-4">
         {/* this is a search bar */}
         <div className="flex md:mb-0 mb-2 items-center border w-full md:w-80 pr-3 gap-2 bg-white border-gray-500/30 h-[46px] rounded-[5px] overflow-hidden">
           <input
@@ -89,16 +90,16 @@ export default function Blogs() {
             className="bg-white text-center w-full md:w-48 rounded-2xl h-12 relative border text-black text-base font-normal group"
             type="button"
           >
-            <div className="bg-[#1eafed] text-white rounded-xl h-10 w-[20%] flex items-center justify-center absolute left-1 top-[4px] group-hover:w-[96%] z-10 duration-500">
+            <div className="bg-secondary text-white rounded-xl h-10 w-[20%] flex items-center justify-center absolute left-1 top-[4px] group-hover:w-[96%] z-10 duration-500">
               <Plus />
             </div>
             <p className="translate-x-2">create blog</p>
           </button>
         </Link>
       </div>
-
+ <hr className="my-5" />
       {/* blogs sections */}
-      <div className="w-full md:w-[90%] mt-5 space-y-5 md:space-y-7 md:mr-5">
+      <div className="w-full mt-5 space-y-5 md:space-y-7">
         {blogs.length === 0 ? (
           <div>no blogs available</div>
         ) : (
@@ -109,6 +110,7 @@ export default function Blogs() {
           </div>
         )}
       </div>
-    </SideNavLayout>
+     </div>
+    // </SideNavLayout>
   );
 }

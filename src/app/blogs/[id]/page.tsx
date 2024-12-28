@@ -28,8 +28,8 @@ export default function Blog({ params }: { params: Promise<{ id: string }> }) {
   if (!blog) return <div>Loading...</div>;
 
   return (
-    <SideNavLayout>
-      <div className="flex md:pr-0 pr-5 ">
+    // <SideNavLayout>
+      <div className="flex md:pr-0 pr-5 container mx-auto">
         <div className="my-4 space-y-3 md:space-y-5 md:w-[80%]">
           <h2 className="text-2xl md:text-5xl ">{blog?.title}</h2>
           <p className="text-gray-500 text-xs md:text-base ">{blog?.desc}</p>
@@ -72,6 +72,6 @@ export default function Blog({ params }: { params: Promise<{ id: string }> }) {
 
         <LeftSideber />
       </div>
-    </SideNavLayout>
+    // {/* </SideNavLayout> */}
   );
 }

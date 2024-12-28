@@ -153,9 +153,9 @@ html {
 }
 
 .activeLink {
-  /* font-size: 50px; */
-  text-decoration: underline;
-  color: #1eafed;
+  background-color: #04091e;
+  color: #fff;
+  padding: 5px 10px;
 }
 
 /* image inside the text */

@@ -21,12 +21,12 @@ export default {
   				foreground: 'hsl(var(--popover-foreground))'
   			},
   			primary: {
-				DEFAULT: '#1D4ED8', // Replace with your desired primary color
+				DEFAULT: '#04091e', // Replace with your desired primary color
 				foreground: '#FFFFFF', 
   			},
   			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))',
-  				foreground: 'hsl(var(--secondary-foreground))'
+  				DEFAULT: '#f6214b',
+  				foreground: '#ffff'
   			},
   			muted: {
   				DEFAULT: 'hsl(var(--muted))',
