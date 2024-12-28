@@ -13,16 +13,12 @@ import CardBlog from "@/components/CardBlog";
 // Assuming you have something like this for CardBlogProps
 
 export default function Blogs() {
-  const { blogs, filteredBlogs, isLoading, error } = useBlogStore();
+  const { blogs, isLoading, error } = useBlogStore();
   const [search, setSearch] = useState("");
-  const { setSearchTerm } = useBlogStore();
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-    setSearchTerm(e.target.value); // Update the search term in Zustand store
+    setSearch(e.target.value); // Update the search term in Zustand store
   };
-
-  console.log("search", filteredBlogs);
 
   return (
     <SideNavLayout>
@@ -103,15 +99,11 @@ export default function Blogs() {
 
       {/* blogs sections */}
       <div className="w-full md:w-[90%] mt-5 space-y-5 md:space-y-7 md:mr-5">
-        {filteredBlogs.length === 0 ? (
-          <div>
-            {blogs?.map((blog, index) => (
-              <CardBlog key={index} {...blog} />
-            ))}
-          </div>
+        {blogs.length === 0 ? (
+          <div>no blogs available</div>
         ) : (
           <div>
-            {filteredBlogs.map((blog, index) => (
+            {blogs.map((blog, index) => (
               <CardBlog key={index} {...blog} />
             ))}
           </div>
