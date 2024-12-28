@@ -61,8 +61,8 @@ export default function Hero() {
                 <Image
                   height={500}
                   width={500}
-                  src={mainArticle.image || "/img/bg2.jpg"}
-                  alt={mainArticle.title || "Main Article"}
+                  src={mainArticle?.image || "/img/bg2.jpg"}
+                  alt={mainArticle?.title || "Main Article"}
                   sizes="100vw"
                   className="w-full h-full object-cover group-hover:scale-110 transition duration-1000  cursor-pointer"
                 />
@@ -97,13 +97,13 @@ export default function Hero() {
 
         {/* Side Articles */}
         <div className="md:space-y-2 flex md:flex-col gap-2 mt-2 md:mt-0 md:gap-0 h-full">
-          {sideArticles.map((article, index) => (
+          {sideArticles?.map((article, index) => (
             <div className="relative group overflow-hidden " key={index}>
               <Image
                 height={500}
                 width={500}
-                src={article.image || "/img/bg3.jpg"}
-                alt={article.title || "Side Article"}
+                src={article?.image || "/img/bg3.jpg"}
+                alt={article?.title || "Side Article"}
                 className="w-full h-full object-cover group-hover:scale-110 transition duration-1000  cursor-pointer"
               />
               {/* Overlay */}

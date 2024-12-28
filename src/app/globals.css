@@ -155,7 +155,7 @@ html {
 .activeLink {
   background-color: #04091e;
   color: #fff;
-  padding: 5px 10px;
+  /* padding: 5px 10px; */
 }
 
 /* image inside the text */

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
-import SideNav from "@/components/SideNav";
 import Navber from "@/components/Navber";
 
 const geistSans = Geist({
@@ -20,9 +19,9 @@ export const metadata: Metadata = {
 };
 
 const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'], // Choose font weights you need
-  variable: '--font-poppins', // Optional for CSS variables
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"], // Choose font weights you need
+  variable: "--font-poppins", // Optional for CSS variables
 });
 
 export default function RootLayout({
@@ -30,13 +29,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} antialiased`}
       >
         <Navber />
-       {children}
+        {children}
       </body>
     </html>
   );

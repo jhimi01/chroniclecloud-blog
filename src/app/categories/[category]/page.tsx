@@ -35,7 +35,7 @@ export default async function CategoryPage({
     <div className="container mx-auto mt-8">
       <div className="flex">
         <div className="w-[75%] space-y-5">
-          {blogs.map((blog) => (
+          {blogs?.map((blog) => (
             <div
               key={blog.id}
               className="hover:bg-accent bg-accent md:bg-transparent "
@@ -44,7 +44,7 @@ export default async function CategoryPage({
                 <Image
                   width={800}
                   height={800}
-                  src={blog.image}
+                  src={'/img/bg.jpg'}
                   alt="blog post"
                   className="h-48 w-48"
                 />

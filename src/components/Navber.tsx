@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import React from "react";
 import {
@@ -9,123 +10,76 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "./ui/navigation-menu";
-import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const pathname = usePathname();
+
+  // Define paths where navbar should not appear
+  const noNavbarPaths = ["/login", "/signup"];
+
+  const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/blogs", label: "Blogs" },
+    { href: "/blogs/upload-blog", label: "Create Blog" },
+    { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" },
+  ];
+
+  const categories = [
+    { href: "/categories/technology", label: "Technology" },
+    { href: "/categories/health", label: "Health" },
+    { href: "/categories/travel", label: "Travel" },
+    { href: "/categories/nature", label: "Nature" },
+    { href: "/categories/world", label: "World" },
+  ];
+
   return (
-    <header className="text-primary container mx-auto">
-      <div>
-        {/* Header Title */}
-        <div className="md:text-center text-4xl font-semibold py-5">
-          Chronicle Cloud
-        </div>
-        <hr className="md:block hidden" />
-
-        {/* Navigation Links */}
-        <nav className="flex space-x-10 justify-center pt-5 pb-2">
-          {/* <Link href="/">Home</Link> */}
-          {/* {projects?.map((project) => ( */}
-          <Link
-            className={`text-base px-[10px] py-[5px] ${
-              pathname === "/" && "activeLink"
-            }`}
-            href="/"
-          >
-            Home
-          </Link>
-          <Link
-            className={`text-base px-[10px] py-[5px] ${
-              pathname === "/blogs" && "activeLink"
-            }`}
-            href="/blogs"
-          >
-            Blogs
-          </Link>
-          {/* <Link href="/blogs">Blogs</Link> */}
-
-          {/* Category NavigationMenu */}
-          <NavigationMenu>
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="px-0 py-0  h-auto text-base hover:bg-transparent">
-                  Category
-                </NavigationMenuTrigger>
-                <NavigationMenuContent className="border-none">
-                  <ul className="px-6 py-5 rounded-none space-y-3 bg-[#ffffff2d] text-primary border-none shadow-md">
-                    <li>
-                      <NavigationMenuLink
-                        className="{navigationMenuTriggerStyle()}"
-                        asChild
-                      >
-                        <Link href="/categories/technology">Technology</Link>
-                      </NavigationMenuLink>
-                    </li>
-                    <li>
-                      <NavigationMenuLink
-                        className="{navigationMenuTriggerStyle()}"
-                        asChild
-                      >
-                        <Link href="/categories/health">Health</Link>
-                      </NavigationMenuLink>
-                    </li>
-                    <li>
-                      <NavigationMenuLink
-                        className="{navigationMenuTriggerStyle()}"
-                        asChild
-                      >
-                        <Link href="/categories/travel">Travel</Link>
-                      </NavigationMenuLink>
-                    </li>
-                    <li>
-                      <NavigationMenuLink
-                        className="{navigationMenuTriggerStyle()}"
-                        asChild
-                      >
-                        <Link href="/categories/travel">Nature</Link>
-                      </NavigationMenuLink>
-                    </li>
-                    <li>
-                      <NavigationMenuLink
-                        className="{navigationMenuTriggerStyle()}"
-                        asChild
-                      >
-                        <Link href="/categories/travel">World</Link>
-                      </NavigationMenuLink>
-                    </li>
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
-
-          <Link
-            className={`text-base px-[10px] py-[5px] ${
-              pathname === "/blogs/upload-blog" && "activeLink"
-            }`}
-            href="/blogs/upload-blog"
-          >
-            Create Blog
-          </Link>
-          <Link
-            className={`text-base px-[10px] py-[5px] ${
-              pathname === "/about" && "activeLink"
-            }`}
-            href="/about"
-          >
-            About
-          </Link>
-          <Link
-            className={`text-base px-[10px] py-[5px]  ${
-              pathname === "/contact" && "activeLink"
-            }`}
-            href="/contact"
-          >
-            Contact
-          </Link>
-        </nav>
+    <header className="container mx-auto text-primary">
+      {/* Header Title */}
+      <div className="text-4xl font-semibold py-5 md:text-center">
+        Chronicle Cloud
       </div>
+      <hr className="hidden md:block" />
+
+      {/* Navigation Links */}
+      <nav className="flex justify-center space-x-10 py-5">
+        {navLinks.map(({ href, label }) => (
+          <Link
+            key={href}
+            href={href}
+            className={`text-base px-3 py-2 ${
+              pathname === href ? "activeLink" : ""
+            }`}
+          >
+            {label}
+          </Link>
+        ))}
+
+        {/* Category Dropdown */}
+        <NavigationMenu>
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger className="text-base hover:bg-transparent">
+                Category
+              </NavigationMenuTrigger>
+              <NavigationMenuContent className="border-none">
+                <ul className="bg-[#ffffff] text-primary shadow-md space-y-3">
+                  {categories.map(({ href, label }) => (
+                    <li key={href} className="py-2 hover:bg-gray-300">
+                      <NavigationMenuLink asChild>
+                        <Link className="px-10 text-center" href={href}>
+                          {label}
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                  ))}
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+      </nav>
     </header>
   );
 }

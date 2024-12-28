@@ -38,7 +38,7 @@ export default function CardBlog({
         <Image
           width={800}
           height={800}
-          src={image}
+          src={'/img/bg.jpg'}
           alt="blog post"
           className="w-48 h-48"
         />
