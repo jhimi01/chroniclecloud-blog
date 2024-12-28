@@ -1,9 +1,9 @@
 "use client";
 
-import SideNavLayout from "./sidenav/layout";
 import CardBlog from "@/components/CardBlog";
 import Hero from "@/components/Hero";
 import LeftSideber from "@/components/LeftSideber";
+import useCategory from "@/hooks/useCategory";
 import useBlogStore, { CardBlogProps } from "@/stores/blogStore";
 
 export default function Home() {
@@ -11,7 +11,7 @@ export default function Home() {
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
-  // const displayBlogs = searchTerm ? filteredBlogs() : blogs;
+
 
   return (
     // <SideNavLayout>

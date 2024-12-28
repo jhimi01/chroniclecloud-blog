@@ -11,7 +11,7 @@ export default function LeftSideber() {
   const categories = [
     { type: "Fashion", amount: 6 },
     { type: "Technology", amount: 6 },
-    { type: "Travel", amount: 8 },
+    { type: "travel", amount: 8 },
     { type: "Photography", amount: 2 },
     { type: "Food", amount: 5 },
   ];
@@ -66,14 +66,13 @@ export default function LeftSideber() {
     },
   ];
 
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const pathname = usePathname();
-  
-  console.log(search)
+
+  console.log(search);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
-
   };
 
   return (
@@ -81,14 +80,14 @@ export default function LeftSideber() {
       {/* for desktop */}
       <div className="border-l p-3 md:block hidden">
         <div className="input-container mt-3 mx-auto">
-        <input
-          type="text"
-          value={search}
-          onChange={handleSearchChange}
-          name="text"
-          className="input placeholder:text-gray-500"
-          placeholder="Search blog"
-        />
+          <input
+            type="text"
+            value={search}
+            onChange={handleSearchChange}
+            name="text"
+            className="input placeholder:text-gray-500"
+            placeholder="Search blog"
+          />
           <span className="icon">
             <svg
               width="19px"
@@ -146,21 +145,23 @@ export default function LeftSideber() {
 
           <div>
             {categories?.map((category, index) => (
-              <div
-                key={index}
-                className={` px-2 hover:bg-slate-200 cursor-pointer ${
-                  index !== categories.length - 1
-                    ? "border-b border-gray-300"
-                    : ""
-                }`}
-              >
-                <div className="flex flex-row items-center justify-between py-2">
-                  <h5>{category?.type}</h5>
-                  <h5>({category?.amount})</h5>
-                </div>
+              <Link key={index} href={`/categories/${category.type}`}>
+                <div
+                  key={index}
+                  className={` px-2 hover:bg-slate-200 cursor-pointer ${
+                    index !== categories.length - 1
+                      ? "border-b border-gray-300"
+                      : ""
+                  }`}
+                >
+                  <div className="flex flex-row items-center justify-between py-2">
+                    <h5>{category?.type}</h5>
+                    <h5>({category?.amount})</h5>
+                  </div>
 
-                {categories.length == index - 1 ? <hr /> : ""}
-              </div>
+                  {categories.length == index - 1 ? <hr /> : ""}
+                </div>
+              </Link>
             ))}
           </div>
         </div>

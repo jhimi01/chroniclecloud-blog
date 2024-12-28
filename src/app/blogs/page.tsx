@@ -22,7 +22,7 @@ export default function Blogs() {
 
   return (
     // <SideNavLayout>
-     <div className="mx-auto container">
+    <div className="mx-auto container">
       <div className="md:flex  items-center gap-5 pt-10 pr-4">
         {/* this is a search bar */}
         <div className="flex md:mb-0 mb-2 items-center border w-full md:w-80 pr-3 gap-2 bg-white border-gray-500/30 h-[46px] rounded-[5px] overflow-hidden">
@@ -97,7 +97,7 @@ export default function Blogs() {
           </button>
         </Link>
       </div>
- <hr className="my-5" />
+      <hr className="my-5" />
       {/* blogs sections */}
       <div className="w-full mt-5 space-y-5 md:space-y-7">
         {blogs.length === 0 ? (
@@ -110,7 +110,7 @@ export default function Blogs() {
           </div>
         )}
       </div>
-     </div>
+    </div>
     // </SideNavLayout>
   );
 }
