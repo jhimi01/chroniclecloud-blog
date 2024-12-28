@@ -67,14 +67,13 @@ export default function LeftSideber() {
   ];
 
   const [search, setSearch] = useState('');
-  const { setSearchTerm } = useBlogStore();
   const pathname = usePathname();
   
   console.log(search)
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
-    setSearchTerm(e.target.value); // Update the search term in Zustand store
+
   };
 
   return (
