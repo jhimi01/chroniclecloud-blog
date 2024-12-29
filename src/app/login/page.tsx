@@ -51,10 +51,10 @@ export default function Login() {
   };
 
   return (
-    <div className="mt-8">
-    <h2 className="text-center text-2xl font-semibold mb-6">Login</h2>
-    <div className="max-w-md mx-auto  p-6 border rounded-lg shadow-md">
-      
+    <div className="mt-20">
+    <div>
+    <h2 className="text-center text-2xl font-semibold mb-4">Login</h2>
+    <div className="max-w-md mx-auto p-6 border rounded-none shadow-md">
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="email" className="block text-lg">
@@ -89,12 +89,14 @@ export default function Login() {
           Login
         </button>
         <div>
-          <Link href="/signup" className="underline text-xs">
+          <Link href="/signup" className="underline text-secondary text-xs">
             are you new here? signup
           </Link>
         </div>
       </form>
     </div>
+    </div>
+    
     </div>
   );
 }

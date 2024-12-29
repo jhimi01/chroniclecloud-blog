@@ -68,19 +68,19 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <Card className="w-full max-w-md rounded-none">
-        <CardHeader>
-          <CardTitle className="text-center">Sign up</CardTitle>
-        </CardHeader>
+    <div className=" mt-5">
+       <div>
+       <CardTitle className="text-center text-2xl font-semibold mb-4">Sign up</CardTitle>
+      <Card className="w-full mx-auto max-w-md rounded-none">
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             {/* Email */}
-            <div>
-              <Label htmlFor="email">Email</Label>
+            <div className="pt-5">
+              <Label htmlFor="email" className="text-lg">Email</Label>
               <Input
                 id="email"
                 type="email"
+                className="rounded-none"
                 placeholder="Enter your email"
                 {...register("email")}
               />
@@ -93,10 +93,11 @@ export default function Signup() {
 
             {/* Name */}
             <div>
-              <Label htmlFor="name">Name</Label>
+              <Label className="text-lg" htmlFor="name">Name</Label>
               <Input
                 id="name"
                 type="text"
+                className="rounded-none"
                 placeholder="Enter your name"
                 {...register("name")}
               />
@@ -109,10 +110,11 @@ export default function Signup() {
 
             {/* Username */}
             <div>
-              <Label htmlFor="username">Username</Label>
+              <Label className="text-lg" htmlFor="username">Username</Label>
               <Input
                 id="username"
                 type="text"
+                className="rounded-none"
                 placeholder="Choose a username"
                 {...register("username")}
               />
@@ -125,10 +127,11 @@ export default function Signup() {
 
             {/* Password */}
             <div>
-              <Label htmlFor="password">Password</Label>
+              <Label className="text-lg" htmlFor="password">Password</Label>
               <Input
                 id="password"
                 type="password"
+                className="rounded-none"
                 placeholder="Create a password"
                 {...register("password")}
               />
@@ -141,10 +144,11 @@ export default function Signup() {
 
             {/* Confirm Password */}
             <div>
-              <Label htmlFor="confirmPassword">Re-type Password</Label>
+              <Label className="text-lg" htmlFor="confirmPassword">Re-type</Label>
               <Input
                 id="confirmPassword"
                 type="password"
+                className="rounded-none"
                 placeholder="Re-type your password"
                 {...register("confirmPassword")}
               />
@@ -164,7 +168,7 @@ export default function Signup() {
             <div className="text-center text-sm mt-2">
               <p>
                 Already have an account?{" "}
-                <Link href="/login" className="text-blue-500 underline">
+                <Link href="/login" className="text-secondary underline">
                   Log in
                 </Link>
               </p>
@@ -172,6 +176,7 @@ export default function Signup() {
           </form>
         </CardContent>
       </Card>
+       </div>
     </div>
   );
 }
