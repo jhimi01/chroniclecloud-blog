@@ -51,8 +51,10 @@ export default function Login() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-8 p-6 border rounded-lg shadow-md">
-      <h2 className="text-center text-2xl font-semibold mb-6">Login</h2>
+    <div className="mt-8">
+    <h2 className="text-center text-2xl font-semibold mb-6">Login</h2>
+    <div className="max-w-md mx-auto  p-6 border rounded-lg shadow-md">
+      
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="email" className="block text-lg">
@@ -82,7 +84,7 @@ export default function Login() {
         </div>
         <button
           type="submit"
-          className="bg-blue-500 text-white py-2 px-4 rounded"
+          className="bg-primary w-full text-white py-2 px-4 rounded-none"
         >
           Login
         </button>
@@ -92,6 +94,7 @@ export default function Login() {
           </Link>
         </div>
       </form>
+    </div>
     </div>
   );
 }

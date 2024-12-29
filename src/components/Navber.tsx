@@ -59,7 +59,7 @@ export default function Navbar() {
         <hr className="hidden md:block" />
 
         {/* Navigation Links for Desktop */}
-        <nav className="md:flex justify-center space-x-10 py-5">
+        <nav className="md:flex justify-center space-x-10 py-5 bg-white">
           {navLinks.map(({ href, label }) => (
             <Link
               key={href}

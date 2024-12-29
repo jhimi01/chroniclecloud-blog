@@ -19,11 +19,19 @@ export default function Blogs() {
   const [grid, setGrid] = useState(false);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value); // Update the search term in Zustand store
+    setSearch(e.target.value.toLowerCase()); // Update the search term in Zustand store
   };
 
+
+  type BlogKeys = "title" | "category" | "desc";
+
+  const filteredBlogs = blogs.filter((blog) =>
+    (["title", "category", "desc"] as BlogKeys[]).some((key) =>
+      blog[key]?.toLowerCase().includes(search)
+    )
+  );
+  
   return (
-    // <SideNavLayout>
     <div className="mx-auto container">
       <div className="md:flex  items-center gap-5 pt-10 pr-4">
         {/* this is a search bar */}
@@ -99,24 +107,26 @@ export default function Blogs() {
           </button>
         </Link>
 
-        <div className="cursor-pointer hidden md:block" onClick={() => setGrid(!grid)}>
+        <div
+          className="cursor-pointer hidden md:block"
+          onClick={() => setGrid(!grid)}
+        >
           <Table size={30} />
         </div>
       </div>
       <hr className="my-5" />
       {/* blogs sections */}
       <div className="w-full my-10 space-y-5 md:space-y-7">
-       {blogs && blogs.length === 0 ? (
+        {filteredBlogs && filteredBlogs.length === 0 ? (
           <div>no blogs available</div>
         ) : (
           <div className={` ${grid ? "gap-3 grid grid-cols-2" : "space-y-5"}`}>
-            {blogs.map((blog, index) => (
+            {filteredBlogs.map((blog, index) => (
               <CardBlog key={index} blog={blog} grid={grid} />
             ))}
           </div>
         )}
       </div>
     </div>
-    // </SideNavLayout>
   );
 }

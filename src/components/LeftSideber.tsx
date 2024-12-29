@@ -3,12 +3,14 @@ import useBlogStore from "@/stores/blogStore";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { type } from "node:os";
 import React, { useState } from "react";
 import { Skeleton } from "./ui/skeleton";
 
-export default function LeftSideber({ blogsCategory }) {
-  console.log(blogsCategory);
+export default function LeftSideber({
+  blogsCategory,
+}: {
+  blogsCategory?: any;
+}) {
   const { blogs } = useBlogStore();
   const pathname = usePathname();
   const [search, setSearch] = useState("");
@@ -204,34 +206,35 @@ export default function LeftSideber({ blogsCategory }) {
         ) : (
           <div className="mt-8 text-slate-500">
             <h2 className="mb-1 px-2 text-xl ">Related Contents</h2>
-
             <div className="space-y-3">
-              {(blogsCategory && blogsCategory.length !== 0) ||
-              (reletedfilteredBlogs && reletedfilteredBlogs?.length !== 0) ? (
-                <div className="space-y-3">
-                  {reletedfilteredBlogs?.map((content, index) => (
-                    <Link
-                      key={index}
-                      href={`/blogs/${content.id}`}
-                      className="flex px-2 flex-row gap-1 hover:shadow-lg bg-accent cursor-pointer"
-                    >
-                      <Image
-                        height={500}
-                        width={500}
-                        alt="related contents"
-                        className="h-14 w-14"
-                        src={content?.image}
-                      />
-                      <h3>{content?.title}</h3>
-                    </Link>
-                  ))}
+              {(blogsCategory?.length ?? 0) > 0 ||
+              (reletedfilteredBlogs?.length ?? 0) > 0 ? (
+                <div className="space-y-3 px-2">
+                  {(blogsCategory || reletedfilteredBlogs)?.map(
+                    (content: any, index: number) => (
+                      <Link
+                        key={index}
+                        href={`/blogs/${content.id}`}
+                        className="flex  items-center flex-row gap-1 hover:shadow-lg bg-accent cursor-pointer"
+                      >
+                        <Image
+                          height={500}
+                          width={500}
+                          alt="related content"
+                          className="h-14 w-14"
+                          src={content?.image || "/placeholder.jpg"}
+                        />
+                        <h3 className="truncate w-full">{content?.title}</h3>
+                      </Link>
+                    )
+                  )}
                 </div>
               ) : (
                 <div>
                   <h3 className="p-2 bg-accent text-slate-400">
                     No content available
                   </h3>
-                  <div className=" space-y-2 md:px-0 px-5">
+                  <div className="space-y-2 px-5">
                     <Skeleton className="h-10 w-full bg-gray-300 rounded-none" />
                     <Skeleton className="h-10 w-full bg-gray-300 rounded-none" />
                     <Skeleton className="h-10 w-full bg-gray-300 rounded-none" />
@@ -241,8 +244,6 @@ export default function LeftSideber({ blogsCategory }) {
             </div>
           </div>
         )}
-
-        {/* social network */}
       </div>
 
       {/* for mobile */}
@@ -252,4 +253,3 @@ export default function LeftSideber({ blogsCategory }) {
     </>
   );
 }
-
