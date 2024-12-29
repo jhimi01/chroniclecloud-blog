@@ -46,7 +46,7 @@ export default function Navbar() {
     { href: "/categories/world", label: "World" },
   ];
 
-  if (noNavbarPaths.includes(pathname)) return null;
+  // if (noNavbarPaths.includes(pathname)) return null;
 
   return (
     <header className="container mx-auto text-primary">

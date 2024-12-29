@@ -72,7 +72,9 @@ export default function Footer() {
         <div className="flex justify-between items-center">
           <p className="text-sm text-gray-400">
             Copyright ©2024 All rights reserved | This template is made with 🖤
-            by Chronicle Cloud
+            by <span className="text-secondary">
+            Chronicle Cloud
+            </span>
           </p>
           <div className="flex items-center gap-5">
             <Facebook className="cursor-pointer hover:text-secondary" />

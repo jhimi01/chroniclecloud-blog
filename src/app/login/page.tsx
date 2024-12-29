@@ -51,52 +51,55 @@ export default function Login() {
   };
 
   return (
-    <div className="mt-20">
-    <div>
-    <h2 className="text-center text-2xl font-semibold mb-4">Login</h2>
-    <div className="max-w-md mx-auto p-6 border rounded-none shadow-md">
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label htmlFor="email" className="block text-lg">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="border p-2 w-full"
-          />
+    <div className="mt-5">
+      <div>
+        <h2 className="text-center text-2xl font-semibold mb-4">Login</h2>
+        <div className="max-w-md mx-auto p-6 border rounded-none shadow-md">
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label htmlFor="email" className="block text-lg">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="border p-2 w-full"
+              />
+            </div>
+            <div>
+              <label htmlFor="password" className="block text-lg">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="border p-2 w-full"
+              />
+            </div>
+            <button
+              type="submit"
+              className="bg-primary w-full text-white py-2 px-4 rounded-none"
+            >
+              Login
+            </button>
+            <div>
+              <p className="text-sm">
+                are you new here?
+                &nbsp;
+                <Link href="/signup" className="underline text-secondary ">
+                  signup
+                </Link>
+              </p>
+            </div>
+          </form>
         </div>
-        <div>
-          <label htmlFor="password" className="block text-lg">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className="border p-2 w-full"
-          />
-        </div>
-        <button
-          type="submit"
-          className="bg-primary w-full text-white py-2 px-4 rounded-none"
-        >
-          Login
-        </button>
-        <div>
-          <Link href="/signup" className="underline text-secondary text-xs">
-            are you new here? signup
-          </Link>
-        </div>
-      </form>
-    </div>
-    </div>
-    
+      </div>
     </div>
   );
 }
