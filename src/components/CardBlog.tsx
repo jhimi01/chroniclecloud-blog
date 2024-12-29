@@ -32,18 +32,18 @@ export default function CardBlog({
   image,
 }: CardBlogProps) {
   return (
-    <div className="hover:bg-accent bg-accent md:bg-transparent hover:shadow-md w-11/12 mr-auto md:w-full">
+    <div className=" bg-accent md:bg-white hover:shadow-md w-11/12 mr-auto md:w-full">
      {/* <Link href={`/blogs/${id}`} > */}
      <div className="md:flex gap-5 ">
         <Image
           width={800}
           height={800}
-          src={'/img/bg.jpg'}
+          src={image}
           alt="blog post"
           className="w-48 h-48"
         />
         <div className="space-y-2 md:space-y-3 p-5 w-full my-2 md:my-0">
-          <h2 className=" md:text-2xl text-xl text-black">{title}</h2>
+          <h2 className=" md:text-2xl text-xl text-black hover:text-secondary cursor-default">{title}</h2>
           <div className="md:flex gap-4">
             <div className="flex text-gray-400 items-center gap-1 text-sm">
               <CalendarDays size={16} strokeWidth={1.75} className="" />
@@ -67,7 +67,7 @@ export default function CardBlog({
               <CircleUserRound size={16} strokeWidth={1.75} /> {author}
             </h3>
             <Link
-              className="text-[#1eafed] text-sm font-semibold flex items-center"
+              className="text-secondary text-sm font-semibold flex items-center"
               href={`/blogs/${id}`}
             >
               Read More

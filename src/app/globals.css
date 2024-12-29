@@ -157,6 +157,11 @@ html {
   color: #fff;
   /* padding: 5px 10px; */
 }
+.origin-top-center{
+  border-radius: 0;
+  padding: 10px 0;
+  background-color: aqua;
+}
 
 /* image inside the text */
 .text-with-image {

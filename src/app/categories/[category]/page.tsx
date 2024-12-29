@@ -1,4 +1,3 @@
-import CardBlog from "@/components/CardBlog";
 import LeftSideber from "@/components/LeftSideber";
 import { PrismaClient } from "@prisma/client";
 import {
@@ -7,6 +6,10 @@ import {
   ChevronRight,
   ThumbsUp,
   File,
+  Facebook,
+  Twitter,
+  Youtube,
+  Instagram,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -33,18 +36,18 @@ export default async function CategoryPage({
 
   return (
     <div className="container mx-auto mt-8">
-      <div className="flex">
+      <div className="flex gap-6">
         <div className="w-[75%] space-y-5">
           {blogs?.map((blog) => (
             <div
               key={blog.id}
-              className="hover:bg-accent bg-accent md:bg-transparent "
+              className="hover:bg-accent border bg-accent md:bg-transparent "
             >
               <div className="md:flex gap-2">
                 <Image
                   width={800}
                   height={800}
-                  src={'/img/bg.jpg'}
+                  src={blog?.image}
                   alt="blog post"
                   className="h-48 w-48"
                 />
@@ -89,8 +92,32 @@ export default async function CategoryPage({
             </div>
           ))}
         </div>
-        <div className="w-[25%]">
+        <div className="w-[25%] border">
+        <div className="w-full bg-primary h-12 flex items-center pl-5 font-normal text-lg">
+          <h2 className="text-white">ShortCut</h2>
+        </div>
           <LeftSideber />
+          <div className="mt-5 bg-white">
+          <div className="w-full bg-primary h-12 flex items-center pl-5 font-normal text-lg">
+            <h2 className="text-white">Social Links</h2>
+          </div>
+          <div className="p-3">
+            <ul className="mt-3 space-y-3 text-white text-lg">
+              <li className="p-2 cursor-pointer  flex justify-between bg-blue-500 ">
+                <Facebook /> | Link our page
+              </li>
+              <li className="p-2 cursor-pointer flex justify-between bg-cyan-500 ">
+                <Twitter /> | Follow US
+              </li>
+              <li className="p-2 cursor-pointer flex justify-between bg-red-500 ">
+                <Youtube /> | Subscribe
+              </li>
+              <li className="p-2 cursor-pointer flex justify-between bg-pink-500 ">
+                <Instagram /> | Follow
+              </li>
+            </ul>
+          </div>
+        </div>
         </div>
       </div>
     </div>

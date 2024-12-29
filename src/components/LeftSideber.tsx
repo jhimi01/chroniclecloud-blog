@@ -8,7 +8,6 @@ import { type } from "node:os";
 import React, { useState } from "react";
 
 export default function LeftSideber() {
-
   const categories = [
     { type: "fashion" },
     { type: "technology" },
@@ -16,8 +15,6 @@ export default function LeftSideber() {
     { type: "photography" },
     { type: "health" },
   ];
-
-
 
   const mycontetnts = [
     {
@@ -71,7 +68,7 @@ export default function LeftSideber() {
 
   const [search, setSearch] = useState("");
   const pathname = usePathname();
-  const categoryFromPathname = pathname.split('/')[2];
+  const categoryFromPathname = pathname.split("/")[2];
 
   console.log(search);
 
@@ -82,7 +79,7 @@ export default function LeftSideber() {
   return (
     <>
       {/* for desktop */}
-      <div className="border-l p-3 md:block hidden">
+      <div className="p-3 md:block hidden bg-white">
         <div className="input-container mt-3 mx-auto">
           <input
             type="text"
@@ -158,7 +155,12 @@ export default function LeftSideber() {
                       : ""
                   }`}
                 >
-                  <div className={`flex flex-row items-center px-2 justify-between py-2 ${category?.type === categoryFromPathname && "bg-gray-300 text-gray-700"}`}>
+                  <div
+                    className={`flex flex-row items-center px-2 justify-between py-2 ${
+                      category?.type === categoryFromPathname &&
+                      "bg-gray-300 text-gray-700"
+                    }`}
+                  >
                     <h5 className="capitalize">{category?.type}</h5>
                     {/* <h5>({categories?.length})</h5> */}
                   </div>
@@ -170,6 +172,7 @@ export default function LeftSideber() {
           </div>
         </div>
 
+        {/* shortcut content */}
         {pathname == "/" ? (
           <div className="mt-8 text-slate-500">
             <h2 className="mb-1 px-2 text-xl ">My Contents</h2>
@@ -229,6 +232,9 @@ export default function LeftSideber() {
             </div>
           </div>
         )}
+
+        {/* social network */}
+       
       </div>
 
       {/* for mobile */}

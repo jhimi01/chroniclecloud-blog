@@ -74,6 +74,7 @@ export default function Navbar() {
                       </NavigationMenuLink>
                     </li>
                   ))}
+                  {/* <hr /> */}
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
