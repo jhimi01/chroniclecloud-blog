@@ -1,5 +1,4 @@
 "use client";
-import SideNavLayout from "@/app/sidenav/layout";
 import LeftSideber from "@/components/LeftSideber";
 import { use, useEffect, useState } from "react";
 import {
@@ -15,11 +14,11 @@ import {
 import Image from "next/image";
 import React from "react";
 import { CardBlogProps } from "@/stores/blogStore";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Blog({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params);
-
   const [blog, setBlog] = useState<CardBlogProps | null>(null);
+  const { id } = use(params);
 
   useEffect(() => {
     async function fetchBlogData() {
@@ -34,10 +33,19 @@ export default function Blog({ params }: { params: Promise<{ id: string }> }) {
     fetchBlogData();
   }, [id]);
 
-  if (!blog) return <div>Loading...</div>;
+  if (!blog)
+    return (
+      <div className="md:flex gap-5 mt-10 container mx-auto">
+        <div className="md:w-[70%] space-y-5 md:px-0 px-5 md:space-y-8">
+          <Skeleton className="h-[400px] w-full bg-gray-300 rounded-none" />
+        </div>
+        <div className="md:w-[30%] hidden md:block">
+          <Skeleton className="h-[400px] bg-gray-300 rounded-none" />
+        </div>
+      </div>
+    );
 
   return (
-    // <SideNavLayout>
     <div className="md:flex md:pr-0 px-5 container mx-auto">
       <div className="my-4 space-y-3 md:space-y-5 md:w-[80%]">
         <h2 className="text-2xl md:text-5xl ">{blog?.title}</h2>
@@ -102,6 +110,5 @@ export default function Blog({ params }: { params: Promise<{ id: string }> }) {
         </div>
       </div>
     </div>
-    // {/* </SideNavLayout> */}
   );
 }

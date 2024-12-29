@@ -50,7 +50,7 @@ export default function Hero() {
   };
 
   return (
-    <main className="container mx-auto my-5">
+    <main className="container mx-auto my-5 md:px-0 px-5">
       {/* Hero Section */}
       <div className="grid grid-cols-1 md:grid-cols-3 md:gap-2 h-full">
         {/* Main Article */}
