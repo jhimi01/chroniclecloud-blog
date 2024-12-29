@@ -43,7 +43,7 @@ export default function Navbar() {
       <hr className="hidden md:block" />
 
       {/* Navigation Links */}
-      <nav className="flex justify-center space-x-10 py-5">
+      <nav className="md:flex justify-center space-x-10 py-5 hidden">
         {navLinks.map(({ href, label }) => (
           <Link
             key={href}

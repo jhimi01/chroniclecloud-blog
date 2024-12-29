@@ -39,7 +39,7 @@ export default function Home() {
             <div className="w-full bg-primary h-12 flex items-center pl-5 font-normal text-lg">
               <h2 className="text-white">ShortCut</h2>
             </div>
-            <div className=" ">
+            <div className=" md:block hidden">
               <LeftSideber />
               <div className="mt-5 bg-white">
                 <div className="w-full bg-primary h-12 flex items-center pl-5 font-normal text-lg">
