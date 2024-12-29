@@ -16,7 +16,7 @@ export async function POST(req: any) {
       });
     }
 
-    const isPasswordValid = await bcrypt.compare(user.password, password);
+    const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return new Response(
         JSON.stringify({ message: "Invalid username or password" }),
