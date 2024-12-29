@@ -69,7 +69,7 @@ export default function Signup() {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <Card className="w-full max-w-md">
+      <Card className="w-full max-w-md rounded-none">
         <CardHeader>
           <CardTitle className="text-center">Sign up</CardTitle>
         </CardHeader>
@@ -156,7 +156,7 @@ export default function Signup() {
             </div>
 
             {/* Submit Button */}
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full rounded-none">
               Sign up
             </Button>
 
