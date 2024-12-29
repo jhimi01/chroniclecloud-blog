@@ -54,11 +54,11 @@ export default async function CategoryPage({
           {blogs.length === 0 ? (
             <p>No blogs found for this category.</p>
           ) : (
-            <div>
+            <div className="space-y-2">
               {blogs?.map((blog) => (
                 <div
                   key={blog.id}
-                  className="hover:bg-accent border bg-accent md:bg-transparent "
+                  className="hover:bg-accent  border bg-accent md:bg-transparent "
                 >
                   <div className="md:flex gap-2">
                     <Image
@@ -66,10 +66,10 @@ export default async function CategoryPage({
                       height={800}
                       src={blog?.image}
                       alt="blog post"
-                      className="md:h-48 md:w-48"
+                      className=" md:w-48"
                     />
                     <div className="space-y-2 md:space-y-3 p-5 w-full my-2 md:my-0">
-                      <h2 className="md:text-2xl text-xl text-black">
+                      <h2 className="md:text-2xl text-xl hover:text-secondary text-black">
                         {blog.title}
                       </h2>
                       <div className="md:flex gap-4">
@@ -97,7 +97,7 @@ export default async function CategoryPage({
                           {blog.author}
                         </h3>
                         <Link
-                          className="text-[#1eafed] text-sm font-semibold flex items-center"
+                          className="text-secondary text-sm font-semibold flex items-center"
                           href={`/blogs/${blog.id}`}
                         >
                           Read More

@@ -3,47 +3,30 @@ import {
   ChevronRight,
   CircleUserRound,
   File,
-  PersonStanding,
   ThumbsUp,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { Profiler } from "react";
+import React from "react";
 
-interface CardBlogProps {
-  id: string;
-  title: string;
-  date: string;
-  category: string;
-  desc: string;
-  likes: number;
-  author: string;
-  image: string;
-}
+export default function CardBlog(blog: any) {
 
-export default function CardBlog({
-  id,
-  title,
-  date,
-  category,
-  desc,
-  likes,
-  author,
-  image,
-}: CardBlogProps) {
+  const { id, title, date, category, desc, likes, author, image, grid } = blog.blog;
   return (
     <div className="bg-white hover:shadow-md w-11/12 mx-auto md:mr-auto md:w-full">
-     {/* <Link href={`/blogs/${id}`} > */}
-     <div className="md:flex gap-5 ">
+      {/* <Link href={`/blogs/${id}`} > */}
+      <div className="md:flex gap-5 ">
         <Image
           width={800}
           height={800}
           src={image}
           alt="blog post"
-          className="md:w-48 md:h-48"
+          className={` ${grid ? "w-44 " : "md:w-48"}`}
         />
         <div className="space-y-2 md:space-y-3 md:p-5 p-3 w-full my-2 md:my-0">
-          <h2 className=" md:text-2xl text-xl text-black hover:text-secondary cursor-default">{title}</h2>
+          <h2 className=" md:text-2xl text-xl text-black hover:text-secondary cursor-default">
+            {title}
+          </h2>
           <div className="md:flex gap-4">
             <div className="flex text-gray-400 items-center gap-1 text-sm">
               <CalendarDays size={16} strokeWidth={1.75} className="" />
@@ -76,7 +59,7 @@ export default function CardBlog({
           </div>
         </div>
       </div>
-    {/* </Link> */}
-     </div>
+      {/* </Link> */}
+    </div>
   );
 }

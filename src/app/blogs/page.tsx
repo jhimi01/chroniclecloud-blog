@@ -1,13 +1,14 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SideNavLayout from "../sidenav/layout";
-import { Plus } from "lucide-react";
+import { Grid2X2, Grid2X2Icon, Plus, Table } from "lucide-react";
 // import  { CardBlogProps } from "@/components/CardBlog";
 // Blogs.tsx or any file that uses CardBlogProps
 import { CardBlogProps } from "@/stores/blogStore"; // Correct import path
 import Link from "next/link";
 import useBlogStore from "@/stores/blogStore";
 import CardBlog from "@/components/CardBlog";
+import { Button } from "@/components/ui/button";
 // Import CardBlog and CardBlogProps
 
 // Assuming you have something like this for CardBlogProps
@@ -15,6 +16,7 @@ import CardBlog from "@/components/CardBlog";
 export default function Blogs() {
   const { blogs, isLoading, error } = useBlogStore();
   const [search, setSearch] = useState("");
+  const [grid, setGrid] = useState(false);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value); // Update the search term in Zustand store
@@ -96,6 +98,10 @@ export default function Blogs() {
             <p className="translate-x-2">create blog</p>
           </button>
         </Link>
+
+        <div className="cursor-pointer hidden md:block" onClick={() => setGrid(!grid)}>
+          <Table size={30} />
+        </div>
       </div>
       <hr className="my-5" />
       {/* blogs sections */}
@@ -103,9 +109,9 @@ export default function Blogs() {
         {blogs.length === 0 ? (
           <div>no blogs available</div>
         ) : (
-          <div className="space-y-5">
+          <div className={` ${grid ? "gap-3 grid grid-cols-2" : "space-y-5"}`}>
             {blogs.map((blog, index) => (
-              <CardBlog key={index} {...blog} />
+              <CardBlog key={index} blog={blog} grid={grid} />
             ))}
           </div>
         )}

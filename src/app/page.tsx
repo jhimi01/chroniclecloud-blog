@@ -10,6 +10,7 @@ import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
 
 export default function Home() {
   const { blogs, isLoading, error } = useBlogStore();
+  console.log(blogs)
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -17,7 +18,9 @@ export default function Home() {
   return (
     // <SideNavLayout>
     <div>
-      <Hero />
+    <div>
+    <Hero />
+    </div>
       <div>
         <div className="flex container mx-auto mt-20">
           <div className="w-full  p-7 bg-accent md:w-9/12 space-y-5 md:space-y-7 md:mr-5">
@@ -32,8 +35,8 @@ export default function Home() {
              </div> // Show this when no blogs match search or when no blogs exist
             ) : (
               <div className="space-y-7">
-                {blogs.map((blog: CardBlogProps, index: number) => (
-                  <CardBlog key={index} {...blog} />
+                {blogs.map((blog, index: number) => (
+                  <CardBlog key={index} blog={blog} />
                 ))}
               </div>
             )}
