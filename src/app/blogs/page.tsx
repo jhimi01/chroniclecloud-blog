@@ -106,7 +106,7 @@ export default function Blogs() {
       <hr className="my-5" />
       {/* blogs sections */}
       <div className="w-full my-10 space-y-5 md:space-y-7">
-        {blogs.length === 0 ? (
+       {blogs && blogs.length === 0 ? (
           <div>no blogs available</div>
         ) : (
           <div className={` ${grid ? "gap-3 grid grid-cols-2" : "space-y-5"}`}>

@@ -32,7 +32,7 @@ export default async function CategoryPage({
   const { category } = params;
   const blogs = await fetchCategoryBlogs(category);
 
-  if (blogs.length === 0) {
+  if (blogs && blogs.length === 0) {
     return (
       <div className="md:flex gap-5 mt-10 container mx-auto">
         <div className="md:w-[70%] space-y-5 md:px-0 px-5 md:space-y-8">
@@ -51,7 +51,7 @@ export default async function CategoryPage({
     <div className="container mx-auto my-8">
       <div className="flex gap-6">
         <div className="md:w-[75%] w-full md:px-0 px-5 space-y-5">
-          {blogs.length === 0 ? (
+          {blogs && blogs.length === 0 ? (
             <p>No blogs found for this category.</p>
           ) : (
             <div className="space-y-2">
@@ -111,11 +111,13 @@ export default async function CategoryPage({
             </div>
           )}
         </div>
+
+        {/* leftsidebar */}
         <div className="w-[25%] border hidden md:block">
           <div className="w-full bg-primary h-12 flex items-center pl-5 font-normal text-lg">
             <h2 className="text-white">ShortCut</h2>
           </div>
-          <LeftSideber />
+          <LeftSideber blogsCategory={blogs} />
           <div className="mt-5 bg-white">
             <div className="w-full bg-primary h-12 flex items-center pl-5 font-normal text-lg">
               <h2 className="text-white">Social Links</h2>

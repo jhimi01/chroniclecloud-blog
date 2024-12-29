@@ -1,13 +1,18 @@
 "use client";
-import useBlogs from "@/hooks/getBlogs";
 import useBlogStore from "@/stores/blogStore";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type } from "node:os";
 import React, { useState } from "react";
+import { Skeleton } from "./ui/skeleton";
 
-export default function LeftSideber() {
+export default function LeftSideber({ blogsCategory }) {
+  console.log(blogsCategory);
+  const { blogs } = useBlogStore();
+  const pathname = usePathname();
+  const [search, setSearch] = useState("");
+  const categoryFromPathname = pathname.split("/")[2];
   const categories = [
     { type: "fashion" },
     { type: "technology" },
@@ -45,32 +50,17 @@ export default function LeftSideber() {
       likes: 320,
     },
   ];
-  const relatedcontetnts = [
-    {
-      author: "johndoe@example.com",
-      title: "The Future of Web Development",
-      image: "/img/bg.jpg",
-      date: "2024-12-26",
-      category: "Technology",
-      desc: "Exploring the latest trends and predictions shaping the future of web development.",
-      likes: 120,
-    },
-    {
-      author: "janesmith@example.com",
-      title: "10 Tips for Healthy Eating",
-      image: "/img/bg5.jpg",
-      date: "2024-12-20",
-      category: "Health",
-      desc: "Discover simple yet effective tips to maintain a healthy diet in your busy life.",
-      likes: 85,
-    },
-  ];
 
-  const [search, setSearch] = useState("");
-  const pathname = usePathname();
-  const categoryFromPathname = pathname.split("/")[2];
+  const contentId = pathname.split("/")[2];
+  const findDataById = blogs.find((blog) => blog.id === contentId);
+  const categoryData = findDataById?.category;
+  // console.log("category ", categoryData);
 
-  console.log(search);
+  const reletedfilteredBlogs = blogs.filter(
+    (blog) => blog.category === categoryData && blog.id !== contentId
+  );
+
+  console.log("category contents", reletedfilteredBlogs);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -165,7 +155,7 @@ export default function LeftSideber() {
                     {/* <h5>({categories?.length})</h5> */}
                   </div>
 
-                  {categories.length == index - 1 ? <hr /> : ""}
+                  {categories && categories.length == index - 1 ? <hr /> : ""}
                 </div>
               </Link>
             ))}
@@ -178,8 +168,17 @@ export default function LeftSideber() {
             <h2 className="mb-1 px-2 text-xl ">My Contents</h2>
 
             <div>
-              {mycontetnts?.length === 0 ? (
-                <h3 className="px-2">No content</h3>
+              {mycontetnts && mycontetnts?.length !== 0 ? (
+                <div>
+                  <h3 className="p-2 bg-accent text-slate-400">
+                    No content available
+                  </h3>
+                  <div className=" space-y-2 md:px-0 px-5">
+                    <Skeleton className="h-10 w-full bg-gray-300 rounded-none" />
+                    <Skeleton className="h-10 w-full bg-gray-300 rounded-none" />
+                    <Skeleton className="h-10 w-full bg-gray-300 rounded-none" />
+                  </div>
+                </div>
               ) : (
                 <div className="space-y-3">
                   {mycontetnts?.map((content, index) => (
@@ -207,14 +206,13 @@ export default function LeftSideber() {
             <h2 className="mb-1 px-2 text-xl ">Related Contents</h2>
 
             <div className="space-y-3">
-              {mycontetnts?.length === 0 ? (
-                <h3 className="px-2">No content</h3>
-              ) : (
+              {(blogsCategory && blogsCategory.length !== 0) ||
+              (reletedfilteredBlogs && reletedfilteredBlogs?.length !== 0) ? (
                 <div className="space-y-3">
-                  {relatedcontetnts?.map((content, index) => (
+                  {reletedfilteredBlogs?.map((content, index) => (
                     <Link
                       key={index}
-                      href="/blogs/id"
+                      href={`/blogs/${content.id}`}
                       className="flex px-2 flex-row gap-1 hover:shadow-lg bg-accent cursor-pointer"
                     >
                       <Image
@@ -228,13 +226,23 @@ export default function LeftSideber() {
                     </Link>
                   ))}
                 </div>
+              ) : (
+                <div>
+                  <h3 className="p-2 bg-accent text-slate-400">
+                    No content available
+                  </h3>
+                  <div className=" space-y-2 md:px-0 px-5">
+                    <Skeleton className="h-10 w-full bg-gray-300 rounded-none" />
+                    <Skeleton className="h-10 w-full bg-gray-300 rounded-none" />
+                    <Skeleton className="h-10 w-full bg-gray-300 rounded-none" />
+                  </div>
+                </div>
               )}
             </div>
           </div>
         )}
 
         {/* social network */}
-       
       </div>
 
       {/* for mobile */}
@@ -244,3 +252,4 @@ export default function LeftSideber() {
     </>
   );
 }
+

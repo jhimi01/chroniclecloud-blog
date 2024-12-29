@@ -27,7 +27,7 @@ export default function Home() {
             <div className="w-full bg-primary h-12 flex items-center pl-5 font-normal text-lg">
               <h2 className="text-white">Latest News</h2>
             </div>
-            {blogs.length === 0 ? (
+            {blogs && blogs.length === 0 ? (
                <div className=" space-y-5 md:px-0 px-5 md:space-y-8">
                <Skeleton className="h-48 w-full bg-gray-300 rounded-none" />
                <Skeleton className="h-48 w-full bg-gray-300 rounded-none" />
