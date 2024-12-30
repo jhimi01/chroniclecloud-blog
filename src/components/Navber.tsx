@@ -35,7 +35,7 @@ export default function Navbar() {
     { href: "/blogs", label: "Blogs" },
     { href: "/blogs/upload-blog", label: "Create Blog" },
     { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
+    { href: "/faq", label: "FAQ" },
   ];
 
   const categories = [
