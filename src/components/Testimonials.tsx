@@ -82,6 +82,7 @@ export default function Testimonials() {
                   width={500}
                   sizes="100vw"
                   alt="user img"
+                  priority
                   className="w-20 h-20 rounded-full mx-auto relative -bottom-8  border-white border-[7px] object-cover"
                 />
                 <div

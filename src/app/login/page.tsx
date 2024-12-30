@@ -28,10 +28,11 @@ export default function Login() {
   });
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+  
     const userData = { email, password };
-
+  
     try {
+      console.log("Sending login request...", userData);
       const res = await fetch("/api/login", {
         method: "POST",
         headers: {
@@ -39,33 +40,38 @@ export default function Login() {
         },
         body: JSON.stringify(userData),
       });
-
-      if (res.ok) {
-        const data = await res.json();
-        setCookie(data.token);
-
-        try {
-          const userInfo = await fetchUserInfo(data.token);
-          console.log("Logged-in user info:", userInfo);
-          setUserInfor(userInfo);
-        } catch (fetchError) {
-          console.error("Error fetching user info:", fetchError.message);
-        }
-
-        alert("Login successful!");
-        router.push("/");
-      } else {
+  
+      if (!res.ok) {
         const errorData = await res.json();
+        console.error("Login failed:", errorData);
         alert(`Error: ${errorData.message}`);
         if (res.status === 404) {
           window.location.href = "/signup";
         }
+        return;
       }
+  
+      const data = await res.json();
+      console.log("Login successful, received token:", data.token);
+      setCookie(data.token);
+  
+      try {
+        console.log("Fetching user info with token:", data.token);
+        const userInfo = await fetchUserInfo(data.token);
+        console.log("Logged-in user info:", userInfo);
+        setUserInfor(userInfo);
+      } catch (fetchError) {
+        console.error("Error fetching user info:", fetchError.message);
+      }
+  
+      alert("Login successful!");
+      router.push("/");
     } catch (error) {
       console.error("Error during login:", error);
       alert("An error occurred. Please try again.");
     }
   };
+  
 
 
   return (

@@ -67,6 +67,7 @@ export default async function CategoryPage({
                       src={blog?.image}
                       alt="blog post"
                       className=" md:w-48"
+                      priority
                     />
                     <div className="space-y-2 md:space-y-3 p-5 w-full my-2 md:my-0">
                       <h2 className="md:text-2xl text-xl hover:text-secondary text-black">

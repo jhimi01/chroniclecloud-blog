@@ -30,6 +30,10 @@ export default function Navbar() {
 
   const noNavbarPaths = ["/login", "/signup"];
 
+  // await prisma.session.delete({
+  //   where: { token },
+  // });
+
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/blogs", label: "Blogs" },

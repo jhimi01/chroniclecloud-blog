@@ -23,7 +23,7 @@ export function useLoggedInUser() {
       const { user } = await response.json();
       setUser(user);
       return user;
-    } catch (err) {
+    } catch (err: any) {
       console.log("Error fetching user info:", err);
       setError(err.message);
       throw err;

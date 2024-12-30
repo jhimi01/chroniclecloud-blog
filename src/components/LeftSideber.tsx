@@ -62,8 +62,6 @@ export default function LeftSideber({
     (blog) => blog.category === categoryData && blog.id !== contentId
   );
 
-  console.log("category contents", reletedfilteredBlogs);
-
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
@@ -192,6 +190,7 @@ export default function LeftSideber({
                       <Image
                         height={500}
                         width={500}
+                        priority
                         alt="related contents"
                         className="h-14 w-14"
                         src={content?.image}
@@ -220,6 +219,7 @@ export default function LeftSideber({
                         <Image
                           height={500}
                           width={500}
+                          priority
                           alt="related content"
                           className="h-14 w-14"
                           src={content?.image || "/placeholder.jpg"}

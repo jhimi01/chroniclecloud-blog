@@ -61,6 +61,7 @@ export default function Hero() {
                 <Image
                   height={500}
                   width={500}
+                  priority
                   src={mainArticle?.image || "/img/bg2.jpg"}
                   alt={mainArticle?.title || "Main Article"}
                   sizes="100vw"
@@ -102,6 +103,7 @@ export default function Hero() {
               <Image
                 height={500}
                 width={500}
+                priority
                 src={article?.image || "/img/bg3.jpg"}
                 alt={article?.title || "Side Article"}
                 className="w-full h-full object-cover group-hover:scale-110 transition duration-1000  cursor-pointer"

@@ -32,5 +32,5 @@ export default function useCategory() {
     }
   };
 
-  // return { category, loading, error, refetch: fetchUsers };
+  return { category, loading, error, refetch: fetchUsers };
 }

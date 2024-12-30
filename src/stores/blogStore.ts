@@ -28,7 +28,7 @@ export interface CardBlogProps {
 }
 
 // Define types for the store state
-interface BlogStore {
+export interface BlogStore {
   blogs: CardBlogProps[];
   isLoading: boolean;
   error: string | null;
@@ -39,6 +39,7 @@ interface BlogStore {
 }
 
 const useBlogStore = create<BlogStore>((set) => {
+
   const fetchBlogs = async () => {
     set({ isLoading: true, error: null });
     try {
