@@ -1,6 +1,7 @@
 "use client";
 
 import { useCookie } from "@/hooks/useCookie";
+import { useLoggedInUser } from "@/hooks/useLoggedInUser";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -8,14 +9,23 @@ import React, { useState } from "react";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [userinfo, setUserInfor] = useState("");
   const router = useRouter();
+  
+  const { fetchUserInfo, user, error } = useLoggedInUser();
+
+  console.log("userinfo", user)
+
+  console.log("user", userinfo)
+  
+
+  // jhimi123@
 
   const { setCookie } = useCookie({
     key: "authToken",
     days: 7,
     defaultValue: "",
   });
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -32,16 +42,23 @@ export default function Login() {
 
       if (res.ok) {
         const data = await res.json();
-        // Set the token using the useCookie hook
         setCookie(data.token);
+
+        try {
+          const userInfo = await fetchUserInfo(data.token);
+          console.log("Logged-in user info:", userInfo);
+          setUserInfor(userInfo);
+        } catch (fetchError) {
+          console.error("Error fetching user info:", fetchError.message);
+        }
+
         alert("Login successful!");
         router.push("/");
       } else {
         const errorData = await res.json();
         alert(`Error: ${errorData.message}`);
-        // Redirect to the signup page if the user is not found
         if (res.status === 404) {
-          window.location.href = "/signup"; // Redirect to signup page
+          window.location.href = "/signup";
         }
       }
     } catch (error) {
@@ -49,6 +66,7 @@ export default function Login() {
       alert("An error occurred. Please try again.");
     }
   };
+
 
   return (
     <div className="mt-5">
