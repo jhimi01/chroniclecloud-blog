@@ -10,11 +10,15 @@ export async function POST(req: Request) {
       throw new Error("JWT_SECRET is not defined in the environment variables");
     }
 
+    // Verify the JWT token
     const decoded = jwt.verify(token, secret) as jwt.JwtPayload;
 
+    // Fetch the user and include blogs
     const user = await prisma.user.findUnique({
       where: { id: decoded.id },
-      select: { id: true, name: true, email: true, username: true },
+      include: {
+        blogs: true, // Include all blogs associated with the user
+      },
     });
 
     if (!user) {
@@ -23,9 +27,41 @@ export async function POST(req: Request) {
       });
     }
 
-    return new Response(JSON.stringify({ user }), { status: 200 });
-  } catch (error) {
+    // Create or update session
+    const sessionToken = jwt.sign(
+      { id: user.id },
+      secret,
+      { expiresIn: "7d" } // Optional: You can set a different expiration for the session token
+    );
+
+    const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days from now
+
+    // Upsert session (create if not exists, otherwise update)
+    await prisma.session.upsert({
+      where: { token },
+      create: {
+        // userEmail: user.email,
+        userId: user.id,
+        token: sessionToken,
+        expiresAt,
+      },
+      update: {
+        expiresAt,
+      },
+    });
+
+    // Return all user data, including blogs
+    return new Response(
+      JSON.stringify({
+        message: "Session updated",
+        user,
+        sessionToken,
+      }),
+      { status: 200 }
+    );
+  } catch (error: any) {
     console.error("Token validation error:", error);
+
     const message =
       error.name === "JsonWebTokenError" || error.name === "TokenExpiredError"
         ? "Invalid or expired token"

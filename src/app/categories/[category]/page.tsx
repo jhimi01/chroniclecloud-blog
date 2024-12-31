@@ -23,6 +23,13 @@ async function fetchCategoryBlogs(category: string) {
   });
   return blogs;
 }
+async function fetchsession() {
+  const users = await prisma.session.findMany({});
+  return users;
+}
+
+fetchsession();
+console.log(fetchsession());
 
 export default async function CategoryPage({
   params,
@@ -95,7 +102,7 @@ export default async function CategoryPage({
                       <div className="md:flex justify-between text-gray-400">
                         <h3 className="text-sm flex items-center gap-1">
                           <CircleUserRound size={16} strokeWidth={1.75} />{" "}
-                          {blog.author}
+                          {/* {blog.author} */}
                         </h3>
                         <Link
                           className="text-secondary text-sm font-semibold flex items-center"

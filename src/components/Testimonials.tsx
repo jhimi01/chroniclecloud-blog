@@ -110,7 +110,7 @@ export default function Testimonials() {
       </div>
 
       {/* why choose us */}
-      <div className="mx-auto  md:grid grid-cols-4 gap-10 text-center space-y-4 md:space-y-0 md:text-justify py-6 my-14">
+      <div className="mx-auto px-10  md:grid grid-cols-4 gap-10 text-center space-y-4 md:space-y-0 md:text-justify py-6 my-14">
         <div>
           <h2 className="">WHY CHOOSE US</h2>
           <div className="w-[25%] mt-2 h-[1px] bg-[#999] mx-auto md:mx-0 mb-10"></div>

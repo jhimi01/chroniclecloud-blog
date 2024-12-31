@@ -46,8 +46,8 @@ export default function Navbar() {
     { href: "/categories/technology", label: "Technology" },
     { href: "/categories/health", label: "Health" },
     { href: "/categories/travel", label: "Travel" },
-    { href: "/categories/nature", label: "Nature" },
-    { href: "/categories/world", label: "World" },
+    { href: "/categories/fashion", label: "Fashion" },
+    { href: "/categories/photography", label: "Photography" },
   ];
 
   // if (noNavbarPaths.includes(pathname)) return null;

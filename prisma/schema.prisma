@@ -14,29 +14,32 @@ datasource db {
 }
 
 model User {
-  id         String     @id @default(cuid())
-  name       String
-  username   String     @unique
-  email      String     @unique
-  password   String
-  created_at DateTime   @default(now())
-  blogs      BlogPost[]
-  Session    Session[]
+  id        String     @id @default(cuid())
+  name      String
+  username  String     @unique
+  email     String     @unique
+  password  String
+  createdAt DateTime   @default(now())
+  blogs     BlogPost[]
+  // Session    Session[]
 }
-// for loggedin users
+
 model Session {
   id        String   @id @default(cuid())
   userId    String
+  // userEmail String
   token     String   @unique
   createdAt DateTime @default(now())
   expiresAt DateTime
-  User      User     @relation(fields: [userId], references: [id])
+  // User      User     @relation(fields: [userId], references: [id])
+
+  @@index([userId]) // Add an index for quicker lookups by userId
 }
 
 model BlogPost {
   id       String   @id @default(cuid())
-  author   String
   title    String
+  // author   String  
   image    String
   date     DateTime @default(now())
   category String
@@ -44,4 +47,6 @@ model BlogPost {
   likes    Int      @default(0)
   User     User?    @relation(fields: [userId], references: [id])
   userId   String?
+
+  @@index([userId]) // Add an index for quicker lookups by userId
 }

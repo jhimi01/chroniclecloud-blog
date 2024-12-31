@@ -1,9 +1,7 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -16,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import SideNavLayout from "@/app/sidenav/layout";
 import React, { useState } from "react";
+import { userStore } from "@/stores/userStore";
 
 const formSchema = z.object({
   title: z.string().min(10, {
@@ -34,6 +33,7 @@ const formSchema = z.object({
 });
 
 export default function UploadBlog() {
+  const { setValue } = useForm();
   const [contentLength, setContentLength] = useState(0);
   const maxContentLength = 500;
 
@@ -52,13 +52,16 @@ export default function UploadBlog() {
     { Catevalue: "Technology", label: "Technology" },
     { Catevalue: "Health", label: "Health" },
     { Catevalue: "Travel", label: "Travel" },
-    { Catevalue: "Nature", label: "Nature" },
-    { Catevalue: "World", label: "World" },
+    { Catevalue: "Fashion", label: "Fashion" },
+    { Catevalue: "Photography", label: "Photography" },
   ];
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     console.log("Submitting form:", values);
   };
+
+  const userInfo = userStore((state) => state.userInfo);
+  console.log("userInfo", userInfo?.user?.email);
 
   return (
     // <SideNavLayout>
@@ -98,6 +101,7 @@ export default function UploadBlog() {
                         type="email"
                         placeholder="Enter your email address"
                         {...field}
+                        value={userInfo?.user?.email && "author email not found"} // Fix the value here
                       />
                     </FormControl>
                     <FormMessage />

@@ -2,6 +2,8 @@
 
 import { useCookie } from "@/hooks/useCookie";
 import { useLoggedInUser } from "@/hooks/useLoggedInUser";
+import useBlogStore from "@/stores/blogStore";
+import { userStore } from "@/stores/userStore";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -9,30 +11,17 @@ import React, { useState } from "react";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userinfo, setUserInfor] = useState("");
   const router = useRouter();
-  
-  const { fetchUserInfo, user, error } = useLoggedInUser();
 
-  console.log("userinfo", user)
+  // Access setUserInfo function from Zustand store
+  const setUserInfo = userStore((state) => state.setUserInfo);
 
-  console.log("user", userinfo)
-  
-
-  // jhimi123@
-
-  const { setCookie } = useCookie({
-    key: "authToken",
-    days: 7,
-    defaultValue: "",
-  });
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     const userData = { email, password };
-  
+
     try {
-      console.log("Sending login request...", userData);
       const res = await fetch("/api/login", {
         method: "POST",
         headers: {
@@ -40,30 +29,21 @@ export default function Login() {
         },
         body: JSON.stringify(userData),
       });
-  
+
       if (!res.ok) {
         const errorData = await res.json();
-        console.error("Login failed:", errorData);
         alert(`Error: ${errorData.message}`);
         if (res.status === 404) {
-          window.location.href = "/signup";
+          router.push("/signup");
         }
         return;
       }
-  
+
       const data = await res.json();
-      console.log("Login successful, received token:", data.token);
-      setCookie(data.token);
-  
-      try {
-        console.log("Fetching user info with token:", data.token);
-        const userInfo = await fetchUserInfo(data.token);
-        console.log("Logged-in user info:", userInfo);
-        setUserInfor(userInfo);
-      } catch (fetchError) {
-        console.error("Error fetching user info:", fetchError.message);
-      }
-  
+      // Assuming the response contains user info
+      const userInfo = await fetchUserInfo(data.token); // Fetch the user info
+      console.log("Fetched user info:", userInfo);
+      setUserInfo(userInfo); // Update Zustand store with user info
       alert("Login successful!");
       router.push("/");
     } catch (error) {
@@ -71,7 +51,22 @@ export default function Login() {
       alert("An error occurred. Please try again.");
     }
   };
-  
+
+  const fetchUserInfo = async (token: string) => {
+    const res = await fetch("/api/validate-token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // Send the token in the headers
+      },
+      body: JSON.stringify({ token }), // Include token in the body if required
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch user info");
+    }
+    return res.json();
+  };
 
 
   return (
@@ -114,8 +109,7 @@ export default function Login() {
             </button>
             <div>
               <p className="text-sm">
-                are you new here?
-                &nbsp;
+                are you new here? &nbsp;
                 <Link href="/signup" className="underline text-secondary ">
                   signup
                 </Link>

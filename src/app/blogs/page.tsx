@@ -18,6 +18,9 @@ export default function Blogs() {
   const [search, setSearch] = useState("");
   const [grid, setGrid] = useState(false);
 
+
+  console.log("his is a blog",blogs)
+
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value.toLowerCase()); // Update the search term in Zustand store
   };
