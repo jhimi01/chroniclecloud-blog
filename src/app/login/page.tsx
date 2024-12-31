@@ -68,7 +68,7 @@ export default function Login() {
 
   const fetchUserInfo = async (token: string) => {
     const res = await fetch("/api/validate-token", {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`, // Ensure token is passed as a Bearer token
