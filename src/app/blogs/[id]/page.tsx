@@ -52,7 +52,7 @@ export default function Blog({ params }: { params: Promise<{ id: string }> }) {
         <p className="text-gray-500 text-xs md:text-base ">{blog?.desc}</p>
         <div className="md:flex gap-4 text-gray-400">
           <h3 className="text-sm flex items-center gap-1">
-            <CircleUserRound size={16} strokeWidth={1.75} /> {blog?.author}
+            <CircleUserRound size={16} strokeWidth={1.75} /> {blog?.userEmail}
           </h3>
           <div className="flex  items-center gap-1 text-sm">
             <CalendarDays size={16} strokeWidth={1.75} className="" />

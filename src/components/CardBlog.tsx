@@ -11,7 +11,7 @@ import React from "react";
 
 export default function CardBlog(blog: any) {
 
-  const { id, title, date, category, desc, likes, author, image, grid } = blog.blog;
+  const { id, title, date, category, desc, likes, userEmail, image, grid } = blog.blog;
   return (
     <div className="bg-white hover:shadow-md w-11/12 mx-auto md:mr-auto md:w-full">
       {/* <Link href={`/blogs/${id}`} > */}
@@ -48,7 +48,7 @@ export default function CardBlog(blog: any) {
           <hr />
           <div className="md:flex justify-between  text-gray-400">
             <h3 className="text-sm flex items-center gap-1">
-              <CircleUserRound size={16} strokeWidth={1.75} /> {author}
+              <CircleUserRound size={16} strokeWidth={1.75} /> {userEmail}
             </h3>
             <Link
               className="text-secondary text-sm font-semibold flex items-center"

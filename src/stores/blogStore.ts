@@ -23,7 +23,7 @@ export interface CardBlogProps {
   category: string;
   desc: string;
   likes: number;
-  author: string;
+  userEmail: string;
   image: string;
 }
 

@@ -20,33 +20,32 @@ model User {
   email     String     @unique
   password  String
   createdAt DateTime   @default(now())
-  blogs     BlogPost[]
-  // Session    Session[]
+  blogs     BlogPost[] // User's associated blogs
+  Session   Session[]
 }
 
 model Session {
   id        String   @id @default(cuid())
-  userId    String
-  // userEmail String
-  token     String   @unique
-  createdAt DateTime @default(now())
-  expiresAt DateTime
-  // User      User     @relation(fields: [userId], references: [id])
+  userId    String // User ID to link session with a user
+  token     String   @unique // JWT token stored as session identifier
+  createdAt DateTime @default(now()) // When the session was created
+  expiresAt DateTime // When the session expires
+  user      User     @relation(fields: [userId], references: [id]) // Relation to the User
 
-  @@index([userId]) // Add an index for quicker lookups by userId
+  @@index([userId]) // Index for faster lookups by userId
 }
 
 model BlogPost {
-  id       String   @id @default(cuid())
-  title    String
-  // author   String  
-  image    String
-  date     DateTime @default(now())
-  category String
-  desc     String
-  likes    Int      @default(0)
-  User     User?    @relation(fields: [userId], references: [id])
-  userId   String?
+  id        String   @id @default(cuid())
+  title     String
+  image     String
+  date      DateTime @default(now())
+  category  String
+  desc      String
+  likes     Int      @default(0)
+  userId    String? // Link to the User who posted the blog
+  userEmail String?
+  User      User?    @relation(fields: [userId], references: [id]) // Fix this relation
 
-  @@index([userId]) // Add an index for quicker lookups by userId
+  @@index([userId]) // Index for faster lookups by userId
 }

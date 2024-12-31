@@ -10,4 +10,10 @@ interface UserStore {
 export const userStore = create<UserStore>((set) => ({
   userInfo: null,
   setUserInfo: (userInfo) => set({ userInfo }), // Correctly updating userInfo state
+  hydrateUserInfo: () => {
+    // const storedUserInfo = JSON.parse(localStorage.getItem("userInfo"));
+    // if (storedUserInfo) {
+    //   set({ userInfo: storedUserInfo });
+    // }
+  },
 }));

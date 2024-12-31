@@ -1,8 +1,6 @@
 "use client";
 
-import { useCookie } from "@/hooks/useCookie";
-import { useLoggedInUser } from "@/hooks/useLoggedInUser";
-import useBlogStore from "@/stores/blogStore";
+import { useCookie } from "@/hooks/useCookie"; // if you're planning to store the token in cookies
 import { userStore } from "@/stores/userStore";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -12,9 +10,18 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  const { setCookie } = useCookie({
+    key: "authToken", // Set the key for the cookie (can be 'token' or something else)
+    days: 7, // Expiration in days
+    defaultValue: "", // Default value if the cookie doesn't exist
+  });
 
   // Access setUserInfo function from Zustand store
   const setUserInfo = userStore((state) => state.setUserInfo);
+// jhimi123@
+// tanha123@
+// rimi123@
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,12 +47,19 @@ export default function Login() {
       }
 
       const data = await res.json();
-      // Assuming the response contains user info
-      const userInfo = await fetchUserInfo(data.token); // Fetch the user info
-      console.log("Fetched user info:", userInfo);
-      setUserInfo(userInfo); // Update Zustand store with user info
-      alert("Login successful!");
-      router.push("/");
+      const { token } = data;
+
+      if (token) {
+        setCookie(token); // Set the token in the cookie
+
+        const userInfo = await fetchUserInfo(token); // Fetch the user info
+        setUserInfo(userInfo);
+        console.log("userInfo", userInfo) // Update Zustand store with user info
+        alert("Login successful!");
+        router.push("/"); // Redirect to home or dashboard
+      } else {
+        alert("Login failed. No token received.");
+      }
     } catch (error) {
       console.error("Error during login:", error);
       alert("An error occurred. Please try again.");
@@ -57,17 +71,19 @@ export default function Login() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`, // Send the token in the headers
+        Authorization: `Bearer ${token}`, // Ensure token is passed as a Bearer token
       },
-      body: JSON.stringify({ token }), // Include token in the body if required
     });
-
+  
     if (!res.ok) {
+      console.error("Error response:", await res.text());
       throw new Error("Failed to fetch user info");
     }
     return res.json();
   };
-
+  
+  
+  
 
   return (
     <div className="mt-5">
