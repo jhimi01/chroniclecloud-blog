@@ -71,7 +71,7 @@ export default function UploadBlog() {
   const userInfo = userStore((state) => state.userInfo);
   const fetchUserInfo = userStore((state) => state.fetchUserInfo);
 
-  console.log("userInfo from upload blog", userInfo.email)
+  console.log("userInfo from upload blog", userInfo)
 
   useEffect(() => {
     const token = getCookie();
