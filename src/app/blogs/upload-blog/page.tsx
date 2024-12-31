@@ -13,8 +13,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import SideNavLayout from "@/app/sidenav/layout";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { userStore } from "@/stores/userStore";
+import { useCookie } from "@/hooks/useCookie";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   title: z.string().min(10, {
@@ -59,9 +61,32 @@ export default function UploadBlog() {
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     console.log("Submitting form:", values);
   };
+ const { getCookie } = useCookie({
+    key: "authToken",
+    days: 7,
+    defaultValue: "",
+  });
 
+  const router = useRouter();
   const userInfo = userStore((state) => state.userInfo);
-  console.log("userInfo", userInfo?.user?.email);
+  const fetchUserInfo = userStore((state) => state.fetchUserInfo);
+
+  console.log("userInfo from upload blog", userInfo.email)
+
+  useEffect(() => {
+    const token = getCookie();
+    if (!token) {
+      router.push("/login"); // Redirect to login if no token is found
+      return;
+    }
+
+    // Fetch user info using Zustand store
+    fetchUserInfo(token);
+  }, []);
+
+  if (!userInfo) {
+    return <div>Loading...</div>;
+  }
 
   return (
     // <SideNavLayout>
@@ -101,7 +126,7 @@ export default function UploadBlog() {
                         type="email"
                         placeholder="Enter your email address"
                         {...field}
-                        value={userInfo?.user?.email && "author email not found"} // Fix the value here
+                        value={userInfo?.email ? userInfo?.email : "email not found"} // Fix the value here
                       />
                     </FormControl>
                     <FormMessage />
