@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Trash2 } from "lucide-react";
+import Image from "next/image";
 
 // Define the type for blogs
 interface Blog {
@@ -23,6 +24,7 @@ interface Blog {
   desc: string;
   date: string; // Stored as an ISO date string
   likes: number;
+  image: string; // Stored as an
 }
 
 // Extend the User type
@@ -84,7 +86,10 @@ export default function UserProfile() {
           </span>
         </h2>
         <p className="text-lg">
-          Email: <span className="font-bold">{userInfo?.email || "No email available"}</span>
+          Email:{" "}
+          <span className="font-bold">
+            {userInfo?.email || "No email available"}
+          </span>
         </p>
       </div>
 
@@ -111,10 +116,21 @@ export default function UserProfile() {
                   <TableCell>
                     <Badge>{blog.category}</Badge>
                   </TableCell>
-                  <TableCell className="font-medium">{blog.title}</TableCell>
+                  <TableCell className="font-medium flex items-center gap-3">
+                    <Image
+                      alt="blog image"
+                      width={500}
+                      height={500}
+                      className="w-10 h-10"
+                      src={blog?.image}
+                    />
+                    {blog.title}
+                  </TableCell>
                   <TableCell>{blog.desc}</TableCell>
                   <TableCell>{formatDate(blog.date)}</TableCell>
-                  <TableCell className="text-right">{blog.likes || 0}</TableCell>
+                  <TableCell className="text-right">
+                    {blog.likes || 0}
+                  </TableCell>
                   <TableCell className="text-right group rounded-full">
                     <Trash2 className="ml-auto w-10 h-10 p-2 group-hover:bg-secondary group-hover:text-white rounded-full " />
                     {/* delete */}

@@ -14,8 +14,6 @@ export default function LeftSideber({
 }) {
   const { blogs } = useBlogStore();
   const pathname = usePathname();
-  const [search, setSearch] = useState("");
-
   const userInfo = userStore((state) => state.userInfo);
   const categoryFromPathname = pathname.split("/")[2];
   const categories = [
@@ -35,74 +33,10 @@ export default function LeftSideber({
     (blog) => blog.category === categoryData && blog.id !== contentId
   );
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-  };
-
   return (
     <>
       {/* for desktop */}
       <div className="p-3 md:block hidden bg-white">
-        <div className="input-container mt-3 mx-auto">
-          <input
-            type="text"
-            value={search}
-            onChange={handleSearchChange}
-            name="text"
-            className="input placeholder:text-gray-500"
-            placeholder="Search blog"
-          />
-          <span className="icon">
-            <svg
-              width="19px"
-              height="19px"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  opacity="1"
-                  d="M14 5H20"
-                  stroke="#000"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                ></path>
-                <path
-                  opacity="1"
-                  d="M14 8H17"
-                  stroke="#000"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                ></path>
-                <path
-                  d="M21 11.5C21 16.75 16.75 21 11.5 21C6.25 21 2 16.75 2 11.5C2 6.25 6.25 2 11.5 2"
-                  stroke="#000"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                ></path>
-                <path
-                  opacity="1"
-                  d="M22 22L20 20"
-                  stroke="#000"
-                  strokeWidth="3.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                ></path>
-              </g>
-            </svg>
-          </span>
-        </div>
-
         {/* category */}
         <div className="mt-8 text-slate-500">
           <h2 className="mb-1 px-2 text-xl">Categories</h2>

@@ -16,37 +16,41 @@ import React, { useEffect, useState } from "react";
 import { userStore } from "@/stores/userStore";
 import { useCookie } from "@/hooks/useCookie";
 import { useRouter } from "next/navigation";
+import ImageUpload from "@/components/ImageUpload";
 
 const formSchema = z.object({
   title: z.string().min(10, {
     message: "Blog title must be at least 3 characters.",
   }),
-  useEmail: z.string().email("Invalid email address."),
-  category: z.string().min(1, {
-    message: "Please select a category.",
-  }),
+  useEmail: z.string().nonempty({ message: "File is required." }),
+  category: z.string().nonempty("Please select a category."),
   desc: z.string().min(20, {
     message: "Content must be at least 20 characters.",
   }),
-  file: z
-    .any()
-    .refine((file) => file instanceof File, { message: "File is required." }),
+  file: z.string().nonempty({ message: "File is required." }),
 });
 
 export default function UploadBlog() {
-  const { setValue } = useForm();
+  const {
+    reset,
+  } = useForm()
+  const userInfo = userStore((state) => state.userInfo);
+  const fetchUserInfo = userStore((state) => state.fetchUserInfo);
+  // const { setValue } = useForm();
   const [descLength, setdescLength] = useState(0);
   const maxDescLength = 500;
-
+  
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
-      useEmail: "",
+      useEmail: userInfo?.email || "",
       category: "",
       desc: "",
     },
   });
+  
+  const router = useRouter()
 
   const categories = [
     { Catevalue: "", label: "Select a category" },
@@ -57,25 +61,51 @@ export default function UploadBlog() {
     { Catevalue: "Photography", label: "Photography" },
   ];
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log("Submitting form:", values);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const { file, ...restOfValues } = values;
+    console.log("Form values on submit:", values);
+
+    try {
+      const response = await fetch("/api/post-blog", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...restOfValues,
+          file,
+        }),
+      });
+
+      const data = await response.json();
+      console.log(data);
+      if (response.ok) {
+        router.push("/")
+        console.log("Blog posted successfully:", data);
+        reset()
+        // Optionally, redirect the user or show a success message
+      } else {
+        console.error("Error posting blog:", data);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
+
   const { getCookie } = useCookie({
     key: "authToken",
     days: 7,
     defaultValue: "",
   });
 
-  const router = useRouter();
-  const userInfo = userStore((state) => state.userInfo);
-  const fetchUserInfo = userStore((state) => state.fetchUserInfo);
 
-  console.log("userInfo from upload blog", userInfo);
+
+  // console.log("userInfo from upload blog", userInfo);
 
   useEffect(() => {
     const token = getCookie();
     if (!token) {
-      router.push("/login"); // Redirect to login if no token is found
+      router.push("/userProfile"); // Redirect to login if no token is found
       return;
     }
 
@@ -190,54 +220,20 @@ export default function UploadBlog() {
             </div>
 
             {/* file upload */}
-            <div className="md:w-1/2 mx-auto flex items-center justify-center bg-white p-3">
-              {/* File Upload */}
-              <FormField
-                control={form.control}
-                name="file"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-base font-semibold">
-                      Upload File
-                    </FormLabel>
-                    <FormControl>
-                      <label className="flex flex-col items-center justify-center md:w-[350px] md:h-[300px] w-full h-full px-14 py-8 bg-accent rounded-3xl border-2 border-dashed border-gray-400 shadow-lg hover:bg-gray-200 cursor-pointer transition-all duration-300">
-                        <svg
-                          viewBox="0 0 640 512"
-                          height="50"
-                          fill="currentColor"
-                          className="mb-5 text-primary"
-                        >
-                          <path d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-217c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l39-39V392c0 13.3 10.7 24 24 24s24-10.7 24-24V257.9l39 39c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-80-80c-9.4-9.4-24.6-9.4-33.9 0l-80 80z" />
-                        </svg>
-                        <p className="text-gray-500 text-sm font-semibold">
-                          Drag and Drop
-                        </p>
-                        <p className="text-gray-500 text-sm font-semibold">
-                          or
-                        </p>
-                        <span className="bg-primary text-white py-1 mt-3 px-4 rounded-md text-sm hover:bg-blue-700">
-                          Browse file
-                        </span>
-                        <input
-                          type="file"
-                          className="hidden"
-                          onChange={(e) =>
-                            field.onChange(e.target.files?.[0] ?? null)
-                          }
-                        />
-                      </label>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+            <ImageUpload
+              onChange={(imageUrl) => {
+                form.setValue("file", imageUrl);
+              }}
+            />
           </div>
 
           {/* Submit Button */}
           <div className="flex justify-center my-5 md:my-0">
-            <Button type="submit" className="text-sm font-medium">
+            <Button
+              type="submit"
+              className="text-sm font-medium"
+              // disabled={Object.keys(form.errors).length > 0}
+            >
               Publish Blog
             </Button>
           </div>

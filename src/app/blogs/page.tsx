@@ -19,7 +19,7 @@ export default function Blogs() {
   const [search, setSearch] = useState("");
   const [grid, setGrid] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 4;
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value.toLowerCase());
@@ -42,6 +42,8 @@ export default function Blogs() {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+
+  console.log("this is a blog", blogs)
 
   return (
     <div className="mx-auto container">

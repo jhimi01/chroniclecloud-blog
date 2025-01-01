@@ -12,6 +12,7 @@ import React from "react";
 export default function CardBlog(blog: any) {
 
   const { id, title, date, category, desc, likes, userEmail, image, grid } = blog.blog;
+  console.log("image", image);
   return (
     <div className="bg-white hover:shadow-md w-11/12 mx-auto md:mr-auto md:w-full">
       {/* <Link href={`/blogs/${id}`} > */}
@@ -19,7 +20,7 @@ export default function CardBlog(blog: any) {
         <Image
           width={800}
           height={800}
-          src={image || "/img/bg.jpg"}
+          src={image}
           alt="blog post"
           className={` ${grid ? "w-44 " : "md:w-48"}`}
           priority
