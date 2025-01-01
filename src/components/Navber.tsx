@@ -12,15 +12,37 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "./ui/navigation-menu";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "./ui/sheet";
 import { userStore } from "@/stores/userStore"; // Zustand store for user management
+import { useCookie } from "@/hooks/useCookie";
+import { Button } from "./ui/button";
 
 export default function Navbar() {
   const pathname = usePathname();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  const { getCookie, removeCookie } = useCookie({
+    key: "authToken",
+    days: 7,
+    defaultValue: "",
+  });
+
+  const fetchUserInfo = userStore((state) => state.fetchUserInfo);
+  const userInfo = userStore((state: any) => state.userInfo);
+
+  useEffect(() => {
+    const token = getCookie();
+    // Fetch user info using Zustand store
+    fetchUserInfo(token);
+  }, []);
+
   // Zustand store for user information
-  const userInfo = userStore((state) => state.userInfo);
 
   useEffect(() => {
     // Check if the user is authenticated (based on Zustand store or cookies)
@@ -30,7 +52,7 @@ export default function Navbar() {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/blogs", label: "Blogs" },
-    { href: "/blogs/upload-blog", label: "Create Blog" },
+    // { href: "/blogs/upload-blog", label: "Create Blog" },
     { href: "/about", label: "About" },
     { href: "/faq", label: "FAQ" },
   ];
@@ -47,6 +69,18 @@ export default function Navbar() {
   if (isAuthenticated) {
     navLinks.push({ href: "/userProfile", label: "My Profile" });
   }
+
+  if (isAuthenticated) {
+    navLinks.push({ href: "/blogs/upload-blog", label: "Create Blog" });
+  } else {
+    navLinks.push({ href: "/login", label: "Create Blog" });
+  }
+
+  
+
+  const handleLogout = () => {
+    removeCookie();
+  };
 
   return (
     <header className="container mx-auto text-primary">
@@ -94,6 +128,18 @@ export default function Navbar() {
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
+
+          {/* logout */}
+          {isAuthenticated ? (
+            <Button
+              className="rounded-none border-primary border-2 hover:text-white bg-transparent text-primary"
+              onClick={() => handleLogout()}
+            >
+              Logout
+            </Button>
+          ) : (
+            <Link href="/login">login</Link>
+          )}
         </nav>
       </div>
 

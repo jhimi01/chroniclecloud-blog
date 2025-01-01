@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import { Skeleton } from "./ui/skeleton";
+import { userStore } from "@/stores/userStore";
 
 export default function LeftSideber({
   blogsCategory,
@@ -14,6 +15,8 @@ export default function LeftSideber({
   const { blogs } = useBlogStore();
   const pathname = usePathname();
   const [search, setSearch] = useState("");
+
+  const userInfo = userStore((state) => state.userInfo);
   const categoryFromPathname = pathname.split("/")[2];
   const categories = [
     { type: "fashion" },
@@ -21,36 +24,6 @@ export default function LeftSideber({
     { type: "travel" },
     { type: "photography" },
     { type: "health" },
-  ];
-
-  const mycontetnts = [
-    {
-      author: "alexanderlee@example.com",
-      title: "Traveling on a Budget",
-      image: "/img/bg3.jpg",
-      date: "2024-11-15",
-      category: "Travel",
-      desc: "Learn how to explore the world without breaking the bank with these budget travel hacks.",
-      likes: 200,
-    },
-    {
-      author: "emilywhite@example.com",
-      title: "The Power of Minimalism",
-      image: "/img/bg2.jpg",
-      date: "2024-10-10",
-      category: "Lifestyle",
-      desc: "Understand how embracing minimalism can lead to a happier and more focused life.",
-      likes: 150,
-    },
-    {
-      author: "michaelbrown@example.com",
-      title: "Mastering JavaScript in 2024",
-      image: "/img/bg5.jpg",
-      date: "2024-09-30",
-      category: "Programming",
-      desc: "An in-depth guide to improving your JavaScript skills and staying ahead in 2024.",
-      likes: 320,
-    },
   ];
 
   const contentId = pathname.split("/")[2];
@@ -168,20 +141,9 @@ export default function LeftSideber({
             <h2 className="mb-1 px-2 text-xl ">My Contents</h2>
 
             <div>
-              {mycontetnts && mycontetnts?.length !== 0 ? (
-                <div>
-                  <h3 className="p-2 bg-accent text-slate-400">
-                    No content available
-                  </h3>
-                  <div className=" space-y-2 md:px-0 px-5">
-                    <Skeleton className="h-10 w-full bg-gray-300 rounded-none" />
-                    <Skeleton className="h-10 w-full bg-gray-300 rounded-none" />
-                    <Skeleton className="h-10 w-full bg-gray-300 rounded-none" />
-                  </div>
-                </div>
-              ) : (
+              {userInfo?.blogs && userInfo.blogs.length >= 0 ? (
                 <div className="space-y-3">
-                  {mycontetnts?.map((content, index) => (
+                  {userInfo.blogs.map((content, index) => (
                     <Link
                       key={index}
                       href="/blogs/id"
@@ -198,6 +160,17 @@ export default function LeftSideber({
                       <h3>{content?.title}</h3>
                     </Link>
                   ))}
+                </div>
+              ) : (
+                <div>
+                  <h3 className="p-2 bg-accent text-slate-400">
+                    No content available
+                  </h3>
+                  <div className=" space-y-2 md:px-0 px-5">
+                    <Skeleton className="h-10 w-full bg-gray-300 rounded-none" />
+                    <Skeleton className="h-10 w-full bg-gray-300 rounded-none" />
+                    <Skeleton className="h-10 w-full bg-gray-300 rounded-none" />
+                  </div>
                 </div>
               )}
             </div>

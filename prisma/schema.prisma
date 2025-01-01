@@ -25,15 +25,14 @@ model User {
 }
 
 model Session {
-  id        String   @id @default(cuid())
-  userId    String // User ID to link session with a user
-  token     String   @unique // JWT token stored as session identifier
-  createdAt DateTime @default(now()) // When the session was created
-  expiresAt DateTime // When the session expires
-  user      User     @relation(fields: [userId], references: [id]) // Relation to the User
-
-  @@index([userId]) // Index for faster lookups by userId
+  id          String   @id @default(cuid())
+  userId      String
+  token       String   @unique
+  createdAt   DateTime @default(now())
+  expiresAt   DateTime
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
 
 model BlogPost {
   id        String   @id @default(cuid())

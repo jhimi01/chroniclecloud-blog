@@ -40,4 +40,6 @@ export const userStore = create<UserStore>((set) => ({
       set({ userInfo: null });
     }
   },
+
+  
 }));

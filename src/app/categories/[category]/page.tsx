@@ -23,13 +23,6 @@ async function fetchCategoryBlogs(category: string) {
   });
   return blogs;
 }
-async function fetchsession() {
-  const users = await prisma.session.findMany({});
-  return users;
-}
-
-fetchsession();
-console.log(fetchsession());
 
 export default async function CategoryPage({
   params,
