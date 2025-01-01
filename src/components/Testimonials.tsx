@@ -55,7 +55,7 @@ export default function Testimonials() {
           <div className="w-[20%] mt-2 h-[1px] bg-[#999] mx-auto md:mx-auto mb-2"></div>
         </div>
         <Swiper
-          slidesPerView={3}
+          // slidesPerView={3}
           spaceBetween={15}
           breakpoints={{
             640: { slidesPerView: 1 },
