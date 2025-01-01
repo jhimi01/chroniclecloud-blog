@@ -19,7 +19,7 @@ export default function CardBlog(blog: any) {
         <Image
           width={800}
           height={800}
-          src={image}
+          src={image || "/img/bg.jpg"}
           alt="blog post"
           className={` ${grid ? "w-44 " : "md:w-48"}`}
           priority

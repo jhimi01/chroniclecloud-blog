@@ -1,20 +1,5 @@
 import { create } from "zustand";
 
-// Define types for the blog data
-// Assuming you have something like this for CardBlogProps
-// export interface CardBlogProps {
-//   id: string;
-//   title: string;
-//   content: string;
-//   date: string;
-//   category: string;
-//   desc: string; // Add missing prop 'desc'
-//   likes: number;
-//   author: string;
-//   image: string; // Add missing prop 'image'
-// }
-// blogStore.ts
-
 export interface CardBlogProps {
   id: string;
   title: string;
@@ -39,7 +24,6 @@ export interface BlogStore {
 }
 
 const useBlogStore = create<BlogStore>((set) => {
-
   const fetchBlogs = async () => {
     set({ isLoading: true, error: null });
     try {

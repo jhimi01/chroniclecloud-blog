@@ -76,10 +76,11 @@ export default function Navbar() {
     navLinks.push({ href: "/login", label: "Create Blog" });
   }
 
-  
-
   const handleLogout = () => {
     removeCookie();
+
+    // Clear user data from Zustand store
+    userStore.getState().setUserInfo(null);
   };
 
   return (
@@ -92,7 +93,7 @@ export default function Navbar() {
         <hr className="hidden md:block" />
 
         {/* Navigation Links */}
-        <nav className="md:flex justify-center space-x-10 py-5 bg-white">
+        <nav className="md:flex justify-center space-x-3 lg:space-x-10 py-5 bg-white">
           {navLinks.map(({ href, label }) => (
             <Link
               key={href}
@@ -138,7 +139,12 @@ export default function Navbar() {
               Logout
             </Button>
           ) : (
-            <Link href="/login">login</Link>
+            <Link
+              href="/login"
+              className="rounded-none border-primary border-2 hover:text-white bg-transparent hover:bg-primary px-5  text-primary"
+            >
+              <div className="mt-[5px]">Login</div>
+            </Link>
           )}
         </nav>
       </div>

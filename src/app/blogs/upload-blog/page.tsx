@@ -12,7 +12,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import SideNavLayout from "@/app/sidenav/layout";
 import React, { useEffect, useState } from "react";
 import { userStore } from "@/stores/userStore";
 import { useCookie } from "@/hooks/useCookie";
@@ -22,11 +21,11 @@ const formSchema = z.object({
   title: z.string().min(10, {
     message: "Blog title must be at least 3 characters.",
   }),
-  email: z.string().email("Invalid email address."),
+  useEmail: z.string().email("Invalid email address."),
   category: z.string().min(1, {
     message: "Please select a category.",
   }),
-  content: z.string().min(20, {
+  desc: z.string().min(20, {
     message: "Content must be at least 20 characters.",
   }),
   file: z
@@ -36,16 +35,16 @@ const formSchema = z.object({
 
 export default function UploadBlog() {
   const { setValue } = useForm();
-  const [contentLength, setContentLength] = useState(0);
-  const maxContentLength = 500;
+  const [descLength, setdescLength] = useState(0);
+  const maxDescLength = 500;
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
-      email: "",
+      useEmail: "",
       category: "",
-      content: "",
+      desc: "",
     },
   });
 
@@ -61,7 +60,7 @@ export default function UploadBlog() {
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     console.log("Submitting form:", values);
   };
- const { getCookie } = useCookie({
+  const { getCookie } = useCookie({
     key: "authToken",
     days: 7,
     defaultValue: "",
@@ -71,7 +70,7 @@ export default function UploadBlog() {
   const userInfo = userStore((state) => state.userInfo);
   const fetchUserInfo = userStore((state) => state.fetchUserInfo);
 
-  console.log("userInfo from upload blog", userInfo)
+  console.log("userInfo from upload blog", userInfo);
 
   useEffect(() => {
     const token = getCookie();
@@ -117,7 +116,7 @@ export default function UploadBlog() {
               {/* Email */}
               <FormField
                 control={form.control}
-                name="email"
+                name="useEmail"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-base">Author Email</FormLabel>
@@ -126,7 +125,9 @@ export default function UploadBlog() {
                         type="email"
                         placeholder="Enter your email address"
                         {...field}
-                        value={userInfo?.email ? userInfo?.email : "email not found"} // Fix the value here
+                        value={
+                          userInfo?.email ? userInfo?.email : "email not found"
+                        } // Fix the value here
                       />
                     </FormControl>
                     <FormMessage />
@@ -161,7 +162,7 @@ export default function UploadBlog() {
               {/* Content */}
               <FormField
                 control={form.control}
-                name="content"
+                name="desc"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-base">Blog Content</FormLabel>
@@ -170,18 +171,18 @@ export default function UploadBlog() {
                         {...field}
                         rows={3}
                         placeholder="Write your blog content here..."
-                        maxLength={maxContentLength}
+                        maxLength={maxDescLength}
                         className="shadow-sm border border-gray-300 rounded-none w-full py-2 px-3 text-gray-800 focus:ring-blue-500 focus:border-blue-500"
                         onChange={(e) => {
                           const value = e.target.value;
-                          setContentLength(value.length);
+                          setdescLength(value.length);
                           field.onChange(value);
                         }}
                       />
                     </FormControl>
                     <FormMessage />
                     <div className="text-right text-sm text-gray-500 mt-1">
-                      {contentLength}/{maxContentLength} characters
+                      {descLength}/{maxDescLength} characters
                     </div>
                   </FormItem>
                 )}

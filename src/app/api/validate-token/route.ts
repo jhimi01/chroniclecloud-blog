@@ -42,7 +42,7 @@ export async function GET(req: Request) {
         status: 404,
       });
     }
-    console.log("user info of logged in user", user)
+    console.log("user info of logged in user", user);
 
     // Step 4: Return the user data
     return new Response(JSON.stringify(user), { status: 200 });
