@@ -62,6 +62,7 @@ export default function UploadBlog() {
     fetchUserInfo(token);
   }, []);
 
+  // blog posting
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       const response = await fetch("/api/post-blog", {
@@ -77,14 +78,14 @@ export default function UploadBlog() {
       });
 
       if (response.ok) {
-        toast("successfully published!")
+        toast("successfully published!");
         router.push("/userProfile");
       } else {
-        toast("Error posting blog!")
+        toast("Error posting blog!");
         console.error("Error posting blog");
       }
     } catch (error) {
-      toast("error!")
+      toast("error!");
       console.error("Error:", error);
     }
   };
@@ -98,7 +99,6 @@ export default function UploadBlog() {
       <div className="w-full bg-primary justify-center h-12 flex items-center py-5 font-normal text-xl">
         <h2 className="text-white">Create a blog</h2>
       </div>
-
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 p-10">
           <div className="md:flex gap-10 w-full">

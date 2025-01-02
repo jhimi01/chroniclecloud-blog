@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import { Skeleton } from "./ui/skeleton";
 import { userStore } from "@/stores/userStore";
+import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
 
 export default function LeftSideber({
   blogsCategory,
@@ -152,6 +153,27 @@ export default function LeftSideber({
           </div>
         )}
       </div>
+      <div className="mt-5 bg-white">
+            <div className="w-full bg-primary h-12 flex items-center pl-5 font-normal text-lg">
+              <h2 className="text-white">Social Links</h2>
+            </div>
+            <div className="p-3">
+              <ul className="mt-3 space-y-3 text-white text-lg">
+                <li className="p-2 cursor-pointer  flex justify-between bg-blue-500 ">
+                  <Facebook /> | Link our page
+                </li>
+                <li className="p-2 cursor-pointer flex justify-between bg-cyan-500 ">
+                  <Twitter /> | Follow US
+                </li>
+                <li className="p-2 cursor-pointer flex justify-between bg-red-500 ">
+                  <Youtube /> | Subscribe
+                </li>
+                <li className="p-2 cursor-pointer flex justify-between bg-pink-500 ">
+                  <Instagram /> | Follow
+                </li>
+              </ul>
+            </div>
+          </div>
     </>
   );
 }

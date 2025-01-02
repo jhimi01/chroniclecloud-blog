@@ -3,7 +3,6 @@ import { Skeleton } from "./ui/skeleton";
 import CardBlog from "./CardBlog";
 import LeftSideber from "./LeftSideber";
 import useBlogStore from "@/stores/blogStore";
-import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
 
 export default function BlogSection() {
   const { blogs } = useBlogStore();
@@ -22,7 +21,7 @@ export default function BlogSection() {
           </div> // Show this when no blogs match search or when no blogs exist
         ) : (
           <div className="space-y-7">
-            {blogs.slice(0,4).map((blog, index: number) => (
+            {blogs.slice(0, 4).map((blog, index: number) => (
               <CardBlog key={index} blog={blog} />
             ))}
           </div>
@@ -32,29 +31,8 @@ export default function BlogSection() {
         <div className="w-full bg-primary h-12 flex items-center pl-5 font-normal text-lg">
           <h2 className="text-white">ShortCut</h2>
         </div>
-        <div className=" ">
+        <div>
           <LeftSideber />
-          <div className="mt-5 bg-white">
-            <div className="w-full bg-primary h-12 flex items-center pl-5 font-normal text-lg">
-              <h2 className="text-white">Social Links</h2>
-            </div>
-            <div className="p-3">
-              <ul className="mt-3 space-y-3 text-white text-lg">
-                <li className="p-2 cursor-pointer  flex justify-between bg-blue-500 ">
-                  <Facebook /> | Link our page
-                </li>
-                <li className="p-2 cursor-pointer flex justify-between bg-cyan-500 ">
-                  <Twitter /> | Follow US
-                </li>
-                <li className="p-2 cursor-pointer flex justify-between bg-red-500 ">
-                  <Youtube /> | Subscribe
-                </li>
-                <li className="p-2 cursor-pointer flex justify-between bg-pink-500 ">
-                  <Instagram /> | Follow
-                </li>
-              </ul>
-            </div>
-          </div>
         </div>
       </div>
     </div>

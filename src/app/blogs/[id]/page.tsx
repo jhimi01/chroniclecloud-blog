@@ -4,12 +4,8 @@ import { use, useEffect, useState } from "react";
 import {
   CalendarDays,
   CircleUserRound,
-  Facebook,
   File,
-  Instagram,
   ThumbsUp,
-  Twitter,
-  Youtube,
 } from "lucide-react";
 import Image from "next/image";
 import React from "react";
@@ -87,27 +83,6 @@ export default function Blog({ params }: { params: Promise<{ id: string }> }) {
           <h2 className="text-white">ShortCut</h2>
         </div>
         <LeftSideber />
-        <div className="mt-5 bg-white">
-          <div className="w-full bg-primary h-12 flex items-center pl-5 font-normal text-lg">
-            <h2 className="text-white">Social Links</h2>
-          </div>
-          <div className="p-3">
-            <ul className="mt-3 space-y-3 text-white text-lg">
-              <li className="p-2 cursor-pointer  flex justify-between bg-blue-500 ">
-                <Facebook /> | Link our page
-              </li>
-              <li className="p-2 cursor-pointer flex justify-between bg-cyan-500 ">
-                <Twitter /> | Follow US
-              </li>
-              <li className="p-2 cursor-pointer flex justify-between bg-red-500 ">
-                <Youtube /> | Subscribe
-              </li>
-              <li className="p-2 cursor-pointer flex justify-between bg-pink-500 ">
-                <Instagram /> | Follow
-              </li>
-            </ul>
-          </div>
-        </div>
       </div>
     </div>
   );

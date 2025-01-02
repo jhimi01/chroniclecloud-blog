@@ -12,7 +12,16 @@ import React from "react";
 export default function CardBlog(blog: any) {
 
   const { id, title, date, category, desc, likes, userEmail, image, grid } = blog.blog;
-  console.log("image", image);
+  console.log("image", date);
+  const formattedDate =(isoDate:any) => {
+    if (!isoDate) return "Unknown";
+    const date = new Date(isoDate);
+    return date.toLocaleDateString("en-Us", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
+  }
   return (
     <div className="bg-white hover:shadow-md w-11/12 mx-auto md:mr-auto md:w-full">
       {/* <Link href={`/blogs/${id}`} > */}
@@ -32,7 +41,7 @@ export default function CardBlog(blog: any) {
           <div className="md:flex gap-4">
             <div className="flex text-gray-400 items-center gap-1 text-sm">
               <CalendarDays size={16} strokeWidth={1.75} className="" />
-              <p>{date}</p>
+              <p>{formattedDate(date)}</p>
             </div>
             <div className="flex text-gray-400 items-center gap-1 text-sm">
               <File size={16} strokeWidth={1.75} />

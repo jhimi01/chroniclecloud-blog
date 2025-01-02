@@ -1,8 +1,6 @@
 "use client";
 import axios from "axios";
-
 import { ToastContainer, toast } from "react-toastify";
-
 import { useCookie } from "@/hooks/useCookie"; // Import the custom hook
 import { userStore } from "@/stores/userStore";
 import { useEffect } from "react";
@@ -68,7 +66,7 @@ export default function UserProfile() {
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = {
       year: "numeric",
-      month: "long",
+      month: "numeric",
       day: "numeric",
       hour: "numeric",
       minute: "numeric",

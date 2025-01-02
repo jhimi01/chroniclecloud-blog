@@ -46,6 +46,27 @@ export default function Testimonials() {
     },
   ];
 
+  const features = [
+    {
+      Icon: Gauge,
+      title: "Fast access",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, quaerat? Nostrum ptatum praesentium aperiam recusandae.",
+    },
+    {
+      Icon: BadgeDollarSign,
+      title: "Free",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, quaerat?",
+    },
+    {
+      Icon: Waypoints,
+      title: "Easy to understand",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, quaerat? Nostrum asperiores.",
+    },
+  ];
+
   return (
     <div className=" mx-auto container">
       {/* swiper */}
@@ -116,48 +137,21 @@ export default function Testimonials() {
           <div className="w-[25%] mt-2 h-[1px] bg-[#999] mx-auto md:mx-0 mb-10"></div>
         </div>
 
-        <div className="flex flex-row text-start">
-          <div className="mr-3">
-            <div className="header_top__icon_wrapper rounded-full  p-2 text-2xl">
-              <Gauge />
+        {features.map((feature, index) => (
+          <div key={index} className="flex flex-row text-start">
+            <div className="mr-3">
+              <div className="header_top__icon_wrapper rounded-full p-2 text-2xl">
+                <feature.Icon />
+              </div>
+            </div>
+            <div>
+              <h2 className="text-2xl mb-1">{feature.title}</h2>
+              <p className="text-[#666] font-light text-justify leading-[1.5]">
+                {feature.description}
+              </p>
             </div>
           </div>
-          <div>
-            <h2 className={` text-2xl mb-1`}>Fast access</h2>
-            <p className="text-[#666] font-light text-justify leading-[1.5]">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Quibusdam, quaerat? Nostrum ptatum praesentium aperiam recusandae.
-            </p>
-          </div>
-        </div>
-        <div className="flex flex-row text-start">
-          <div className="mr-3">
-            <div className="header_top__icon_wrapper rounded-full  p-2 text-2xl">
-              <BadgeDollarSign />
-            </div>
-          </div>
-          <div>
-            <h2 className={` text-2xl mb-1`}>Free</h2>
-            <p className="text-[#666] font-light text-justify leading-[1.5]">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Quibusdam, quaerat?
-            </p>
-          </div>
-        </div>
-        <div className="flex flex-row text-start">
-          <div className="mr-3">
-            <div className="header_top__icon_wrapper rounded-full  p-2 text-2xl">
-              <Waypoints />
-            </div>
-          </div>
-          <div>
-            <h2 className={` text-2xl mb-1`}>Easy to understand</h2>
-            <p className="text-[#666] font-light text-justify leading-[1.5]">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Quibusdam, quaerat? Nostrum asperiores .
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
