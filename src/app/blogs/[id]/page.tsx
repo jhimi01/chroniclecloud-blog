@@ -1,12 +1,7 @@
 "use client";
 import LeftSideber from "@/components/LeftSideber";
 import { use, useEffect, useState } from "react";
-import {
-  CalendarDays,
-  CircleUserRound,
-  File,
-  ThumbsUp,
-} from "lucide-react";
+import { CalendarDays, CircleUserRound, File, ThumbsUp } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { CardBlogProps } from "@/stores/blogStore";
@@ -65,7 +60,7 @@ export default function Blog({ params }: { params: Promise<{ id: string }> }) {
           width={500}
           height={500}
           sizes="100vw"
-          className="md:w-[98%] "
+          className="md:w-[98%] h-[600px] object-cover"
           priority
         />
 

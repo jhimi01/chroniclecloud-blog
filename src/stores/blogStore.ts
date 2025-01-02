@@ -19,9 +19,6 @@ export interface BlogStore {
   isLoading: boolean;
   error: string | null;
   fetchBlogs: () => Promise<void>;
-  addBlog: (newBlog: CardBlogProps) => Promise<void>;
-  updateBlog: (id: string, updatedBlog: CardBlogProps) => Promise<void>;
-  deleteBlog: (id: string) => Promise<void>;
 }
 
 const useBlogStore = create<BlogStore>((set) => {
@@ -39,68 +36,6 @@ const useBlogStore = create<BlogStore>((set) => {
     }
   };
 
-  const addBlog = async (newBlog: CardBlogProps) => {
-    try {
-      const response = await fetch("/api/blogpost", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newBlog),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to add blog");
-      }
-
-      const savedBlog: CardBlogProps = await response.json();
-      set((state) => ({ blogs: [...state.blogs, savedBlog] }));
-    } catch (error) {
-      set({ error: (error as Error).message });
-    }
-  };
-
-  const updateBlog = async (id: string, updatedBlog: CardBlogProps) => {
-    try {
-      const response = await fetch(`/api/blogpost/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedBlog),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to update blog");
-      }
-
-      const updatedData: CardBlogProps = await response.json();
-      set((state) => ({
-        blogs: state.blogs.map((blog) => (blog.id === id ? updatedData : blog)),
-      }));
-    } catch (error) {
-      set({ error: (error as Error).message });
-    }
-  };
-
-  const deleteBlog = async (id: string) => {
-    try {
-      const response = await fetch(`/api/blogpost/${id}`, {
-        method: "DELETE",
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to delete blog");
-      }
-
-      set((state) => ({
-        blogs: state.blogs.filter((blog) => blog.id !== id),
-      }));
-    } catch (error) {
-      set({ error: (error as Error).message });
-    }
-  };
-
   // Immediately fetch blogs upon store initialization
   fetchBlogs();
 
@@ -109,9 +44,6 @@ const useBlogStore = create<BlogStore>((set) => {
     isLoading: false,
     error: null,
     fetchBlogs,
-    addBlog,
-    updateBlog,
-    deleteBlog,
   };
 });
 
