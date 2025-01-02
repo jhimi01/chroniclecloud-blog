@@ -152,11 +152,6 @@ export default function LeftSideber({
           </div>
         )}
       </div>
-
-      {/* for mobile */}
-      <div className="fixed md:hidden border-t border-gray-400 bottom-0 w-full left-0 py-3 px-5 bg-gray-200 z-50">
-        <p className="text-gray-600">this is a mobile nav</p>
-      </div>
     </>
   );
 }

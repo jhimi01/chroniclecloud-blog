@@ -19,14 +19,12 @@ export default function Blogs() {
   const [search, setSearch] = useState("");
   const [grid, setGrid] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4;
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value.toLowerCase());
   };
 
   type BlogKeys = "title" | "category" | "desc";
-
   const filteredBlogs = blogs.filter((blog) =>
     (["title", "category", "desc"] as BlogKeys[]).some((key) =>
       blog[key]?.toLowerCase().includes(search)
@@ -34,20 +32,25 @@ export default function Blogs() {
   );
 
   // Pagination logic
+  const itemsPerPage = 4;
   const totalItems = filteredBlogs.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentBlogs = filteredBlogs.slice(startIndex, startIndex + itemsPerPage);
+  const currentBlogs = filteredBlogs.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
 
+  // search funtionality
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
-  console.log("this is a blog", blogs)
+  console.log("this is a blog", blogs);
 
   return (
     <div className="mx-auto container">
-      <div className="md:flex items-center gap-5 pt-10 pr-4">
+      <div className="md:flex items-center gap-5 p-4 md:p-0 md:pt-10 md:pr-4">
         {/* Search bar */}
         <div className="flex md:mb-0 mb-2 items-center border w-full md:w-80 pr-3 gap-2 bg-white border-gray-500/30 h-[46px] rounded-[5px] overflow-hidden">
           <input
@@ -84,9 +87,14 @@ export default function Blogs() {
         >
           <Table size={30} />
         </div>
-      </div>
-      <div className="pt-5 text-xl">
-        <h2>Blogs content: <span className="text-white bg-secondary p-1 rounded-full">{blogs?.length}</span></h2>
+        <div className="text-xl md:mt-0 mt-4 text-center md:text-start">
+          <h2>
+            Blogs content:
+            <span className="text-white bg-secondary p-1 rounded-full">
+              {blogs?.length}
+            </span>
+          </h2>
+        </div>
       </div>
       <hr className="my-5" />
 

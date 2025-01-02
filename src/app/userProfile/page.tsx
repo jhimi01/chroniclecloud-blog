@@ -1,7 +1,7 @@
 "use client";
-import axios from 'axios';
+import axios from "axios";
 
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 
 import { useCookie } from "@/hooks/useCookie"; // Import the custom hook
 import { userStore } from "@/stores/userStore";
@@ -80,30 +80,29 @@ export default function UserProfile() {
     );
   };
 
-  const handleDelete = async (id:string)=>{
+  const handleDelete = async (id: string) => {
     try {
       const res = await axios.delete(`/api/delete-blog/${id}`);
       console.log(res.data);
-      toast("deleted successfully!")
-  
+      toast("deleted successfully!");
+
       // Optional: Update local state to remove the blog dynamically
     } catch (error) {
       console.error("Error deleting blog:", error);
     }
-  }
-
+  };
 
   return (
     <div className="container mx-auto py-10">
       <div className="text-center my-5 space-y-3">
         <h2 className="text-4xl">
-          Welcome,{" "}
+          Welcome,
           <span className="bg-secondary p-1 capitalize text-white">
             {userInfo?.name || "Guest"}
           </span>
         </h2>
         <p className="text-lg">
-          Email:{" "}
+          Email:
           <span className="font-bold">
             {userInfo?.email || "No email available"}
           </span>
@@ -149,7 +148,10 @@ export default function UserProfile() {
                     {blog.likes || 0}
                   </TableCell>
                   <TableCell className="text-right group rounded-full">
-                    <Trash2 onClick={()=>handleDelete(blog?.id)} className="ml-auto w-10 h-10 p-2 group-hover:bg-secondary group-hover:text-white rounded-full " />
+                    <Trash2
+                      onClick={() => handleDelete(blog?.id)}
+                      className="ml-auto w-10 h-10 p-2 group-hover:bg-secondary group-hover:text-white rounded-full "
+                    />
                     {/* delete */}
                   </TableCell>
                 </TableRow>

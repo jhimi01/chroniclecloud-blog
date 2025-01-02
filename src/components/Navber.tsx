@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Menu } from "lucide-react";
 import {
   NavigationMenu,
@@ -26,6 +26,7 @@ import { Button } from "./ui/button";
 export default function Navbar() {
   const pathname = usePathname();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const router = useRouter()
 
   const { getCookie, removeCookie } = useCookie({
     key: "authToken",
@@ -73,7 +74,7 @@ export default function Navbar() {
   if (isAuthenticated) {
     navLinks.push({ href: "/blogs/upload-blog", label: "Create Blog" });
   } else {
-    navLinks.push({ href: "/login", label: "Create Blog" });
+    // navLinks.push({ href: "/login", label: "login" });
   }
 
   const handleLogout = () => {
@@ -81,6 +82,7 @@ export default function Navbar() {
 
     // Clear user data from Zustand store
     userStore.getState().setUserInfo(null);
+    router.push("/")
   };
 
   return (
