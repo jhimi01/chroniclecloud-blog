@@ -1,6 +1,8 @@
 "use client";
 import axios from 'axios';
 
+import { ToastContainer, toast } from 'react-toastify';
+
 import { useCookie } from "@/hooks/useCookie"; // Import the custom hook
 import { userStore } from "@/stores/userStore";
 import { useEffect } from "react";
@@ -78,8 +80,16 @@ export default function UserProfile() {
     );
   };
 
-  const handleDelete = (id:string)=>{
-   
+  const handleDelete = async (id:string)=>{
+    try {
+      const res = await axios.delete(`/api/delete-blog/${id}`);
+      console.log(res.data);
+      toast("deleted successfully!")
+  
+      // Optional: Update local state to remove the blog dynamically
+    } catch (error) {
+      console.error("Error deleting blog:", error);
+    }
   }
 
 
@@ -152,6 +162,7 @@ export default function UserProfile() {
               </TableRow>
             )}
           </TableBody>
+          <ToastContainer />
         </Table>
       </div>
     </div>

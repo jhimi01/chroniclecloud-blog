@@ -17,6 +17,7 @@ import { userStore } from "@/stores/userStore";
 import { useCookie } from "@/hooks/useCookie";
 import { useRouter } from "next/navigation";
 import ImageUpload from "@/components/ImageUpload";
+import { toast, ToastContainer } from "react-toastify";
 
 const formSchema = z.object({
   title: z.string().min(10, {
@@ -76,11 +77,14 @@ export default function UploadBlog() {
       });
 
       if (response.ok) {
+        toast("successfully published!")
         router.push("/userProfile");
       } else {
+        toast("Error posting blog!")
         console.error("Error posting blog");
       }
     } catch (error) {
+      toast("error!")
       console.error("Error:", error);
     }
   };
@@ -174,6 +178,7 @@ export default function UploadBlog() {
           </div>
         </form>
       </Form>
+      <ToastContainer />
     </div>
   );
 }

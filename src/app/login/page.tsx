@@ -5,6 +5,7 @@ import { userStore } from "@/stores/userStore";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -55,14 +56,17 @@ export default function Login() {
         const userInfo = await fetchUserInfo(token); // Fetch the user info
         setUserInfo(userInfo);
         console.log("userInfo", userInfo) // Update Zustand store with user info
-        alert("Login successful!");
+        // alert("Login successful!");
+         toast("Login successful!")
         router.push("/"); // Redirect to home or dashboard
       } else {
-        alert("Login failed. No token received.");
+        // alert("Login failed. No token received.");
+        toast("Login failed. No token received!")
       }
     } catch (error) {
       console.error("Error during login:", error);
-      alert("An error occurred. Please try again.");
+      toast("An error occurred. Please try again!")
+      // alert("An error occurred. Please try again.");
     }
   };
 
@@ -134,6 +138,7 @@ export default function Login() {
           </form>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

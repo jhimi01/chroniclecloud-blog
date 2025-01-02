@@ -85,6 +85,9 @@ export default function Blogs() {
           <Table size={30} />
         </div>
       </div>
+      <div className="pt-5 text-xl">
+        <h2>Blogs content: <span className="text-white bg-secondary p-1 rounded-full">{blogs?.length}</span></h2>
+      </div>
       <hr className="my-5" />
 
       {/* Blogs section */}
