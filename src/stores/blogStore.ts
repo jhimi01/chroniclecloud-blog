@@ -9,6 +9,7 @@ export interface CardBlogProps {
   desc: string;
   likes: number;
   userEmail: string;
+  userId: string;
   image: string;
 }
 

@@ -13,6 +13,7 @@ interface Blog {
 interface User {
   name: string;
   email: string;
+  id: string;
   blogs: Blog[];
 }
 

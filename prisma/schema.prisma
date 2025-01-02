@@ -43,9 +43,9 @@ model BlogPost {
   category  String
   desc      String
   likes     Int      @default(0)
-  userId    String? // Link to the User who posted the blog
+  userId    String 
   userEmail String?
-  User      User?    @relation(fields: [userId], references: [id]) // Fix this relation
+  User      User     @relation(fields: [userId], references: [id]) // Fix this relation
 
   @@index([userId]) // Index for faster lookups by userId
 }

@@ -1,4 +1,5 @@
 "use client";
+import axios from 'axios';
 
 import { useCookie } from "@/hooks/useCookie"; // Import the custom hook
 import { userStore } from "@/stores/userStore";
@@ -19,6 +20,7 @@ import Image from "next/image";
 
 // Define the type for blogs
 interface Blog {
+  id: string;
   category: string;
   title: string;
   desc: string;
@@ -76,6 +78,11 @@ export default function UserProfile() {
     );
   };
 
+  const handleDelete = (id:string)=>{
+   
+  }
+
+
   return (
     <div className="container mx-auto py-10">
       <div className="text-center my-5 space-y-3">
@@ -132,7 +139,7 @@ export default function UserProfile() {
                     {blog.likes || 0}
                   </TableCell>
                   <TableCell className="text-right group rounded-full">
-                    <Trash2 className="ml-auto w-10 h-10 p-2 group-hover:bg-secondary group-hover:text-white rounded-full " />
+                    <Trash2 onClick={()=>handleDelete(blog?.id)} className="ml-auto w-10 h-10 p-2 group-hover:bg-secondary group-hover:text-white rounded-full " />
                     {/* delete */}
                   </TableCell>
                 </TableRow>

@@ -47,7 +47,7 @@ const ImageUpload = ({ onChange }: ImageUploadProps) => {
     }
   };
 
-  console.log(imageUrl)
+  // console.log(imageUrl)
 
   return (
     <div>
@@ -76,7 +76,8 @@ const ImageUpload = ({ onChange }: ImageUploadProps) => {
             />
             {loading && (
               <p className="flex items-center">
-                Uploading... <LoaderCircle className="animate-spin" />
+                Uploading... wait for a moment
+                <LoaderCircle className="animate-spin" />
               </p>
             )}
             {error && <p className="text-red-500">{error}</p>}

@@ -22,7 +22,7 @@ export default function CardBlog(blog: any) {
           height={800}
           src={image}
           alt="blog post"
-          className={` ${grid ? "w-44 " : "md:w-48"}`}
+          className={`${grid ? "w-44 " : "md:w-48"}`}
           priority
         />
         <div className="space-y-2 md:space-y-3 md:p-5 p-3 w-full my-2 md:my-0">
