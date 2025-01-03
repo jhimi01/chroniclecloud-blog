@@ -13,7 +13,12 @@ export default function Blog({ params }: { params: Promise<{ id: string }> }) {
 
   useEffect(() => {
     async function fetchBlogData() {
-      const response = await fetch(`/api/blogs/${id}`);
+      const response = await fetch(`/api/blogs/${id}`,{
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      } );
       if (!response.ok) {
         console.error("Blog not found");
         return;
