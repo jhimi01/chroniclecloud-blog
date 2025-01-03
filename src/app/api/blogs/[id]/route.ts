@@ -2,14 +2,11 @@ import prisma from "@/lib/db";
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request, context: { params: { id: string } }) {
-  // Await params to ensure it is resolved
-  const { id } = await context.params;
+  const { id } = context.params; // Access `id` from `params` directly
 
   try {
     const blog = await prisma.blogPost.findUnique({
-      where: {
-        id, // Finding the blog by `id`
-      },
+      where: { id }, // Finding the blog by `id`
     });
 
     if (!blog) {
