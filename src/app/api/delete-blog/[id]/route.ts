@@ -1,8 +1,11 @@
 import prisma from "@/lib/db";
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(
+  req: Request,
+  context: { params: Promise<{ id: string }> }
+) {
   try {
-    const { id } = params;
+    const { id } = await context.params; // Await the params promise
 
     if (!id) {
       return new Response(
