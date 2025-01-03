@@ -23,9 +23,10 @@ async function fetchCategoryBlogs(category: string) {
 export default async function CategoryPage({
   params,
 }: {
-  params: { category: string };
+  params: Promise<{ category: string }>; // Adjusted params to a promise
 }) {
-  const { category } = params;
+  const { category } = await params; // Await the promise
+
   const blogs = await fetchCategoryBlogs(category);
 
   if (blogs && blogs.length === 0) {
