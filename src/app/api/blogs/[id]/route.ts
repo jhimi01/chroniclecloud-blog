@@ -1,14 +1,12 @@
-import db from '@/lib/db';
-// app/api/blogs/[id]/route.ts
-
+import prisma from "@/lib/db";
 import { NextResponse } from "next/server";
 
-export async function GET(req: Request, { params }: { params: { id: string } }) {
-  const { id } = params;
+export async function GET(req: Request, context: { params: { id: string } }) {
+  // Await params to ensure it is resolved
+  const { id } = await context.params;
 
   try {
-    // Example: Assuming `db` is your database client and you have a `blogs` table or collection
-    const blog = await db.blogPost.findUnique({
+    const blog = await prisma.blogPost.findUnique({
       where: {
         id, // Finding the blog by `id`
       },
@@ -20,6 +18,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 
     return NextResponse.json(blog, { status: 200 });
   } catch (error) {
+    console.error("Error fetching blog:", error);
     return NextResponse.json({ message: "Server error" }, { status: 500 });
   }
 }
