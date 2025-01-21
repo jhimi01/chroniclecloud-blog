@@ -8,10 +8,9 @@ export async function DELETE(
     const { id } = await context.params; // Await the params promise
 
     if (!id) {
-      return new Response(
-        JSON.stringify({ message: "Blog ID is required." }),
-        { status: 400 }
-      );
+      return new Response(JSON.stringify({ message: "Blog ID is required." }), {
+        status: 400,
+      });
     }
 
     await prisma.blogPost.delete({
@@ -24,9 +23,8 @@ export async function DELETE(
     );
   } catch (error) {
     console.error("Error deleting blog:", error);
-    return new Response(
-      JSON.stringify({ message: "Failed to delete blog." }),
-      { status: 500 }
-    );
+    return new Response(JSON.stringify({ message: "Failed to delete blog." }), {
+      status: 500,
+    });
   }
 }
