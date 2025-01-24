@@ -3,7 +3,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { useCookie } from "@/hooks/useCookie"; // Import the custom hook
 import { userStore } from "@/stores/userStore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   Table,
@@ -15,8 +15,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Trash2 } from "lucide-react";
+import { Edit, Trash2 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import EditModal from "@/components/EditModal";
 
 // Define the type for blogs
 interface Blog {
@@ -27,6 +29,7 @@ interface Blog {
   date: string; // Stored as an ISO date string
   likes: number;
   image: string; // Stored as an
+  file: string;
 }
 
 // Extend the User type
@@ -46,6 +49,8 @@ export default function UserProfile() {
   const router = useRouter();
   const userInfo = userStore((state) => state.userInfo as User | null);
   const fetchUserInfo = userStore((state) => state.fetchUserInfo);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedBlog, setSelectedBlog] = useState<Blog | null>(null);
 
   useEffect(() => {
     const token = getCookie();
@@ -79,14 +84,47 @@ export default function UserProfile() {
   };
 
   const handleDelete = async (id: string) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this blog?"
+    );
+    if (!confirmed) return;
     try {
       const res = await axios.delete(`/api/delete-blog/${id}`);
       console.log(res.data);
-      toast("deleted successfully!");
+      toast("Deleted successfully!");
+      window.location.reload();
 
       // Optional: Update local state to remove the blog dynamically
     } catch (error) {
       console.error("Error deleting blog:", error);
+    }
+  };
+
+  const handleEdit = (blog: Blog) => {
+    setSelectedBlog(blog); // Set the blog to edit
+    setIsModalOpen(true); // Open the modal
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setSelectedBlog(null);
+  };
+
+  const handleEditSubmit = async (data: any) => {
+    try {
+      const response = await axios.put(
+        `/api/edit-blog/${selectedBlog?.id}`,
+        data
+      );
+      if (response.status === 200) {
+        toast("Blog updated successfully!");
+
+        // Refresh or update local state here if needed
+        handleModalClose();
+      }
+    } catch (error) {
+      console.error("Error updating blog:", error);
+      toast("Failed to update blog.");
     }
   };
 
@@ -120,6 +158,7 @@ export default function UserProfile() {
               <TableHead>Desc</TableHead>
               <TableHead>Created at</TableHead>
               <TableHead className="text-right">Like</TableHead>
+              <TableHead className="text-right">Edit</TableHead>
               <TableHead className="text-right">Delete</TableHead>
             </TableRow>
           </TableHeader>
@@ -128,7 +167,9 @@ export default function UserProfile() {
               userInfo.blogs.map((blog, index) => (
                 <TableRow key={index}>
                   <TableCell>
-                    <Badge>{blog.category}</Badge>
+                    <Link href={`/blogs/${blog?.id}`}>
+                      <Badge>{blog.category}</Badge>
+                    </Link>
                   </TableCell>
                   <TableCell className="font-medium flex items-center gap-3">
                     <Image
@@ -145,26 +186,41 @@ export default function UserProfile() {
                   <TableCell className="text-right">
                     {blog.likes || 0}
                   </TableCell>
+                  <TableCell>
+                    <Edit
+                      onClick={() => handleEdit(blog)}
+                      className="cursor-pointer"
+                    />
+                  </TableCell>
                   <TableCell className="text-right group rounded-full">
                     <Trash2
                       onClick={() => handleDelete(blog?.id)}
-                      className="ml-auto w-10 h-10 p-2 group-hover:bg-secondary group-hover:text-white rounded-full "
+                      className="ml-auto w-10 h-10 p-2 group-hover:bg-secondary group-hover:text-white rounded-full cursor-pointer"
                     />
-                    {/* delete */}
                   </TableCell>
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={6} className="text-center text-xl py-5">
+                <TableCell colSpan={7} className="text-center text-xl py-5">
                   No blogs found.
                 </TableCell>
               </TableRow>
             )}
           </TableBody>
-          <ToastContainer />
         </Table>
       </div>
+      {selectedBlog && (
+        <EditModal
+          isOpen={isModalOpen}
+          onClose={handleModalClose}
+          onSubmit={handleEditSubmit}
+          defaultValues={{
+            ...selectedBlog,
+            file: selectedBlog?.file || "", // Provide a default value
+          }} // Pass blog details to the modal
+        />
+      )}
     </div>
   );
 }

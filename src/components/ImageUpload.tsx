@@ -21,12 +21,16 @@ const ImageUpload = ({ onChange }: ImageUploadProps) => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = event.target.files?.[0];
-    if (!file) return;
+    console.log("File selected:", file); // Debugging
+    if (!file) {
+      alert("Please select an image file");
+      return;
+    }
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", "pskbaxbg"); // your Cloudinary preset
-    formData.append("cloud_name", "dudkmza2y"); // your Cloudinary cloud name
+    formData.append("upload_preset", "pskbaxbg");
+    formData.append("cloud_name", "dudkmza2y");
 
     setLoading(true);
     setError(null);
@@ -36,11 +40,12 @@ const ImageUpload = ({ onChange }: ImageUploadProps) => {
         "https://api.cloudinary.com/v1_1/dudkmza2y/image/upload",
         formData
       );
-
       const uploadedImageUrl = response.data.secure_url;
+      console.log("Uploaded image URL:", uploadedImageUrl); // Debugging
       setImageUrl(uploadedImageUrl);
-      onChange(uploadedImageUrl); // Pass the URL to the parent component
+      onChange(uploadedImageUrl); // Pass to parent
     } catch (err) {
+      console.error("Upload error:", err);
       setError("Error uploading image. Please try again.");
     } finally {
       setLoading(false);
@@ -54,7 +59,7 @@ const ImageUpload = ({ onChange }: ImageUploadProps) => {
       <FormItem>
         <FormLabel className="text-base font-semibold">Upload Image</FormLabel>
         <FormControl>
-          <label className="flex flex-col items-center justify-center md:w-[350px] md:h-[300px] w-full h-full px-14 py-8 bg-accent rounded-3xl border-2 border-dashed border-gray-400 shadow-lg hover:bg-gray-200 cursor-pointer transition-all duration-300">
+          <label className="flex flex-col items-center justify-center w-full h-full px-14 py-8 bg-accent rounded-3xl border-2 border-dashed border-gray-400 shadow-lg hover:bg-gray-200 cursor-pointer transition-all duration-300">
             <svg
               viewBox="0 0 640 512"
               height="50"

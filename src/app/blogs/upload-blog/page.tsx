@@ -167,9 +167,11 @@ export default function UploadBlog() {
                 )}
               />
             </div>
-            <ImageUpload
-              onChange={(imageUrl) => form.setValue("file", imageUrl)}
-            />
+            <div className="md:w-[40%]">
+              <ImageUpload
+                onChange={(imageUrl) => form.setValue("file", imageUrl)}
+              />
+            </div>
           </div>
           <div className="flex justify-center my-5">
             <Button type="submit" className="text-sm font-medium">
