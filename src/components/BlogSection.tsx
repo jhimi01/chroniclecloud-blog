@@ -9,7 +9,7 @@ export default function BlogSection() {
 
   return (
     <div className="flex container mx-auto mt-20">
-      <div className="w-full  p-7 bg-accent md:w-9/12 space-y-5 md:space-y-7 md:mr-5">
+      <div className="w-full   p-7 bg-accent md:w-9/12 space-y-5 md:space-y-7 md:mr-5">
         <div className="w-full bg-primary h-12 flex items-center pl-5 font-normal text-lg">
           <h2 className="text-white">Latest News</h2>
         </div>
@@ -27,7 +27,7 @@ export default function BlogSection() {
           </div>
         )}
       </div>
-      <div className="p-7 bg-accent space-y-7 md:block hidden">
+      <div className="p-7 flex-1 bg-accent space-y-7 md:block hidden">
         <div className="w-full bg-primary h-12 flex items-center pl-5 font-normal text-lg">
           <h2 className="text-white">ShortCut</h2>
         </div>
