@@ -22,11 +22,12 @@ import {
 import { userStore } from "@/stores/userStore"; // Zustand store for user management
 import { useCookie } from "@/hooks/useCookie";
 import { Button } from "./ui/button";
+import Image from "next/image";
 
 export default function Navbar() {
   const pathname = usePathname();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
 
   const { getCookie, removeCookie } = useCookie({
     key: "authToken",
@@ -82,15 +83,16 @@ export default function Navbar() {
 
     // Clear user data from Zustand store
     userStore.getState().setUserInfo(null);
-    router.push("/")
+    router.push("/");
   };
 
   return (
     <header className="container mx-auto text-primary">
       {/* Desktop Navigation */}
       <div className="hidden md:block">
-        <div className="text-4xl font-semibold py-5 md:text-center flex items-center justify-between md:block">
-          Chronicle Cloud
+        <div className="text-4xl font-semibold  md:text-center flex items-center justify-between md:block">
+          {/* Chronicle Cloud */}
+          <Image width={500} height={500} alt="logo" src="/img/logo1.png" className="w-20 h-20 mx-auto" />
         </div>
         <hr className="hidden md:block" />
 
