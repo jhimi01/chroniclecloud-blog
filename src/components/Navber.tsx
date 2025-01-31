@@ -69,7 +69,7 @@ export default function Navbar() {
   ];
 
   // Add userProfile link conditionally
-  if (isAuthenticated) {
+  if (isAuthenticated && userInfo.role === "USER") {
     navLinks.push({ href: "/userProfile", label: "My Profile" });
   }
 
@@ -77,7 +77,7 @@ export default function Navbar() {
     navLinks.push({ href: "/blogs/upload-blog", label: "Create Blog" });
   } 
 
-  if (isAuthenticated) {
+  if (isAuthenticated && userInfo.role === "ADMIN") {
     navLinks.push({ href: "/dashboard", label: "Dashboard" });
   } 
 
