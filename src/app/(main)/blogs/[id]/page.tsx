@@ -69,12 +69,12 @@ export default function Blog({ params }: { params: Promise<{ id: string }> }) {
           priority
         />
 
-        <div className="text-gray-400 ">
+        {/* <div className="text-gray-400 ">
           <div className="flex text-gray-600 items-center gap-1 text-sm">
             <ThumbsUp className="cursor-pointer" size={22} strokeWidth={1.75} />
             <p>{blog?.likes}</p>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* sidebar */}

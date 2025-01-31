@@ -25,19 +25,19 @@ export default function BlogTable() {
   return (
     <Table>
       <TableCaption>A list of recent blog posts.</TableCaption>
-      <TableHeader>
+      <TableHeader className="bg-primary ">
         <TableRow>
-          <TableHead>Title</TableHead>
-          <TableHead>Title</TableHead>
-          <TableHead>Category</TableHead>
-          <TableHead>Date</TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead className="text-right">Actions</TableHead>
+          <TableHead className="text-white"></TableHead>
+          <TableHead className="text-white">Title</TableHead>
+          <TableHead className="text-white">Category</TableHead>
+          <TableHead className="text-white">Date</TableHead>
+          <TableHead className="text-white">Status</TableHead>
+          <TableHead className="text-right text-white">Actions</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {blogs.map((blog) => (
-          <TableRow key={blog?.id}>
+          <TableRow key={blog?.id} className="hover:bg-gray-200">
             <TableCell className="font-medium">
               <Image
                 width={1000}

@@ -21,7 +21,6 @@ const ImageUpload = ({ onChange }: ImageUploadProps) => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = event.target.files?.[0];
-    console.log("File selected:", file); // Debugging
     if (!file) {
       alert("Please select an image file");
       return;
@@ -41,7 +40,6 @@ const ImageUpload = ({ onChange }: ImageUploadProps) => {
         formData
       );
       const uploadedImageUrl = response.data.secure_url;
-      console.log("Uploaded image URL:", uploadedImageUrl); // Debugging
       setImageUrl(uploadedImageUrl);
       onChange(uploadedImageUrl); // Pass to parent
     } catch (err) {
@@ -51,8 +49,6 @@ const ImageUpload = ({ onChange }: ImageUploadProps) => {
       setLoading(false);
     }
   };
-
-  // console.log(imageUrl)
 
   return (
     <div>

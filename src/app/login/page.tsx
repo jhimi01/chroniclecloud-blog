@@ -55,7 +55,6 @@ export default function Login() {
 
         const userInfo = await fetchUserInfo(token); // Fetch the user info
         setUserInfo(userInfo);
-        console.log("userInfo", userInfo) // Update Zustand store with user info
         // alert("Login successful!");
          toast("Login successful!")
         router.push("/"); // Redirect to home or dashboard

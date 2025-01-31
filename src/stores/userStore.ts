@@ -35,8 +35,6 @@ export const userStore = create<UserStore>((set) => ({
 
   fetchUserInfo: async (token) => {
     if (!token) {
-      // Token is not available, leave userInfo as null
-      console.log("No token found.");
       return;
     }
 
@@ -56,7 +54,6 @@ export const userStore = create<UserStore>((set) => ({
       }
 
       const userData: User = await res.json();
-      // console.log("Fetched user data:", userData);
       set({ userInfo: userData }); // Store user data in Zustand store
     } catch (error) {
       console.error("Error fetching user info:", error);

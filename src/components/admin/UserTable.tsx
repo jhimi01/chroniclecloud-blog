@@ -35,26 +35,30 @@ export default function UserTable() {
     }
   }, [token, fetchAllUsers]);
 
-  console.log(allUsers);
-
   return (
     <div className="p-6 bg-background rounded-lg shadow-sm">
       <h1 className="text-2xl font-bold mb-6">Manage Users</h1>
       <Table>
         <TableCaption>A list of all registered users.</TableCaption>
-        <TableHeader>
+        <TableHeader className="bg-primary">
           <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>Role</TableHead>
-            <TableHead>Joined</TableHead>
-            <TableHead className="text-right">Actions</TableHead>
+            <TableHead className="text-white">UserId</TableHead>
+            <TableHead className="text-white">Name</TableHead>
+            <TableHead className="text-white">Email</TableHead>
+            <TableHead className="text-white">Role</TableHead>
+            <TableHead className="text-white">Joined</TableHead>
+            <TableHead className="text-right text-white">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {allUsers?.map((user:any) => (
-            <TableRow key={user.id}>
-              <TableCell className="font-medium capitalize">{user.name}</TableCell>
+          {allUsers?.map((user: any) => (
+            <TableRow key={user.id} className="hover:bg-gray-300">
+              <TableCell className="font-medium capitalize">
+                {user.id}
+              </TableCell>
+              <TableCell className="font-medium capitalize">
+                {user.name}
+              </TableCell>
               <TableCell>{user.email}</TableCell>
               <TableCell>
                 <span
@@ -71,24 +75,24 @@ export default function UserTable() {
                 {new Date(user.createdAt).toLocaleDateString()}
               </TableCell>
               <TableCell className="text-right">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm">
-                    <MoreHorizontal className="w-4 h-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem>
-                    <Edit className="w-4 h-4 mr-2" />
-                    Edit
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="text-red-600">
-                    <Trash2 className="w-4 h-4 mr-2" />
-                    Delete
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </TableCell>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="sm">
+                      <MoreHorizontal className="w-4 h-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem>
+                      <Edit className="w-4 h-4 mr-2" />
+                      Edit
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="text-red-600">
+                      <Trash2 className="w-4 h-4 mr-2" />
+                      Delete
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

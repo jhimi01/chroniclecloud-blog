@@ -68,7 +68,6 @@ export default function UserProfile() {
   }
 
 
-  console.log(userInfo)
 
   // Format the date
   const formatDate = (dateString: string) => {
@@ -93,7 +92,6 @@ export default function UserProfile() {
     if (!confirmed) return;
     try {
       const res = await axios.delete(`/api/delete-blog/${id}`);
-      console.log(res.data);
       toast("Deleted successfully!");
       window.location.reload();
 

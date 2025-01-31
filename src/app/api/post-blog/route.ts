@@ -6,7 +6,6 @@ export async function POST(req: Request) {
   try {
     // Parse the incoming request body (blog post data)
     const { title, userEmail, userId, category, desc, file } = await req.json();
-    console.log(req.body);
 
     if (!title || !userEmail || !category || !desc || !file) {
       return new Response(
@@ -27,7 +26,6 @@ export async function POST(req: Request) {
       },
     });
 
-    console.log("Form values being sent:", newBlogPost);
     return new Response(
       JSON.stringify({ message: "Blog posted successfully.", newBlogPost }),
       { status: 200 }

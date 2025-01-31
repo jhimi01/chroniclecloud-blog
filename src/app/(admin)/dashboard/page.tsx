@@ -17,6 +17,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { FileTextIcon, ShieldPlus, Users } from "lucide-react";
 
 // **Register required Chart.js components**
 ChartJS.register(
@@ -48,7 +49,6 @@ export default function AdminDashboard() {
     }
   }, [token, fetchAllUsers]);
 
-  console.log(allUsers);
 
   // Group blogs by user
   const userBlogCounts = allUsers.map((user) => ({
@@ -62,38 +62,38 @@ export default function AdminDashboard() {
   const userData = allUsers.map((_, index) => index + 1);
 
   return (
-    <div className="space-y-6">
+    <div>
       <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="bg-blue-600 text-white ">
+      <div className="grid grid-cols-1 md:grid-cols-3 mb-4">
+        <Card className="btn-grad-green text-white ">
           <CardHeader>
+          </CardHeader>
+          <CardContent>
             <CardTitle>Total Users</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-3xl font-bold">{allUsers?.length}</p>
+            <div className="text-3xl flex items-center gap-1 justify-center font-bold "> <Users /> {allUsers?.length}</div>
           </CardContent>
         </Card>
-        <Card className="bg-green-600 text-white">
+        <Card className=" btn-grad  text-white">
           <CardHeader>
+          </CardHeader>
+          <CardContent>
             <CardTitle>Total Blog Posts</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-3xl font-bold">{blogs?.length}</p>
+            <div className="text-3xl flex items-center gap-1 justify-center font-bold "> <FileTextIcon />{blogs?.length}</div>
           </CardContent>
         </Card>
-        <Card className="bg-purple-600 text-white">
+        <Card className="btn-grad-blue text-white">
           <CardHeader>
-            <CardTitle>Active Sessions</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold">89</p>
+            <CardTitle>Active Sessions</CardTitle>
+            <div className="text-3xl flex items-center gap-1 justify-center font-bold "> <ShieldPlus />89</div>
           </CardContent>
         </Card>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid  grid-cols-2 gap-6">
         {/* Bar Chart */}
-        <Card>
+        <Card className="w-full">
           <CardHeader>
             <CardTitle>Blogs Uploaded Per User</CardTitle>
           </CardHeader>
@@ -105,8 +105,8 @@ export default function AdminDashboard() {
                   {
                     label: "Blog Uploads",
                     data: blogUploads,
-                    backgroundColor: "rgba(75, 192, 192, 0.5)",
-                    borderColor: "rgba(75, 192, 192, 1)",
+                    backgroundColor: "#23378861",
+                    borderColor: "rgba(35,56,136,1)",
                     borderWidth: 1,
                   },
                 ],
@@ -115,28 +115,8 @@ export default function AdminDashboard() {
           </CardContent>
         </Card>
 
-        {/* Pie Chart */}
-        <Card>
-          <CardHeader>
-            <CardTitle>User Distribution</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Pie
-              data={{
-                labels: ["Active Users", "Inactive Users"],
-                datasets: [
-                  {
-                    data: [allUsers.length, 100 - allUsers.length],
-                    backgroundColor: ["#4CAF50", "#F44336"],
-                  },
-                ],
-              }}
-            />
-          </CardContent>
-        </Card>
-
         {/* Line Chart */}
-        <Card>
+        <Card className="w-full">
           <CardHeader>
             <CardTitle>User Growth</CardTitle>
           </CardHeader>

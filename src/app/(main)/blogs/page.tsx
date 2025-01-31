@@ -46,7 +46,6 @@ export default function Blogs() {
     setCurrentPage(page);
   };
 
-  console.log("this is a blog", blogs);
 
   return (
     <div className="mx-auto container">

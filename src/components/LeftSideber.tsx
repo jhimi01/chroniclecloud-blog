@@ -28,7 +28,6 @@ export default function LeftSideber({
   const contentId = pathname.split("/")[2];
   const findDataById = blogs.find((blog) => blog.id === contentId);
   const categoryData = findDataById?.category;
-  // console.log("category ", categoryData);
 
   const reletedfilteredBlogs = blogs.filter(
     (blog) => blog.category === categoryData && blog.id !== contentId

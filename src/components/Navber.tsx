@@ -26,7 +26,6 @@ import Image from "next/image";
 
 export default function Navbar() {
   const pathname = usePathname();
-  console.log(pathname);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
 
@@ -69,7 +68,7 @@ export default function Navbar() {
   ];
 
   // Add userProfile link conditionally
-  if (isAuthenticated && userInfo.role === "USER") {
+  if (isAuthenticated && userInfo?.role === "USER") {
     navLinks.push({ href: "/userProfile", label: "My Profile" });
   }
 
@@ -77,7 +76,7 @@ export default function Navbar() {
     navLinks.push({ href: "/blogs/upload-blog", label: "Create Blog" });
   } 
 
-  if (isAuthenticated && userInfo.role === "ADMIN") {
+  if (isAuthenticated && userInfo?.role === "ADMIN") {
     navLinks.push({ href: "/dashboard", label: "Dashboard" });
   } 
 

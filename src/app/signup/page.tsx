@@ -45,10 +45,8 @@ export default function Signup() {
   const router = useRouter();
 
   const onSubmit = async (data: any) => {
-    // console.log(data)
     const date = new Date();
     const newData = {...data, createdAt:date}
-    console.log(newData)
     try {
       const res = await fetch("/api/signup", {
         method: "POST",
