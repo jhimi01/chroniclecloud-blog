@@ -14,9 +14,12 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { userStore } from "@/stores/userStore";
 
 export default function AdminSidebar() {
   const pathname = usePathname();
+   const userInfo = userStore((state: any) => state.userInfo);
+   console.log("user info", userInfo)
 
   const navLinks = [
     { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -29,8 +32,10 @@ export default function AdminSidebar() {
   return (
     <div className="flex bg-primary text-white flex-col h-screen fixed w-64 bg-background border-r">
       {/* Sidebar Header */}
-      <div className="flex items-center justify-center h-16 border-b">
+      <div className=" text-center py-2 border-b bg-[#0f1634]">
         <h1 className="text-2xl font-semibold text-white">Admin Panel</h1>
+        <h3 className="text-sm text-gray-400">{userInfo?.email}</h3>
+        <h3 className="text-sm text-gray-400">{userInfo?.username}</h3>
       </div>
 
       {/* Sidebar Navigation */}

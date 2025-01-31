@@ -37,7 +37,7 @@ export default function BlogTable() {
       </TableHeader>
       <TableBody>
         {blogs.map((blog) => (
-          <TableRow key={blog?.id} className="hover:bg-gray-200">
+          <TableRow key={blog?.id} className="hover:bg-gray-300">
             <TableCell className="font-medium">
               <Image
                 width={1000}

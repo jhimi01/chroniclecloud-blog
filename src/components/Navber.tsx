@@ -97,15 +97,8 @@ export default function Navbar() {
     >
       {/* Desktop Navigation */}
       <div className="hidden md:block">
-         {/* <Image
-            width={500}
-            height={500}
-            alt="logo"
-            src="/img/logo1.png"
-            className="w-20 h-20 mx-auto"
-          /> */}
         
-        <div className="text-4xl font-semibold py-5  md:text-center flex items-center justify-center">
+        <div className="text-4xl font-semibold py-5 text-primary  md:text-center flex items-center justify-center">
           Chronicle Cloud
           {/* <Image
             width={500}
