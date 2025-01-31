@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
@@ -98,15 +97,23 @@ export default function Navbar() {
     >
       {/* Desktop Navigation */}
       <div className="hidden md:block">
-        <div className="text-4xl font-semibold  md:text-center flex items-center justify-between md:block">
-          {/* Chronicle Cloud */}
-          <Image
+         {/* <Image
             width={500}
             height={500}
             alt="logo"
             src="/img/logo1.png"
             className="w-20 h-20 mx-auto"
-          />
+          /> */}
+        
+        <div className="text-4xl font-semibold py-5  md:text-center flex items-center justify-center">
+          Chronicle Cloud
+          {/* <Image
+            width={500}
+            height={500}
+            alt="logo"
+            src="/img/logo1.png"
+            className="w-20 h-20 mx-auto"
+          /> */}
         </div>
         <hr className="hidden md:block" />
 
