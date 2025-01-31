@@ -1,17 +1,10 @@
-"use client";
-import BlogSection from "@/components/BlogSection";
-import Hero from "@/components/Hero";
-import Testimonials from "@/components/Testimonials";
+import Main from "./(main)/page";
+
+
 export default function Home() {
   return (
     <div>
-      <div>
-        <Hero />
-      </div>
-      <div>
-        <BlogSection />
-      </div>
-      <Testimonials />
+      <Main />
     </div>
   );
 }

@@ -26,6 +26,7 @@ import Image from "next/image";
 
 export default function Navbar() {
   const pathname = usePathname();
+  console.log(pathname);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
 
@@ -74,9 +75,11 @@ export default function Navbar() {
 
   if (isAuthenticated) {
     navLinks.push({ href: "/blogs/upload-blog", label: "Create Blog" });
-  } else {
-    // navLinks.push({ href: "/login", label: "login" });
-  }
+  } 
+
+  if (isAuthenticated) {
+    navLinks.push({ href: "/dashboard", label: "Dashboard" });
+  } 
 
   const handleLogout = () => {
     removeCookie();
@@ -87,12 +90,24 @@ export default function Navbar() {
   };
 
   return (
-    <header className="container mx-auto text-primary">
+    <header
+      className={`${
+        ["/blogs-admin", "/users", "/dashboard"].includes(pathname)
+          ? "hidden"
+          : ""
+      } container mx-auto text-primary`}
+    >
       {/* Desktop Navigation */}
       <div className="hidden md:block">
         <div className="text-4xl font-semibold  md:text-center flex items-center justify-between md:block">
           {/* Chronicle Cloud */}
-          <Image width={500} height={500} alt="logo" src="/img/logo1.png" className="w-20 h-20 mx-auto" />
+          <Image
+            width={500}
+            height={500}
+            alt="logo"
+            src="/img/logo1.png"
+            className="w-20 h-20 mx-auto"
+          />
         </div>
         <hr className="hidden md:block" />
 
