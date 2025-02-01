@@ -21,7 +21,6 @@ import {
 import { userStore } from "@/stores/userStore"; // Zustand store for user management
 import { useCookie } from "@/hooks/useCookie";
 import { Button } from "./ui/button";
-import Image from "next/image";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -43,17 +42,13 @@ export default function Navbar() {
     fetchUserInfo(token);
   }, []);
 
-  // Zustand store for user information
-
   useEffect(() => {
-    // Check if the user is authenticated (based on Zustand store or cookies)
-    setIsAuthenticated(!!userInfo); // Adjust logic if needed to check cookies or session
+    setIsAuthenticated(!!userInfo);
   }, [userInfo]);
 
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/blogs", label: "Blogs" },
-    // { href: "/blogs/upload-blog", label: "Create Blog" },
     { href: "/about", label: "About" },
     { href: "/faq", label: "FAQ" },
   ];
@@ -73,11 +68,11 @@ export default function Navbar() {
 
   if (isAuthenticated) {
     navLinks.push({ href: "/blogs/upload-blog", label: "Create Blog" });
-  } 
+  }
 
   if (isAuthenticated && userInfo?.role === "ADMIN") {
     navLinks.push({ href: "/dashboard", label: "Dashboard" });
-  } 
+  }
 
   const handleLogout = () => {
     removeCookie();
@@ -97,7 +92,6 @@ export default function Navbar() {
     >
       {/* Desktop Navigation */}
       <div className="hidden md:block">
-        
         <div className="text-4xl font-semibold py-5 text-primary  md:text-center flex items-center justify-center">
           Chronicle Cloud
           {/* <Image

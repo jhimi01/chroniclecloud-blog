@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -7,24 +7,26 @@ export default function Footer() {
   const pathname = usePathname();
 
   return (
-    <div className={`${
+    <div
+      className={`${
         ["/blogs-admin", "/users", "/dashboard"].includes(pathname)
           ? "hidden"
           : ""
-      } bg-primary py-24 mt-10`}>
+      } bg-primary py-24 mt-10`}
+    >
       <div className="text-white container px-5 mx-auto">
         <div className="grid md:grid-cols-4 grid-cols-2 gap-10 mg:gap-5">
           <div className="space-y-5">
             <h2 className="text-xl">Top Products</h2>
             <ul className="space-y-4 text-gray-500">
-              <li className="hover:text-white cursor-pointer">            
+              <li className="hover:text-white cursor-pointer">
                 Manage Website
               </li>
-              <li className="hover:text-white cursor-pointer">            
+              <li className="hover:text-white cursor-pointer">
                 Manage Reputation
               </li>
               <li className="hover:text-white cursor-pointer"> Power Tools</li>
-              <li className="hover:text-white cursor-pointer">            
+              <li className="hover:text-white cursor-pointer">
                 Marketing Service
               </li>
             </ul>
@@ -34,10 +36,10 @@ export default function Footer() {
             <ul className="space-y-4 text-gray-500">
               <li className="hover:text-white cursor-pointer"> Jobs</li>
               <li className="hover:text-white cursor-pointer"> Brand Assets</li>
-              <li className="hover:text-white cursor-pointer">            
+              <li className="hover:text-white cursor-pointer">
                 Investor Relations
               </li>
-              <li className="hover:text-white cursor-pointer">            
+              <li className="hover:text-white cursor-pointer">
                 Terms of Service
               </li>
             </ul>
@@ -47,10 +49,10 @@ export default function Footer() {
             <ul className="space-y-4 text-gray-500">
               <li className="hover:text-white cursor-pointer"> Jobs</li>
               <li className="hover:text-white cursor-pointer"> Brand Assets</li>
-              <li className="hover:text-white cursor-pointer">            
+              <li className="hover:text-white cursor-pointer">
                 Investor Relations
               </li>
-              <li className="hover:text-white cursor-pointer">            
+              <li className="hover:text-white cursor-pointer">
                 Terms of Service
               </li>
             </ul>

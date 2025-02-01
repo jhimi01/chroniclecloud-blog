@@ -46,7 +46,7 @@ export default function Signup() {
 
   const onSubmit = async (data: any) => {
     const date = new Date();
-    const newData = {...data, createdAt:date}
+    const newData = { ...data, createdAt: date };
     try {
       const res = await fetch("/api/signup", {
         method: "POST",
@@ -71,114 +71,126 @@ export default function Signup() {
 
   return (
     <div className=" mt-5">
-       <div>
-       <CardTitle className="text-center text-2xl font-semibold mb-4">Sign up</CardTitle>
-      <Card className="w-full mx-auto max-w-md rounded-none">
-        <CardContent>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            {/* Email */}
-            <div className="pt-5">
-              <Label htmlFor="email" className="text-lg">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                className="rounded-none"
-                placeholder="Enter your email"
-                {...register("email")}
-              />
-              {errors.email && (
-                <p className="text-red-500 text-sm mt-1">
-                  {String(errors.email.message)}
+      <div>
+        <CardTitle className="text-center text-2xl font-semibold mb-4">
+          Sign up
+        </CardTitle>
+        <Card className="w-full mx-auto max-w-md rounded-none">
+          <CardContent>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+              {/* Email */}
+              <div className="pt-5">
+                <Label htmlFor="email" className="text-lg">
+                  Email
+                </Label>
+                <Input
+                  id="email"
+                  type="email"
+                  className="rounded-none"
+                  placeholder="Enter your email"
+                  {...register("email")}
+                />
+                {errors.email && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {String(errors.email.message)}
+                  </p>
+                )}
+              </div>
+
+              {/* Name */}
+              <div>
+                <Label className="text-lg" htmlFor="name">
+                  Name
+                </Label>
+                <Input
+                  id="name"
+                  type="text"
+                  className="rounded-none"
+                  placeholder="Enter your name"
+                  {...register("name")}
+                />
+                {errors.name && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {String(errors.name.message)}
+                  </p>
+                )}
+              </div>
+
+              {/* Username */}
+              <div>
+                <Label className="text-lg" htmlFor="username">
+                  Username
+                </Label>
+                <Input
+                  id="username"
+                  type="text"
+                  className="rounded-none"
+                  placeholder="Choose a username"
+                  {...register("username")}
+                />
+                {errors.username && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {String(errors.username.message)}
+                  </p>
+                )}
+              </div>
+
+              {/* Password */}
+              <div>
+                <Label className="text-lg" htmlFor="password">
+                  Password
+                </Label>
+                <Input
+                  id="password"
+                  type="password"
+                  className="rounded-none"
+                  placeholder="Create a password"
+                  {...register("password")}
+                />
+                {errors.password && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {String(errors.password.message)}
+                  </p>
+                )}
+              </div>
+
+              {/* Confirm Password */}
+              <div>
+                <Label className="text-lg" htmlFor="confirmPassword">
+                  Re-type
+                </Label>
+                <Input
+                  id="confirmPassword"
+                  type="password"
+                  className="rounded-none"
+                  placeholder="Re-type your password"
+                  {...register("confirmPassword")}
+                />
+                {errors.confirmPassword && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {String(errors.confirmPassword.message)}
+                  </p>
+                )}
+              </div>
+
+              {/* Submit Button */}
+              <Button type="submit" className="w-full rounded-none">
+                Sign up
+              </Button>
+
+              {/* Login Link */}
+              <div className="text-center text-sm mt-2">
+                <p>
+                  Already have an account?{" "}
+                  <Link href="/login" className="text-secondary underline">
+                    Log in
+                  </Link>
                 </p>
-              )}
-            </div>
-
-            {/* Name */}
-            <div>
-              <Label className="text-lg" htmlFor="name">Name</Label>
-              <Input
-                id="name"
-                type="text"
-                className="rounded-none"
-                placeholder="Enter your name"
-                {...register("name")}
-              />
-              {errors.name && (
-                <p className="text-red-500 text-sm mt-1">
-                  {String(errors.name.message)}
-                </p>
-              )}
-            </div>
-
-            {/* Username */}
-            <div>
-              <Label className="text-lg" htmlFor="username">Username</Label>
-              <Input
-                id="username"
-                type="text"
-                className="rounded-none"
-                placeholder="Choose a username"
-                {...register("username")}
-              />
-              {errors.username && (
-                <p className="text-red-500 text-sm mt-1">
-                  {String(errors.username.message)}
-                </p>
-              )}
-            </div>
-
-            {/* Password */}
-            <div>
-              <Label className="text-lg" htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                className="rounded-none"
-                placeholder="Create a password"
-                {...register("password")}
-              />
-              {errors.password && (
-                <p className="text-red-500 text-sm mt-1">
-                  {String(errors.password.message)}
-                </p>
-              )}
-            </div>
-
-            {/* Confirm Password */}
-            <div>
-              <Label className="text-lg" htmlFor="confirmPassword">Re-type</Label>
-              <Input
-                id="confirmPassword"
-                type="password"
-                className="rounded-none"
-                placeholder="Re-type your password"
-                {...register("confirmPassword")}
-              />
-              {errors.confirmPassword && (
-                <p className="text-red-500 text-sm mt-1">
-                  {String(errors.confirmPassword.message)}
-                </p>
-              )}
-            </div>
-
-            {/* Submit Button */}
-            <Button type="submit" className="w-full rounded-none">
-              Sign up
-            </Button>
-
-            {/* Login Link */}
-            <div className="text-center text-sm mt-2">
-              <p>
-                Already have an account?{" "}
-                <Link href="/login" className="text-secondary underline">
-                  Log in
-                </Link>
-              </p>
-            </div>
-          </form>
-        </CardContent>
-      </Card>
-       </div>
+              </div>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }

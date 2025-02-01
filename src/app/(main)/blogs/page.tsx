@@ -46,7 +46,6 @@ export default function Blogs() {
     setCurrentPage(page);
   };
 
-
   return (
     <div className="mx-auto container">
       <div className="md:flex items-center gap-5 p-4 md:p-0 md:pt-10 md:pr-4">

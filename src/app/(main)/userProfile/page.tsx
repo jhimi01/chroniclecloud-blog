@@ -67,8 +67,6 @@ export default function UserProfile() {
     return <div>Loading...</div>;
   }
 
-
-
   // Format the date
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = {

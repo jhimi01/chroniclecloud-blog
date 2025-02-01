@@ -22,7 +22,7 @@ export async function POST(req: Request) {
         category,
         desc,
         userEmail,
-        userId // Email of the author
+        userId, // Email of the author
       },
     });
 

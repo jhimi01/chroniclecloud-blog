@@ -49,7 +49,6 @@ export default function AdminDashboard() {
     }
   }, [token, fetchAllUsers]);
 
-
   // Group blogs by user
   const userBlogCounts = allUsers.map((user) => ({
     name: user.name || "Unknown User",
@@ -66,27 +65,35 @@ export default function AdminDashboard() {
       <h1 className="text-2xl font-bold">Admin Dashboard</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 mb-4">
         <Card className="btn-grad-green text-white ">
-          <CardHeader>
-          </CardHeader>
+          <CardHeader></CardHeader>
           <CardContent>
             <CardTitle>Total Users</CardTitle>
-            <div className="text-3xl flex items-center gap-1 justify-center font-bold "> <Users /> {allUsers?.length}</div>
+            <div className="text-3xl flex items-center gap-1 justify-center font-bold ">
+              {" "}
+              <Users /> {allUsers?.length}
+            </div>
           </CardContent>
         </Card>
         <Card className=" btn-grad  text-white">
-          <CardHeader>
-          </CardHeader>
+          <CardHeader></CardHeader>
           <CardContent>
             <CardTitle>Total Blog Posts</CardTitle>
-            <div className="text-3xl flex items-center gap-1 justify-center font-bold "> <FileTextIcon />{blogs?.length}</div>
+            <div className="text-3xl flex items-center gap-1 justify-center font-bold ">
+              {" "}
+              <FileTextIcon />
+              {blogs?.length}
+            </div>
           </CardContent>
         </Card>
         <Card className="btn-grad-blue text-white">
-          <CardHeader>
-          </CardHeader>
+          <CardHeader></CardHeader>
           <CardContent>
             <CardTitle>Active Sessions</CardTitle>
-            <div className="text-3xl flex items-center gap-1 justify-center font-bold "> <ShieldPlus />89</div>
+            <div className="text-3xl flex items-center gap-1 justify-center font-bold ">
+              {" "}
+              <ShieldPlus />
+              89
+            </div>
           </CardContent>
         </Card>
       </div>

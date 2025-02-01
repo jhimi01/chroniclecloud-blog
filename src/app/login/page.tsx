@@ -19,10 +19,9 @@ export default function Login() {
 
   // Access setUserInfo function from Zustand store
   const setUserInfo = userStore((state) => state.setUserInfo);
-// jhimi123@
-// tanha123@
-// rimi123@
-
+  // jhimi123@
+  // tanha123@
+  // rimi123@
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -56,15 +55,15 @@ export default function Login() {
         const userInfo = await fetchUserInfo(token); // Fetch the user info
         setUserInfo(userInfo);
         // alert("Login successful!");
-         toast("Login successful!")
+        toast("Login successful!");
         router.push("/"); // Redirect to home or dashboard
       } else {
         // alert("Login failed. No token received.");
-        toast("Login failed. No token received!")
+        toast("Login failed. No token received!");
       }
     } catch (error) {
       console.error("Error during login:", error);
-      toast("An error occurred. Please try again!")
+      toast("An error occurred. Please try again!");
       // alert("An error occurred. Please try again.");
     }
   };
@@ -77,16 +76,13 @@ export default function Login() {
         Authorization: `Bearer ${token}`, // Ensure token is passed as a Bearer token
       },
     });
-  
+
     if (!res.ok) {
       console.error("Error response:", await res.text());
       throw new Error("Failed to fetch user info");
     }
     return res.json();
   };
-  
-  
-  
 
   return (
     <div className="mt-5">

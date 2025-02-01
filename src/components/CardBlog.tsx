@@ -10,17 +10,17 @@ import Link from "next/link";
 import React from "react";
 
 export default function CardBlog(blog: any) {
-
-  const { id, title, date, category, desc, likes, userEmail, image, grid } = blog.blog;
-  const formattedDate =(isoDate:any) => {
+  const { id, title, date, category, desc, likes, userEmail, image, grid } =
+    blog.blog;
+  const formattedDate = (isoDate: any) => {
     if (!isoDate) return "Unknown";
     const date = new Date(isoDate);
     return date.toLocaleDateString("en-Us", {
       year: "numeric",
       month: "long",
       day: "numeric",
-    })
-  }
+    });
+  };
   return (
     <div className="bg-white hover:shadow-md w-11/12 mx-auto md:mr-auto md:w-full">
       {/* <Link href={`/blogs/${id}`} > */}

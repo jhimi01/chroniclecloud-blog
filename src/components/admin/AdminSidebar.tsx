@@ -18,15 +18,13 @@ import { userStore } from "@/stores/userStore";
 
 export default function AdminSidebar() {
   const pathname = usePathname();
-   const userInfo = userStore((state: any) => state.userInfo);
-   console.log("user info", userInfo)
+  const userInfo = userStore((state: any) => state.userInfo);
+  console.log("user info", userInfo);
 
   const navLinks = [
     { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
     { href: "/users", label: "Users", icon: Users },
     { href: "/blogs-admin", label: "Blogs", icon: FileText },
-    // { href: "/", label: "Home", icon: Home },
-    // { href: "/admin/settings", label: "Settings", icon: Settings },
   ];
 
   return (
@@ -34,8 +32,8 @@ export default function AdminSidebar() {
       {/* Sidebar Header */}
       <div className=" text-center py-2 border-b bg-[#0f1634]">
         <h1 className="text-2xl font-semibold text-white">Admin Panel</h1>
-        <h3 className="text-sm text-gray-400">{userInfo?.email}</h3>
-        <h3 className="text-sm text-gray-400">{userInfo?.username}</h3>
+        <h3 className="text-xs text-gray-400">{userInfo?.email}</h3>
+        <h3 className="text-xs text-gray-400">{userInfo?.username}</h3>
       </div>
 
       {/* Sidebar Navigation */}
