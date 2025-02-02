@@ -133,8 +133,8 @@ export default function UploadBlog() {
                         <option value="Technology">Technology</option>
                         <option value="Health">Health</option>
                         <option value="Travel">Travel</option>
-                        <option value="Travel">Fashion</option>
-                        <option value="Travel">Photography</option>
+                        <option value="Fashion">Fashion</option>
+                        <option value="Photography">Photography</option>
                       </select>
                     </FormControl>
                     <FormMessage />
