@@ -21,6 +21,7 @@ import {
 import { userStore } from "@/stores/userStore"; // Zustand store for user management
 import { useCookie } from "@/hooks/useCookie";
 import { Button } from "./ui/button";
+import Image from "next/image";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -92,15 +93,15 @@ export default function Navbar() {
     >
       {/* Desktop Navigation */}
       <div className="hidden md:block">
-        <div className="text-4xl font-semibold py-5 text-primary  md:text-center flex items-center justify-center">
-          {/* <Image
+        <div className="text-4xl font-semibold text-primary  md:text-center flex items-center justify-center">
+          <Image
             width={500}
             height={500}
             alt="logo"
             src="/img/logo1.png"
             className="w-20 h-20 mx-auto"
-          /> */}
-          Chronicle Cloud
+          />
+          {/* Chronicle Cloud */}
         </div>
         <hr className="hidden md:block" />
 
