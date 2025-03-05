@@ -3,14 +3,13 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { useCookie } from "@/hooks/useCookie";
 import useBlogStore from "@/stores/blogStore";
 import { userStore } from "@/stores/userStore";
-import { useEffect } from "react";
-import { Bar, Pie, Line } from "react-chartjs-2";
+import { useEffect, useState, useMemo } from "react";
+import { Bar, Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
   BarElement,
-  ArcElement,
   PointElement,
   LineElement,
   Title,
@@ -24,7 +23,6 @@ ChartJS.register(
   CategoryScale,
   LinearScale,
   BarElement,
-  ArcElement,
   PointElement,
   LineElement,
   Title,
@@ -41,47 +39,53 @@ export default function AdminDashboard() {
     defaultValue: "",
   });
 
-  const token = getCookie();
-
-  console.log("token ",token)
+  const [token, setToken] = useState("");
 
   useEffect(() => {
-    if (token) {
+    const cookieToken = getCookie();
+    setToken(cookieToken);
+  }, [getCookie]);
+
+  useEffect(() => {
+    if (token && allUsers.length === 0) {
       fetchAllUsers(token);
     }
-  }, [token, fetchAllUsers]);
+  }, [token, allUsers, fetchAllUsers]);
 
   // Group blogs by user
-  const userBlogCounts = allUsers.map((user) => ({
-    name: user.name || "Unknown User",
-    count: blogs.filter((blog) => blog.userId === user.id).length,
-  }));
+  const userBlogCounts = useMemo(() => {
+    return allUsers.map((user) => ({
+      name: user.name || "Unknown User",
+      count: blogs.filter((blog) => blog.userId === user.id).length,
+    }));
+  }, [allUsers, blogs]);
 
   const labels = userBlogCounts.map((user) => user.name);
   const blogUploads = userBlogCounts.map((user) => user.count);
-
   const userData = allUsers.map((_, index) => index + 1);
+
+  if (!allUsers || !blogs) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
       <h1 className="text-2xl font-bold">Admin Dashboard</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 mb-4">
-        <Card className="btn-grad-green text-white ">
+        <Card className="btn-grad-green text-white">
           <CardHeader></CardHeader>
           <CardContent>
             <CardTitle>Total Users</CardTitle>
-            <div className="text-3xl flex items-center gap-1 justify-center font-bold ">
-              {" "}
+            <div className="text-3xl flex items-center gap-1 justify-center font-bold">
               <Users /> {allUsers?.length}
             </div>
           </CardContent>
         </Card>
-        <Card className=" btn-grad  text-white">
+        <Card className="btn-grad text-white">
           <CardHeader></CardHeader>
           <CardContent>
             <CardTitle>Total Blog Posts</CardTitle>
-            <div className="text-3xl flex items-center gap-1 justify-center font-bold ">
-              {" "}
+            <div className="text-3xl flex items-center gap-1 justify-center font-bold">
               <FileTextIcon />
               {blogs?.length}
             </div>
@@ -91,8 +95,7 @@ export default function AdminDashboard() {
           <CardHeader></CardHeader>
           <CardContent>
             <CardTitle>Active Sessions</CardTitle>
-            <div className="text-3xl flex items-center gap-1 justify-center font-bold ">
-              {" "}
+            <div className="text-3xl flex items-center gap-1 justify-center font-bold">
               <ShieldPlus />
               89
             </div>
@@ -100,7 +103,7 @@ export default function AdminDashboard() {
         </Card>
       </div>
 
-      <div className="grid  grid-cols-2 gap-6">
+      <div className="grid grid-cols-2 gap-6">
         {/* Bar Chart */}
         <Card className="w-full">
           <CardHeader>
