@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { userStore } from "@/stores/userStore";
 import { useCookie } from "@/hooks/useCookie";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function UserTable() {
   const { allUsers, fetchAllUsers } = userStore();
@@ -27,13 +27,18 @@ export default function UserTable() {
     days: 7,
     defaultValue: "",
   }); // Replace with your token retrieval logic
-  const token = getCookie();
+ const [token, setToken] = useState("");
 
   useEffect(() => {
-    if (token) {
-      fetchAllUsers(token); // Fetch all users when the component mounts
+    const cookieToken = getCookie();
+    setToken(cookieToken);
+  }, [getCookie]);
+
+  useEffect(() => {
+    if (token && allUsers.length === 0) {
+      fetchAllUsers(token);
     }
-  }, [token, fetchAllUsers]);
+  }, [token, allUsers, fetchAllUsers]);
 
   return (
     <div className="p-6 bg-background rounded-lg shadow-sm">
