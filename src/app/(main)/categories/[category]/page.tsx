@@ -23,9 +23,9 @@ async function fetchCategoryBlogs(category: string) {
 export default async function CategoryPage({
   params,
 }: {
-  params: { category: string };
+  params: Promise<{ category: string }>;
 }) {
-  const { category } = params;
+  const { category } = await params;
 
   const availableCategories = await prisma.blogPost.findMany({
     select: { category: true },
