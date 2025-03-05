@@ -27,7 +27,7 @@ model User {
 
 model Session {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String
+  userId    String   @db.ObjectId // Add @db.ObjectId here
   token     String   @unique // JWT token stored as session identifier
   createdAt DateTime @default(now()) // When the session was created
   expiresAt DateTime // When the session expires
@@ -44,7 +44,7 @@ model BlogPost {
   category  String
   desc      String
   likes     Int      @default(0)
-  userId    String
+  userId    String   @db.ObjectId // Add @db.ObjectId here
   userEmail String?
   User      User     @relation(fields: [userId], references: [id]) // Fix this relation
 
