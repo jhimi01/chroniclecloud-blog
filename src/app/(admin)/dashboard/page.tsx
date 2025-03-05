@@ -43,6 +43,8 @@ export default function AdminDashboard() {
 
   const token = getCookie();
 
+  console.log("token ",token)
+
   useEffect(() => {
     if (token) {
       fetchAllUsers(token);

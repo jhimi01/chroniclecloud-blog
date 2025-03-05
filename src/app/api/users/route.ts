@@ -13,6 +13,7 @@ export async function GET(req: any) {
       );
     }
 
+    
     // Extract the token from the header
     const token = authHeader.split(" ")[1];
     if (!token) {
@@ -21,9 +22,16 @@ export async function GET(req: any) {
         { status: 401 }
       );
     }
-
+    
+    // console.log('tokennnnnnnnnn', token)
     // Verify the token
-    const decoded = verifyToken(token); // Replace with your token verification logic
+    const decoded = verifyToken(token); // Replace with your 
+    // token verification logic
+
+    console.log("Decoded Token:", decoded);
+
+
+
     if (!decoded) {
       return NextResponse.json(
         { success: false, message: "Invalid or expired token" },
@@ -31,8 +39,18 @@ export async function GET(req: any) {
       );
     }
 
+    const user = await prisma.user.findUnique({
+      where: { id: decoded.id },
+    });
+    if (!user) {
+      return NextResponse.json(
+        { success: false, message: "User not found" },
+        { status: 404 }
+      );
+    }
+
        // Check if the user has the ADMIN role
-       if (decoded.role !== 'ADMIN') {
+       if (user.role !== 'ADMIN') {
         return NextResponse.json(
           { success: false, message: 'Access denied. Admins only.' },
           { status: 403 },

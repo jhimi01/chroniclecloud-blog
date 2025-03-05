@@ -61,6 +61,8 @@ export const userStore = create<UserStore>((set) => ({
     }
   },
   fetchAllUsers: async (token) => {
+
+    console.log("tokennnnnnnnn", token)
     if (!token) {
       console.log("No token found.");
       return;
@@ -75,12 +77,21 @@ export const userStore = create<UserStore>((set) => ({
       });
 
       if (!res.ok) {
-        console.error("Failed to fetch all users", await res.text());
+        const errorText = await res.text();
+        console.error("Failed to fetch all users:", errorText);
+        // Handle unauthorized access (401 or 403)
+        if (res.status === 403) {
+          console.log("Access denied. Admins only.");
+        }
         return;
       }
 
       const data = await res.json();
-      set({ allUsers: data.users }); // Store all users in Zustand store
+      if (data?.users) {
+        set({ allUsers: data.users }); // Store all users in Zustand store
+      } else {
+        console.error("Unexpected response format:", data);
+      }
     } catch (error) {
       console.error("Error fetching all users:", error);
     }
