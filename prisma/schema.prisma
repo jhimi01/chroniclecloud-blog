@@ -9,12 +9,12 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id        String     @id @default(cuid())
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
   name      String
   username  String     @unique
   email     String     @unique
@@ -26,8 +26,8 @@ model User {
 }
 
 model Session {
-  id        String   @id @default(cuid())
-  userId    String // User ID to link session with a user
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String
   token     String   @unique // JWT token stored as session identifier
   createdAt DateTime @default(now()) // When the session was created
   expiresAt DateTime // When the session expires
@@ -37,7 +37,7 @@ model Session {
 }
 
 model BlogPost {
-  id        String   @id @default(cuid())
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
   title     String
   image     String
   date      DateTime @default(now())

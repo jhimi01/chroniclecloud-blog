@@ -52,7 +52,7 @@ export default function Blog({ params }: { params: Promise<{ id: string }> }) {
           </h3>
           <div className="flex  items-center gap-1 text-sm">
             <CalendarDays size={16} strokeWidth={1.75} className="" />
-            <p>{blog?.date}</p>
+            <p>{new Date(blog?.date).toLocaleDateString()}</p>
           </div>
           <div className="flex items-center gap-1 text-sm">
             <File size={16} strokeWidth={1.75} />

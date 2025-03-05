@@ -130,11 +130,11 @@ export default function UploadBlog() {
                         <option value="" disabled>
                           Select a category
                         </option>
-                        <option value="Technology">Technology</option>
-                        <option value="Health">Health</option>
-                        <option value="Travel">Travel</option>
-                        <option value="Fashion">Fashion</option>
-                        <option value="Photography">Photography</option>
+                        <option value="technology">Technology</option>
+                        <option value="health">Health</option>
+                        <option value="travel">Travel</option>
+                        <option value="fashion">Fashion</option>
+                        <option value="photography">Photography</option>
                       </select>
                     </FormControl>
                     <FormMessage />
